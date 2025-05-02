@@ -13,7 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body className="bg-gray-chateau-100 flex flex-col gap-4">
+        {children}
+      </body>
     </html>
   );
 }
