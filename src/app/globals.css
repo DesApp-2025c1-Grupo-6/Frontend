@@ -3,7 +3,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  
+  --color-gray-chateau-50: "#F5F7F8";
+  --color-gray-chateau-100: "#EEEFF1";
+  --color-wild-sand-100: "#EDEEF1";
+  --color-wild-sand-600: "#566173";
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  font-size: medium;
 }
 
 
