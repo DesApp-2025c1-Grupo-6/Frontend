@@ -2,6 +2,8 @@
 
 import Table from "@/src/components/Table";
 import SectionTable from "../UI/SectionTable";
+import Modal from "../UI/Modal";
+import { toggleModalVisibility } from "../utils/utils";
 
 const data = [
   { id: 1, nombre: "Zona Norte", descripcion: "Área residencial y comercial" },
@@ -12,9 +14,28 @@ const data = [
 
 function index() {
   return (
-    <SectionTable titulo="Zonas" textButton="Agregar Zona">
-      <Table data={data} />
-    </SectionTable>
+    <>
+      <SectionTable
+        titulo="Zonas"
+        textButton="Agregar Zona"
+        onClickButton={() => toggleModalVisibility("registroDeZona")}
+      >
+        <Table data={data} />
+      </SectionTable>
+      <Modal
+        lineButton
+        fillButton
+        lineButtonText="Cancelar"
+        fillButtonText="Guardar"
+        fillButtonAction={() => console.log("Zona guardada")}
+        lineButtonAction={() => {
+          console.log("Cancelado");
+          toggleModalVisibility("registroDeZona");
+        }}
+        id="registroDeZona"
+        title="Registrar nueva Zona"
+      ></Modal>
+    </>
   );
 }
 
