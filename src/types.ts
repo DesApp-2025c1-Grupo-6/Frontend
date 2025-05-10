@@ -35,3 +35,20 @@ export type TableProps = {
   onDelete?: (id: string | number) => void;
   rowsPerPage?: number;
 };
+
+export type TextInputProps = {
+  label?: string;
+  placeholder?: string;
+  Icon?: React.ReactNode;
+  id?: string;
+  name?: string;
+  className?: string;
+  value?: string | number;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  [key: string]: any;
+};
+
+export type DateInputProps = {
+  required?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};

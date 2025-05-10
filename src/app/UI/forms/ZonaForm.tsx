@@ -18,6 +18,7 @@ function ZonaForm({ id, title, mode, data, onSave }: ZonaFormProps) {
   }, [mode, data]);
 
   const handleSave = () => {
+    if (!nombre) return; // No hace nada si el campo está vacío
     if (onSave) onSave(nombre);
     toggleModalVisibility(id);
     setNombre("");
