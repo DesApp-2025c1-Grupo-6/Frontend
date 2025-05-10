@@ -1,4 +1,4 @@
-// import Calendar from "../icons/Calendar";
+import Calendar from "../icons/Calendar";
 
 function DateInput({
   onChange,
@@ -13,7 +13,7 @@ function DateInput({
         id="input-date"
         onChange={onChange}
       />
-      {/* <Calendar /> */}
+      <Calendar />
     </div>
   );
 }
