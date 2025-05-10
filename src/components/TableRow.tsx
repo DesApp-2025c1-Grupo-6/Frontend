@@ -25,15 +25,15 @@ const TableRow = ({
   const values = Object.values(row);
 
   return (
-    <tr className="hover:bg-gray-200 transition-all">
+    <tr className="hover:bg-gray-200 transition-all border-b border-gray-300">
       {values.map((value, idx) => (
-        <td key={idx} className="p-4 border-b border-gray-300">
+        <td key={idx} className="text-left px-5 py-3 truncate max-w-xs">
           {String(value)}
         </td>
       ))}
 
       {(viewButton || editButton || deleteButton) && (
-        <td className="p-4 border-b border-gray-300 space-x-2">
+        <td className="px-5 py-2 flex gap-5 justify-end">
           {viewButton && (
             <button className="cursor-pointer" onClick={() => onView?.(row)}>
               <Eye />
