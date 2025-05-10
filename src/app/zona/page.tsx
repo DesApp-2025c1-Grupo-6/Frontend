@@ -1,40 +1,85 @@
 "use client";
 
 import Table from "@/src/components/Table";
+import ZonaForm from "../UI/forms/ZonaForm";
 import SectionTable from "../UI/SectionTable";
-import Modal from "../UI/Modal";
 import { toggleModalVisibility } from "../utils/utils";
+import { useState } from "react";
+import { Zona } from "@/src/types";
 
-const data = [
-  { id: 1, nombre: "Zona Norte", descripcion: "Área residencial y comercial" },
-  { id: 2, nombre: "Zona Sur", descripcion: "Sector industrial" },
-  { id: 3, nombre: "Zona Este", descripcion: "Zona universitaria" },
-  { id: 4, nombre: "Zona Oeste", descripcion: "Barrio histórico" },
+const initialData: Zona[] = [
+  { id: 1, nombre: "Zona Norte" },
+  { id: 2, nombre: "Zona Sur" },
+  { id: 3, nombre: "Zona Este" },
+  { id: 4, nombre: "Zona Oeste" },
 ];
 
 function index() {
+  const [data, setData] = useState(initialData);
+  const [selectedRow, setSelectedRow] = useState<Zona | undefined>();
+
   return (
     <>
       <SectionTable
         titulo="Zonas"
         textButton="Agregar Zona"
-        onClickButton={() => toggleModalVisibility("registroDeZona")}
+        onClickButton={() => toggleModalVisibility("createZona")}
       >
-        <Table data={data} />
+        <Table
+          data={data}
+          viewButton
+          editButton
+          deleteButton
+          onView={(row) => {
+            setSelectedRow(row);
+            toggleModalVisibility("viewZona");
+          }}
+          onEdit={(row) => {
+            setSelectedRow(row);
+            toggleModalVisibility("editZona");
+          }}
+          onDelete={(id) => setData(data.filter((r) => r.id !== id))}
+        />
       </SectionTable>
-      <Modal
-        lineButton
-        fillButton
-        lineButtonText="Cancelar"
-        fillButtonText="Guardar"
-        fillButtonAction={() => console.log("Zona guardada")}
-        lineButtonAction={() => {
-          console.log("Cancelado");
-          toggleModalVisibility("registroDeZona");
+
+      {/* Modal de formulario de registro de nueva zona */}
+      <ZonaForm
+        id="createZona"
+        mode="create"
+        title="Registro de Zona"
+        onSave={(nombre: string) => {
+          setData((prevData) => [
+            ...prevData,
+            {
+              id: prevData.length + 1,
+              nombre: nombre,
+            },
+          ]);
         }}
-        id="registroDeZona"
-        title="Registrar nueva Zona"
-      ></Modal>
+      />
+
+      {/* Modal de formulario de vista de zona */}
+      <ZonaForm
+        id="viewZona"
+        mode="view"
+        title={"Zona " + (selectedRow ? selectedRow.id : "")}
+        data={selectedRow}
+      />
+
+      {/* Modal de formulario de edición de zona */}
+      <ZonaForm
+        id="editZona"
+        mode="edit"
+        title={"Editar Zona " + (selectedRow ? selectedRow.id : "")}
+        data={selectedRow}
+        onSave={(nombre: string) => {
+          setData((prevData) =>
+            prevData.map((row) =>
+              row.id === selectedRow?.id ? { ...row, nombre } : row
+            )
+          );
+        }}
+      />
     </>
   );
 }
