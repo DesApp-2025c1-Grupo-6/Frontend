@@ -9,41 +9,12 @@ import { Zona } from "@/src/types";
 import Toast from "@/src/components/Toast";
 import TableSkeleton from "@/src/components/Skeletons";
 import Modal from "../UI/Modal";
-
-// Mock de datos iniciales
-const initialData: Zona[] = [
-  { id: 1, nombre: "Zona Norte" },
-  { id: 2, nombre: "Zona Sur" },
-  { id: 3, nombre: "Zona Este" },
-  { id: 4, nombre: "Zona Oeste" },
-  { id: 5, nombre: "Zona Centro" },
-  { id: 6, nombre: "Zona Industrial" },
-  { id: 7, nombre: "Zona Comercial" },
-  { id: 8, nombre: "Zona Residencial" },
-  { id: 9, nombre: "Zona Rural" },
-  { id: 10, nombre: "Zona Universitaria" },
-  { id: 11, nombre: "Zona Portuaria" },
-  { id: 12, nombre: "Zona Costera" },
-  { id: 13, nombre: "Zona Montañosa" },
-  { id: 14, nombre: "Zona Histórica" },
-  { id: 15, nombre: "Zona Deportiva" },
-  { id: 16, nombre: "Zona Escolar" },
-  { id: 17, nombre: "Zona Hospitalaria" },
-  { id: 18, nombre: "Zona Turística" },
-  { id: 19, nombre: "Zona Tecnológica" },
-  { id: 20, nombre: "Zona Administrativa" },
-  { id: 21, nombre: "Zona Administrativa" },
-];
-
-// Simula una petición asíncrona para obtener los datos iniciales de zonas
-async function fetchInitialData(): Promise<Zona[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(initialData);
-    }, 1000);
-  });
-}
-//////////////////////////////////////////////////////////
+import {
+  createZona,
+  deleteZona,
+  getZonas,
+  updateZona,
+} from "@/src/services/fetchDataZonas";
 
 function Index() {
   // Estado para almacenar los datos de la tabla
@@ -63,9 +34,17 @@ function Index() {
   // Efecto para cargar los datos iniciales al montar el componente
   useEffect(() => {
     setLoading(true);
-    fetchInitialData()
+    getZonas()
       .then((fetchedData) => {
         setData(fetchedData);
+      })
+      .catch((error) => {
+        console.error("Error al cargar los datos:", error);
+        showToast(
+          "Error",
+          "No se pudieron cargar los datos: " + error,
+          "error"
+        );
       })
       .finally(() => {
         setLoading(false);
@@ -92,37 +71,60 @@ function Index() {
 
   // Handler para crear una nueva zona
   const handleCreateZone = useCallback(
-    (nombre: string) => {
-      showToast("Zona creada", "Se ha creado la zona: " + nombre, "success");
-      setData((prevData) => [
-        ...prevData,
-        {
-          id: prevData.length + 1,
-          nombre: nombre,
-        },
-      ]);
+    async (nombre: string) => {
+      try {
+        const newZona = await createZona({ nombre });
+        setData((current) => [...current, newZona]);
+        showToast("Zona creada", "Se ha creado la zona: " + nombre, "success");
+      } catch (error) {
+        showToast(
+          "Error",
+          "No se pudo crear la zona: " + nombre + ", Error: " + error,
+          "error"
+        );
+      }
     },
     [showToast]
   );
 
   // Handler para editar una zona existente
   const handleEditZone = useCallback(
-    (nombre: string) => {
-      showToast("Zona editada", "Zona editada con éxito", "success");
-      setData((prevData) =>
-        prevData.map((row) =>
-          row.id === selectedRow?.id ? { ...row, nombre } : row
-        )
-      );
+    async (nombre: string) => {
+      if (!selectedRow) return;
+      try {
+        const updated = await updateZona(selectedRow.id, { nombre });
+        setData((prev) =>
+          prev.map((row) => (row.id === selectedRow.id ? updated : row))
+        );
+        showToast("Zona editada", "Zona editada con éxito", "success");
+      } catch (error) {
+        showToast(
+          "Error",
+          "No se pudo editar la zona: " + nombre + ", Error: " + error,
+          "error"
+        );
+      }
     },
     [selectedRow, showToast]
   );
 
-  // Handler para eliminar una zona
   const handleDelete = useCallback(
-    (id: string | number) => {
-      setData((prevData) => prevData.filter((row) => row.id !== id));
-      showToast("Zona eliminada", "Se ha eliminado la zona: " + id, "success");
+    async (id: string | number) => {
+      try {
+        await deleteZona(id);
+        setData((prev) => prev.filter((row) => row.id !== id));
+        showToast(
+          "Zona eliminada",
+          "Se ha eliminado la zona: " + id,
+          "success"
+        );
+      } catch (error) {
+        showToast(
+          "Error",
+          "No se pudo eliminar la zona: " + id + ", Error: " + error,
+          "error"
+        );
+      }
     },
     [showToast]
   );
