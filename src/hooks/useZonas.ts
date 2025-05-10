@@ -1,3 +1,4 @@
+// Hook personalizado para manejar la lógica de zonas
 import { useState, useEffect, useCallback } from "react";
 import { Zona } from "@/src/types";
 import {
@@ -7,11 +8,19 @@ import {
   deleteZona,
 } from "@/src/services/fetchDataZonas";
 
+/**
+ * Hook para gestionar zonas: carga, creación, edición, eliminación y selección.
+ * @param onError Callback opcional para manejar errores (por ejemplo, mostrar un toast)
+ */
 export function useZonas(onError?: (msg: string) => void) {
+  // Estado para almacenar las zonas
   const [data, setData] = useState<Zona[]>([]);
+  // Estado para mostrar el loader
   const [loading, setLoading] = useState(false);
+  // Estado para la fila seleccionada (para editar o eliminar)
   const [selectedRow, setSelectedRow] = useState<Zona | undefined>();
 
+  // Efecto para cargar las zonas al montar el componente o cambiar onError
   useEffect(() => {
     setLoading(true);
     getZonas()
@@ -22,6 +31,10 @@ export function useZonas(onError?: (msg: string) => void) {
       .finally(() => setLoading(false));
   }, [onError]);
 
+  /**
+   * Crea una nueva zona
+   * @param nombre Nombre de la zona
+   */
   const handleCreateZone = useCallback(
     async (nombre: string) => {
       try {
@@ -37,6 +50,10 @@ export function useZonas(onError?: (msg: string) => void) {
     [onError]
   );
 
+  /**
+   * Edita una zona existente (usa la seleccionada)
+   * @param nombre Nuevo nombre de la zona
+   */
   const handleEditZone = useCallback(
     async (nombre: string) => {
       if (!selectedRow) return { success: false, nombre };
@@ -55,6 +72,10 @@ export function useZonas(onError?: (msg: string) => void) {
     [selectedRow, onError]
   );
 
+  /**
+   * Elimina una zona por id
+   * @param id ID de la zona a eliminar
+   */
   const handleDelete = useCallback(
     async (id: string | number) => {
       try {
@@ -70,6 +91,7 @@ export function useZonas(onError?: (msg: string) => void) {
     [onError]
   );
 
+  // Retorna los estados y handlers principales para usar en el componente
   return {
     data,
     loading,

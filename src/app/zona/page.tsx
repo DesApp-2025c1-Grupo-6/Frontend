@@ -13,14 +13,17 @@ import { useToast } from "@/src/hooks/useToast";
 import { useCallback } from "react";
 
 function Index() {
+  // Hook para mostrar toasts de notificación
   const { toastVisible, toastMessage, toastTitle, toastType, showToast } =
     useToast();
 
+  // Callback estable para manejar errores desde useZonas
   const handleError = useCallback(
     (msg: string) => showToast("Error", msg, "error"),
     [showToast]
   );
 
+  // Hook personalizado para manejar la lógica de zonas
   const {
     data,
     loading,
@@ -46,14 +49,17 @@ function Index() {
 
   return (
     <>
+      {/* Sección principal con tabla y botón para agregar zona */}
       <SectionTable
         titulo="Zonas"
         textButton="Agregar Zona"
         onClickButton={() => toggleModalVisibility("createZona")}
       >
         {loading ? (
+          // Muestra skeletons mientras se cargan los datos
           <TableSkeleton columns={3} />
         ) : (
+          // Tabla con los datos de zonas
           <Table
             data={data}
             rowsPerPage={5}
@@ -64,12 +70,14 @@ function Index() {
           />
         )}
       </SectionTable>
+      {/* Toast de notificación para feedback al usuario */}
       <Toast
         type={toastType}
         title={toastTitle}
         message={toastMessage}
         open={toastVisible}
       />
+      {/* Modal de confirmación de eliminación de zona */}
       <Modal
         id="deleteZona"
         title={"Eliminar Zona " + (selectedRow ? selectedRow.id : "")}
@@ -95,6 +103,7 @@ function Index() {
         }}
         lineButtonAction={() => toggleModalVisibility("deleteZona")}
       />
+      {/* Modal de formulario para crear una nueva zona */}
       <ZonaForm
         id="createZona"
         mode="create"
@@ -110,6 +119,7 @@ function Index() {
           }
         }}
       />
+      {/* Modal de formulario para editar una zona existente */}
       <ZonaForm
         id="editZona"
         mode="edit"
