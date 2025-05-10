@@ -2,6 +2,7 @@ import Check from "../icons/Check";
 import Error from "../icons/Error";
 import React, { useEffect, useState } from "react";
 import Plus from "../icons/Plus";
+import { ToastProps } from "../types";
 
 /**
  * Componente Toast para mostrar mensajes de notificación temporales.
@@ -12,8 +13,7 @@ import Plus from "../icons/Plus";
  * El usuario también puede cerrarlo manualmente.
  *
  * @param props - Las propiedades del componente Toast.
- * @param props.success - Si es true, muestra el toast con estilo e ícono de éxito.
- * @param props.error - Si es true, muestra el toast con estilo e ícono de error.
+ * @param props.type - Tipo de toast: "success" o "error".
  * @param props.title - El texto del título que se muestra en la parte superior del toast.
  * @param props.message - El contenido del mensaje del toast.
  * @param props.open - Controla la visibilidad del toast. Por defecto es false.
@@ -22,7 +22,7 @@ import Plus from "../icons/Plus";
  * @example
  * ```tsx
  * <Toast
- *   success
+ *   type="success"
  *   title="Operación exitosa"
  *   message="Tus cambios han sido guardados."
  *   open={mostrarToast}
@@ -30,29 +30,13 @@ import Plus from "../icons/Plus";
  * />
  * ```
  */
-function Toast({
-  success,
-  error,
-  title,
-  message,
-  open = false,
-  onClose,
-}: {
-  success?: boolean;
-  error?: boolean;
-  title: string;
-  message: string;
-  open?: boolean;
-  onClose?: () => void;
-}) {
+
+function Toast({ type, title, message, open = false, onClose }: ToastProps) {
   const [visible, setVisible] = useState(false);
-  const seconds = 5;
 
   useEffect(() => {
     setVisible(open);
-    const timer = setTimeout(() => setVisible(false), seconds * 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     if (!visible && onClose) {
@@ -61,8 +45,18 @@ function Toast({
     }
   }, [visible, onClose]);
 
-  const backgroundColor = success ? "bg-esmerald-500" : error && "bg-roman-500";
-  const textColor = success ? "text-esmerald-700" : error && "text-roman-700";
+  const backgroundColor =
+    type === "success"
+      ? "bg-esmerald-500"
+      : type === "error"
+      ? "bg-roman-500"
+      : "";
+  const textColor =
+    type === "success"
+      ? "text-esmerald-700"
+      : type === "error"
+      ? "text-roman-700"
+      : "";
 
   return (
     <section
@@ -73,7 +67,8 @@ function Toast({
       <span className={`h-full w-3 min-w-3 ${backgroundColor}`} />
       <div className="w-full flex flex-col justify-start items-center">
         <div className="flex w-full items-center p-1">
-          {success ? <Check /> : error && <Error />}
+          {type === "success" && <Check />}
+          {type === "error" && <Error />}
           <h1
             className={`text-center w-4/5 text-xl font-semibold ml-2 ${textColor}`}
           >

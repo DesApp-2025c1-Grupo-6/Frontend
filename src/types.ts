@@ -16,3 +16,11 @@ export type ZonaFormProps = {
   data?: Zona;
   onSave?: (nombre: string) => void;
 };
+
+export type ToastProps = {
+  type: "success" | "error";
+  title: string;
+  message: string;
+  open: boolean;
+  onClose?: () => void;
+};
