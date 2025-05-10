@@ -26,7 +26,7 @@ function Button({
       className={"min-w-24 " + className}
       style={{
         backgroundColor: line ? "transparent" : color,
-        color: line ? "#566173" : "white",
+        color: line ? color : "white",
         borderColor: line ? color : "transparent",
       }}
     >
