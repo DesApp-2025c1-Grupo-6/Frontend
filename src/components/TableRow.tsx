@@ -1,54 +1,61 @@
-import { tableActions } from "../app/utils/utils";
+import React from "react";
+import Eye from "../icons/Eye";
+import Edit from "../icons/Edit";
+import Trash from "../icons/Trash";
 
-function TableRow({
-  row,
-  key,
-  viewButton,
-  editButton,
-  deleteButton,
-}: {
+interface TableRowProps {
   row: any;
-  key: number;
   viewButton?: boolean;
   editButton?: boolean;
   deleteButton?: boolean;
-}) {
+  onView?: (row: any) => void;
+  onEdit?: (row: any) => void;
+  onDelete?: (id: string | number) => void;
+}
+
+const TableRow = ({
+  row,
+  viewButton,
+  editButton,
+  deleteButton,
+  onView,
+  onEdit,
+  onDelete,
+}: TableRowProps) => {
+  const values = Object.values(row);
+
   return (
-    <tr
-      key={key}
-      className="border-b border-gray-200 hover:bg-gray-200 transition duration-200 ease-in-out"
-    >
-      {row.map((value: string) => (
-        <td className="px-3 py-4 text-left">{value}</td>
+    <tr className="hover:bg-gray-200 transition-all">
+      {values.map((value, idx) => (
+        <td key={idx} className="p-4 border-b border-gray-300">
+          {String(value)}
+        </td>
       ))}
-      <td className="flex gap-2 justify-center items-center p-4">
-        {viewButton && (
-          <button
-            className="cursor-pointer"
-            onClick={tableActions.view.onClick}
-          >
-            <tableActions.view.Icon />
-          </button>
-        )}
-        {editButton && (
-          <button
-            className="cursor-pointer"
-            onClick={tableActions.edit.onClick}
-          >
-            <tableActions.edit.Icon />
-          </button>
-        )}
-        {deleteButton && (
-          <button
-            className="cursor-pointer"
-            onClick={tableActions.delete.onClick}
-          >
-            <tableActions.delete.Icon />
-          </button>
-        )}
-      </td>
+
+      {(viewButton || editButton || deleteButton) && (
+        <td className="p-4 border-b border-gray-300 space-x-2">
+          {viewButton && (
+            <button className="cursor-pointer" onClick={() => onView?.(row)}>
+              <Eye />
+            </button>
+          )}
+          {editButton && (
+            <button className="cursor-pointer" onClick={() => onEdit?.(row)}>
+              <Edit />
+            </button>
+          )}
+          {deleteButton && (
+            <button
+              className="cursor-pointer"
+              onClick={() => onDelete?.(row.id)}
+            >
+              <Trash />
+            </button>
+          )}
+        </td>
+      )}
     </tr>
   );
-}
+};
 
 export default TableRow;
