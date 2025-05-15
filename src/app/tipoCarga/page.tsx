@@ -1,14 +1,14 @@
 "use client";
 
 import Table from "@/src/components/Table";
-import ZonaForm from "../UI/forms/ZonaForm";
+import TipoCargaForm from "../UI/forms/TipoCargaForm";
 import SectionTable from "../UI/SectionTable";
 import { toggleModalVisibility } from "../utils/utils";
-import { Zona } from "@/src/types";
+import { tipoCarga } from "@/src/types";
 import Toast from "@/src/components/Toast";
 import TableSkeleton from "@/src/components/Skeletons";
 import Modal from "../UI/Modal";
-import { useZonas } from "@/src/hooks/useZonas";
+import { useTipoCarga } from "@/src/hooks/useTipoCarga";
 import { useToast } from "@/src/hooks/useToast";
 import { useCallback } from "react";
 
@@ -17,43 +17,43 @@ function Index() {
   const { toastVisible, toastMessage, toastTitle, toastType, showToast } =
     useToast();
 
-  // Callback estable para manejar errores desde useZonas
+  // Callback estable para manejar errores desde useTipoCarga
   const handleError = useCallback(
     (msg: string) => showToast("Error", msg, "error"),
     [showToast]
   );
 
-  // Hook personalizado para manejar la lógica de zonas
+  // Hook personalizado para manejar la lógica de tipoCarga
   const {
     data,
     loading,
     selectedRow,
     setSelectedRow,
-    handleCreateZone,
-    handleEditZone,
+    handleCreateTipoCarga,
+    handleEditTipoCarga,
     handleDelete,
-  } = useZonas(handleError);
+  } = useTipoCarga(handleError);
 
   // Handler para abrir el modal de edición con la fila seleccionada
-  const handleEdit = (row: Zona) => {
+  const handleEdit = (row: tipoCarga) => {
     setSelectedRow(row);
-    toggleModalVisibility("editZona");
+    toggleModalVisibility("editTipoCarga");
   };
 
   // Handler para abrir el modal de confirmación de eliminación
   const handleDeleteRequest = (id: string | number) => {
     const row = data.find((row) => row.id === id);
     setSelectedRow(row);
-    toggleModalVisibility("deleteZona");
+    toggleModalVisibility("deleteteTipoCarga");
   };
 
   return (
     <>
-      {/* Sección principal con tabla y botón para agregar zona */}
+      {/* Sección principal con tabla y botón para agregar tipoCarga */}
       <SectionTable
-        titulo="Zonas"
-        textButton="Agregar Zona"
-        onClickButton={() => toggleModalVisibility("createZona")}
+        titulo="Tipos de Carga"
+        textButton="Agregar Tipo de Carga"
+        onClickButton={() => toggleModalVisibility("createTipoCarga")}
       >
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
@@ -77,11 +77,11 @@ function Index() {
         message={toastMessage}
         open={toastVisible}
       />
-      {/* Modal de confirmación de eliminación de zona */}
+      {/* Modal de confirmación de eliminación de tipoCarga */}
       <Modal
-        id="deleteZona"
-        title={"Eliminar Zona " + (selectedRow ? selectedRow.id : "")}
-        description="¿Está seguro de que desea eliminar esta zona?"
+        id="deleteTipoCarga"
+        title={"Eliminar tipoCarga " + (selectedRow ? selectedRow.id : "")}
+        description="¿Está seguro de que desea eliminar este tipoCarga?"
         fillButton
         lineButton
         fillButtonText="Eliminar"
@@ -93,42 +93,46 @@ function Index() {
             const res = await handleDelete(selectedRow.id);
             if (res?.success) {
               showToast(
-                "Zona eliminada",
-                "Se ha eliminado la zona: " + selectedRow.id,
+                "tipoCarga eliminado",
+                "Se ha eliminado el tipoCarga: " + selectedRow.id,
                 "success"
               );
             }
           }
-          toggleModalVisibility("deleteZona");
+          toggleModalVisibility("deletetipoCarga");
         }}
-        lineButtonAction={() => toggleModalVisibility("deleteZona")}
+        lineButtonAction={() => toggleModalVisibility("deleteTipoCarga")}
       />
-      {/* Modal de formulario para crear una nueva zona */}
-      <ZonaForm
-        id="createZona"
+      {/* Modal de formulario para crear un nuevo tipoCarga */}
+      <TipoCargaForm
+        id="createTipoCarga"
         mode="create"
-        title="Registro de Zona"
-        onSave={async (nombre: string) => {
-          const res = await handleCreateZone(nombre);
+        title="Registro de Tipo de Carga"
+        onSave={async (descricion: string) => {
+          const res = await handleCreateTipoCarga(descricion);
           if (res?.success) {
             showToast(
-              "Zona creada",
-              "Se ha creado la zona: " + nombre,
+              "tipoCarga creado",
+              "Se ha creado el tipoCarga: " + descricion,
               "success"
             );
           }
         }}
       />
-      {/* Modal de formulario para editar una zona existente */}
-      <ZonaForm
-        id="editZona"
+      {/* Modal de formulario para editar un tipo de carga existente*/}
+      <TipoCargaForm
+        id="editTipoCarga"
         mode="edit"
-        title={"Editar Zona " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar Tipo de carga " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
-        onSave={async (nombre: string) => {
-          const res = await handleEditZone(nombre);
+        onSave={async (descripcion: string) => {
+          const res = await handleEditTipoCarga(descripcion);
           if (res?.success) {
-            showToast("Zona editada", "Zona editada con éxito", "success");
+            showToast(
+              "Tipo de carga editado",
+              "Tipo de carga editado con éxito",
+              "success"
+            );
           }
         }}
       />
