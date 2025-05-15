@@ -29,6 +29,7 @@ function Table({
     () => data.slice(startIdx, endIdx),
     [data, startIdx, endIdx]
   );
+  console.log("paginatedData", paginatedData);
 
   return (
     <div>
