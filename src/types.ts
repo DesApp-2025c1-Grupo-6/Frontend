@@ -8,6 +8,16 @@ export type Zona = {
   id: string | number;
   nombre: string;
 };
+export type Carga = {
+  id: string | number;
+  peso: string;
+  volumen: string;
+  tipoCarga: tipoCarga;
+};
+export type tipoCarga = {
+  id: string | number;
+  descripcion: string;
+};
 
 export type ZonaFormProps = {
   id: string;
@@ -16,7 +26,20 @@ export type ZonaFormProps = {
   data?: Zona;
   onSave?: (nombre: string) => void;
 };
-
+export type CargaFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: Carga;
+  onSave?: (peso: string, volumen: string, tipoCarga: tipoCarga) => void;
+};
+export type TipoCargaFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: tipoCarga;
+  onSave?: (descripcion: string) => void;
+};
 export type ToastProps = {
   type: "success" | "error";
   title: string;

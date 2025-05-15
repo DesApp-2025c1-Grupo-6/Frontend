@@ -1,14 +1,14 @@
 "use client";
 
 import Table from "@/src/components/Table";
-import CargaForm from "../UI/forms/CargaForm";
+import TipoCargaForm from "../UI/forms/TipoCargaForm";
 import SectionTable from "../UI/SectionTable";
 import { toggleModalVisibility } from "../utils/utils";
-import { Carga, tipoCarga } from "@/src/types";
+import { tipoCarga } from "@/src/types";
 import Toast from "@/src/components/Toast";
 import TableSkeleton from "@/src/components/Skeletons";
 import Modal from "../UI/Modal";
-import { useCarga } from "@/src/hooks/useCarga";
+import { useTipoCarga } from "@/src/hooks/useTipoCarga";
 import { useToast } from "@/src/hooks/useToast";
 import { useCallback } from "react";
 
@@ -17,49 +17,49 @@ function Index() {
   const { toastVisible, toastMessage, toastTitle, toastType, showToast } =
     useToast();
 
-  // Callback estable para manejar errores desde useCarga
+  // Callback estable para manejar errores desde useTipoCarga
   const handleError = useCallback(
     (msg: string) => showToast("Error", msg, "error"),
     [showToast]
   );
 
-  // Hook personalizado para manejar la lógica de Carga
+  // Hook personalizado para manejar la lógica de tipoCarga
   const {
     data,
     loading,
     selectedRow,
     setSelectedRow,
-    handleCreateCarga,
-    handleEditCarga,
+    handleCreateTipoCarga,
+    handleEditTipoCarga,
     handleDelete,
-  } = useCarga(handleError);
+  } = useTipoCarga(handleError);
 
   // Handler para abrir el modal de edición con la fila seleccionada
-  const handleEdit = (row: Carga) => {
+  const handleEdit = (row: tipoCarga) => {
     setSelectedRow(row);
-    toggleModalVisibility("editCarga");
+    toggleModalVisibility("editTipoCarga");
   };
 
   // Handler para abrir el modal de confirmación de eliminación
   const handleDeleteRequest = (id: string | number) => {
     const row = data.find((row) => row.id === id);
     setSelectedRow(row);
-    toggleModalVisibility("deleteCarga");
+    toggleModalVisibility("deleteteTipoCarga");
   };
 
   return (
     <>
-      {/* Sección principal con tabla y botón para agregar carga */}
+      {/* Sección principal con tabla y botón para agregar tipoCarga */}
       <SectionTable
-        titulo="Cargas"
-        textButton="Agregar Carga"
-        onClickButton={() => toggleModalVisibility("createCarga")}
+        titulo="Tipos de Carga"
+        textButton="Agregar Tipo de Carga"
+        onClickButton={() => toggleModalVisibility("createTipoCarga")}
       >
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
           <TableSkeleton columns={3} />
         ) : (
-          // Tabla con los datos de Cargas
+          // Tabla con los datos de zonas
           <Table
             data={data}
             rowsPerPage={5}
@@ -77,11 +77,11 @@ function Index() {
         message={toastMessage}
         open={toastVisible}
       />
-      {/* Modal de confirmación de eliminación de carga */}
+      {/* Modal de confirmación de eliminación de tipoCarga */}
       <Modal
-        id="deleteCarga"
-        title={"Eliminar carga " + (selectedRow ? selectedRow.id : "")}
-        description="¿Está seguro de que desea eliminar esta carga?"
+        id="deleteTipoCarga"
+        title={"Eliminar tipoCarga " + (selectedRow ? selectedRow.id : "")}
+        description="¿Está seguro de que desea eliminar este tipoCarga?"
         fillButton
         lineButton
         fillButtonText="Eliminar"
@@ -93,47 +93,46 @@ function Index() {
             const res = await handleDelete(selectedRow.id);
             if (res?.success) {
               showToast(
-                "Carga eliminada",
-                "Se ha eliminado la carga: " + selectedRow.id,
+                "tipoCarga eliminado",
+                "Se ha eliminado el tipoCarga: " + selectedRow.id,
                 "success"
               );
             }
           }
-          toggleModalVisibility("deletecarga");
+          toggleModalVisibility("deletetipoCarga");
         }}
-        lineButtonAction={() => toggleModalVisibility("deleteCarga")}
+        lineButtonAction={() => toggleModalVisibility("deleteTipoCarga")}
       />
-      {/* Modal de formulario para crear una nueva carga */}
-      <CargaForm
-        id="createCarga"
+      {/* Modal de formulario para crear un nuevo tipoCarga */}
+      <TipoCargaForm
+        id="createTipoCarga"
         mode="create"
-        title="Registro de Carga"
-        onSave={async (peso: string, volumen: string, tipoCarga: tipoCarga) => {
-          const res = await handleCreateCarga(peso, volumen, tipoCarga);
+        title="Registro de Tipo de Carga"
+        onSave={async (descricion: string) => {
+          const res = await handleCreateTipoCarga(descricion);
           if (res?.success) {
             showToast(
-              "carga creada",
-              "Se ha creado la carga: " +
-                peso +
-                " " +
-                volumen +
-                " " +
-                tipoCarga,
+              "tipoCarga creado",
+              "Se ha creado el tipoCarga: " + descricion,
               "success"
             );
           }
         }}
       />
-      {/* Modal de formulario para editar una carga existente */}
-      <CargaForm
-        id="editCarga"
+      {/* Modal de formulario para editar un tipo de carga existente*/}
+      <TipoCargaForm
+        id="editTipoCarga"
         mode="edit"
-        title={"Editar Carga " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar Tipo de carga " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
-        onSave={async (peso: string, volumen: string, tipoCarga: tipoCarga) => {
-          const res = await handleEditCarga(peso, volumen, tipoCarga);
+        onSave={async (descripcion: string) => {
+          const res = await handleEditTipoCarga(descripcion);
           if (res?.success) {
-            showToast("Carga editada", "Carga editada con éxito", "success");
+            showToast(
+              "Tipo de carga editado",
+              "Tipo de carga editado con éxito",
+              "success"
+            );
           }
         }}
       />
