@@ -17,6 +17,14 @@ export type ZonaFormProps = {
   onSave?: (nombre: string) => void;
 };
 
+export type VehiculoFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: Vehiculo;
+  onSave?: (vehiculo: { tipo: string; toneladas: string | number }) => void;
+};
+
 export type ToastProps = {
   type: "success" | "error";
   title: string;
@@ -51,4 +59,10 @@ export type TextInputProps = {
 export type DateInputProps = {
   required?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type Vehiculo = {
+  id: string | number;
+  tipo: string;
+  toneladas: number;
 };
