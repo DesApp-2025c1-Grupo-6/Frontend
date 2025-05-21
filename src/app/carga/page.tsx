@@ -134,7 +134,8 @@ function Index() {
         data={selectedRow}
         dataTipoDeCargas={dataTipoDeCargas}
         onSave={async (peso, volumen, tipo, requisitos) => {
-          const res = await handleEditCarga({
+          if (selectedRow?.id === undefined) return;
+          const res = await handleEditCarga(selectedRow?.id, {
             peso,
             volumen,
             tipo,

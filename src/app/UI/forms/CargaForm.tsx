@@ -18,6 +18,13 @@ function CargaForm({
   const [tipoDeCarga, setTipoDeCarga] = useState("");
   const [requisitosEspeciales, setRequisitosEspeciales] = useState("");
 
+  const resetForm = () => {
+    setPeso("");
+    setVolumen("");
+    setTipoDeCarga("");
+    setRequisitosEspeciales("");
+  };
+
   const handlePesoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPeso(event.target.value);
   };
@@ -34,14 +41,25 @@ function CargaForm({
   ) => {
     setRequisitosEspeciales(event.target.value);
   };
+
   useEffect(() => {
     if ((mode === "edit" || mode === "view") && data) {
       setPeso(data.peso || "");
       setVolumen(data.volumen || "");
-      setTipoDeCarga(data.tipo || "");
+      // Buscar el id del tipo de carga a partir de la descripción si es necesario
+      if (dataTipoDeCargas && data.tipo) {
+        const tipoEncontrado = dataTipoDeCargas.find(
+          (t) =>
+            t.descripcion === data.tipo ||
+            t.id.toString() === data.tipo.toString()
+        );
+        setTipoDeCarga(tipoEncontrado ? tipoEncontrado.id.toString() : "");
+      } else {
+        setTipoDeCarga("");
+      }
       setRequisitosEspeciales(data.requisitos || "");
     }
-  }, [mode, data]);
+  }, [mode, data, dataTipoDeCargas]);
 
   const handleSave = () => {
     if (mode === "view") {
@@ -52,18 +70,19 @@ function CargaForm({
     if (!peso || !volumen || !tipoDeCarga) return;
     if (onSave) onSave(peso, volumen, tipoDeCarga, requisitosEspeciales);
     toggleModalVisibility(id);
-    setPeso("");
-    setVolumen("");
-    setTipoDeCarga("");
-    setRequisitosEspeciales("");
+
+    if (mode === "create") {
+      resetForm();
+    }
   };
 
   const onCancel = () => {
+    if (mode === "edit") {
+      toggleModalVisibility(id);
+      return;
+    }
     toggleModalVisibility(id);
-    setPeso("");
-    setVolumen("");
-    setTipoDeCarga("");
-    setRequisitosEspeciales("");
+    resetForm();
   };
 
   return (

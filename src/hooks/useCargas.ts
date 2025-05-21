@@ -23,63 +23,69 @@ export function useCargas(onError?: (msg: string) => void) {
 
   const {} = useTipoCargas(onError);
 
+  // Función para normalizar los datos de cargas
+  function normalizeCargas(rawData: any[]): Carga[] {
+    return rawData.map((item: any) => {
+      const { id_tipo_carga, tipoCarga, requisitos_especiales, ...rest } = item;
+      const { descripcion } = tipoCarga;
+      return {
+        ...rest,
+        tipo: descripcion,
+        requisitos: requisitos_especiales,
+      };
+    });
+  }
+
+  // Función auxiliar para cargar y normalizar datos de cargas
+  async function fetchAndSetCargas() {
+    setLoading(true);
+    try {
+      const rawCargas = await getCargas();
+      const cargasNormalizadas = normalizeCargas(rawCargas);
+      setData(cargasNormalizadas);
+    } catch (error) {
+      if (onError) onError("No se pudieron cargar los datos: " + error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // Efecto para cargar las Cargas al montar el componente o cambiar onError
   useEffect(() => {
-    setLoading(true);
-    getCargas()
-      .then((data) => {
-        data = data.map((item: any) => {
-          const { id_tipo_carga, tipoCarga, requisitos_especiales, ...rest } =
-            item;
-          const { descripcion } = tipoCarga;
-
-          return {
-            ...rest,
-            tipo: descripcion,
-            requisitos: requisitos_especiales,
-          };
-        });
-
-        setData(data);
-      })
-      .catch((error) => {
-        if (onError) onError("No se pudieron cargar los datos: " + error);
-      })
-      .finally(() => setLoading(false));
+    fetchAndSetCargas();
   }, [onError]);
 
+  // Handler para crear una nueva carga
   const handleCreateCarga = useCallback(
-    async (data: Carga) => {
+    async (cargaNueva: Carga) => {
       try {
-        const newCarga = await createCarga(data);
-        setData((current) => [...current, newCarga]);
-        console.log("Carga creada:", newCarga);
-
-        return { success: true, carga: newCarga };
+        // Intentar crear la nueva carga
+        await createCarga(cargaNueva);
+        // Refrescar la lista de cargas
+        await fetchAndSetCargas();
+        return { success: true };
       } catch (error) {
+        // Manejo de error con mensaje claro
         if (onError)
           onError(
             "No se pudo crear la Carga: " +
-              JSON.stringify(data) +
+              JSON.stringify(cargaNueva) +
               ", Error: " +
               error
           );
-        return { success: false, carga: data };
+        return { success: false };
       }
     },
     [onError]
   );
 
+  // Handler para editar una carga existente
   const handleEditCarga = useCallback(
-    async (data: Carga) => {
-      if (!selectedRow || selectedRow.id === undefined)
-        return { success: false, carga: data };
+    async (id: string | number, data: Carga) => {
       try {
-        const updated = await updateCarga(selectedRow.id, data);
-        setData((prev) =>
-          prev.map((row) => (row.id === selectedRow.id ? updated : row))
-        );
-        return { success: true, carga: updated };
+        await updateCarga(id, data);
+        await fetchAndSetCargas();
+        return { success: true };
       } catch (error) {
         if (onError)
           onError(
@@ -88,22 +94,23 @@ export function useCargas(onError?: (msg: string) => void) {
               ", Error: " +
               error
           );
-        return { success: false, carga: data };
+        return { success: false };
       }
     },
-    [selectedRow, onError]
+    [onError]
   );
 
+  // Handler para eliminar una carga
   const handleDelete = useCallback(
     async (id: string | number) => {
       try {
         await deleteCarga(id);
         setData((prev) => prev.filter((row) => row.id !== id));
-        return { success: true, id };
+        return { success: true };
       } catch (error) {
         if (onError)
           onError("No se pudo eliminar la Carga: " + id + ", Error: " + error);
-        return { success: false, id };
+        return { success: false };
       }
     },
     [onError]

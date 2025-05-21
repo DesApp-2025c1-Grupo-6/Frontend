@@ -40,13 +40,14 @@ export async function createCarga(data: Carga): Promise<Carga> {
 }
 
 export async function updateCarga(id: number | string, data: Carga) {
-  console.log("Data to update carga:", data);
-
   const payload = {
     ...data,
     requisitos_especiales: data.requisitos,
     id_tipo_carga: data.tipo,
   };
+
+  console.log("Payload to update carga:", JSON.stringify(payload));
+
   const response = await fetch(`${BASE_URL}/cargas/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
