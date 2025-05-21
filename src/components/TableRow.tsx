@@ -23,8 +23,6 @@ const TableRow = ({
   onDelete,
 }: TableRowProps) => {
   const values = Object.values(row);
-  console.log("TableRow values", values);
-  console.log("TableRow row", row);
 
   return (
     <tr className="hover:bg-gray-200 transition-all border-b border-gray-300">
