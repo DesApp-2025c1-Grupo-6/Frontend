@@ -6,6 +6,7 @@ function SelectInput({
   label,
   options,
   shouldValidate,
+  errorMessage = "Este campo es obligatorio",
   onChange,
   ...props
 }: SelectInputProps) {
@@ -30,7 +31,7 @@ function SelectInput({
       </div>
       {shouldValidate && (
         <p className="font-semibold text-roman-500 text-xs ml-1 mt-1">
-          Este campo no puede estar vacío
+          {errorMessage}
         </p>
       )}
     </div>

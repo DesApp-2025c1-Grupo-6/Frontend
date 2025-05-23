@@ -119,6 +119,7 @@ function CargaForm({
           id="tipoCarga"
           label="Tipo de Carga"
           value={tipoDeCarga}
+          errorMessage="Debe seleccionar al menos un tipo de carga"
           shouldValidate={tipoDeCarga === "" && shouldValidate}
           onChange={handleTipoDeCargaChange}
           options={

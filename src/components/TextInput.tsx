@@ -12,6 +12,7 @@ function TextInput({
   value,
   type,
   shouldValidate,
+  errorMessage = "Este campo es obligatorio",
   ...props
 }: TextInputProps) {
   return (
@@ -37,7 +38,7 @@ function TextInput({
       </div>
       {shouldValidate && !value && (
         <p className="font-semibold text-roman-500 text-xs ml-1 mt-1">
-          Este campo no puede estar vacio
+          {errorMessage}
         </p>
       )}
     </div>

@@ -78,6 +78,7 @@ export type TextInputProps = {
   name?: string;
   shouldValidate?: boolean;
   className?: string;
+  errorMessage?: string;
   type: "text" | "number";
   value?: string | number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -89,6 +90,7 @@ export type SelectInputProps = {
   label: string;
   options: { value: string; label: string }[];
   shouldValidate?: boolean;
+  errorMessage?: string;
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   [key: string]: any;
 };
@@ -96,6 +98,7 @@ export type SelectInputProps = {
 export type DateInputProps = {
   required?: boolean;
   shouldValidate?: boolean;
+  errorMessage?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
