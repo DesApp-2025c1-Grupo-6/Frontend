@@ -6,44 +6,60 @@ import Modal from "../Modal";
 
 function ZonaForm({ id, title, mode, data, onSave }: ZonaFormProps) {
   const [nombre, setNombre] = useState("");
+  const [shouldValidate, setShouldValidate] = useState(false);
 
   const handleNombreChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNombre(event.target.value);
   };
 
+  const resetForm = () => {
+    setShouldValidate(false);
+    setNombre("");
+  };
+
   useEffect(() => {
-    if ((mode === "edit" || mode === "view") && data) {
+    if (mode === "edit" && data) {
       setNombre(data.nombre);
     }
   }, [mode, data]);
 
   const handleSave = () => {
-    if (!nombre) return; // No hace nada si el campo está vacío
+    if (!nombre) {
+      setShouldValidate(true);
+      return;
+    }
     if (onSave) onSave(nombre);
     toggleModalVisibility(id);
-    setNombre("");
+    resetForm();
   };
 
   const onCancel = () => {
     toggleModalVisibility(id);
-    setNombre("");
+
+    if (mode === "create") {
+      resetForm();
+    } else if (mode === "edit" && data) {
+      setNombre(data.nombre);
+      setShouldValidate(false);
+    }
   };
 
   return (
     <Modal
       id={id}
       title={title}
-      lineButton={mode !== "view"}
+      lineButton
       fillButton
       lineButtonText="Cancelar"
-      fillButtonText={mode === "view" ? "Cerrar" : "Guardar"}
+      fillButtonText="Guardar"
       fillButtonAction={handleSave}
       lineButtonAction={onCancel}
     >
       <form>
         <TextInput
           value={nombre}
-          disabled={mode === "view"}
+          shouldValidate={shouldValidate && nombre === ""}
+          type="text"
           onChange={handleNombreChange}
           placeholder="Nombre"
         />
