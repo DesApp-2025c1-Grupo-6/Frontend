@@ -8,6 +8,18 @@ export type Zona = {
   id: string | number;
   nombre: string;
 };
+export type Carga = {
+  id?: string | number;
+  peso: string;
+  volumen: string;
+  tipo: string;
+  requisitos: string;
+};
+
+export type TipoCarga = {
+  id: string | number;
+  descripcion: string;
+};
 
 export type ZonaFormProps = {
   id: string;
@@ -23,6 +35,20 @@ export type VehiculoFormProps = {
   mode: "view" | "edit" | "create";
   data?: Vehiculo;
   onSave?: (vehiculo: { tipo: string; toneladas: string | number }) => void;
+};
+
+export type CargaFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: Carga;
+  dataTipoDeCargas?: TipoCarga[];
+  onSave?: (
+    peso: string,
+    volumen: string,
+    tipoDeCarga: string,
+    requisitosEspeciales: string
+  ) => void;
 };
 
 export type ToastProps = {
