@@ -76,14 +76,26 @@ export type TextInputProps = {
   Icon?: React.ReactNode;
   id?: string;
   name?: string;
+  shouldValidate?: boolean;
   className?: string;
+  type: "text" | "number";
   value?: string | number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   [key: string]: any;
 };
 
+export type SelectInputProps = {
+  id: string;
+  label: string;
+  options: { value: string; label: string }[];
+  shouldValidate?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  [key: string]: any;
+};
+
 export type DateInputProps = {
   required?: boolean;
+  shouldValidate?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

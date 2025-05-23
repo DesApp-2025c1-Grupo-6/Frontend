@@ -17,12 +17,30 @@ function CargaForm({
   const [volumen, setVolumen] = useState("");
   const [tipoDeCarga, setTipoDeCarga] = useState("");
   const [requisitosEspeciales, setRequisitosEspeciales] = useState("");
+  const [shouldValidate, setShouldValidate] = useState(false);
 
   const resetForm = () => {
+    setShouldValidate(false);
     setPeso("");
     setVolumen("");
     setTipoDeCarga("");
     setRequisitosEspeciales("");
+  };
+
+  const fillFormFromData = (data: any, dataTipoDeCargas: any[]) => {
+    setPeso(data.peso ?? "");
+    setVolumen(data.volumen ?? "");
+    if (dataTipoDeCargas && data.tipo) {
+      const tipoEncontrado = dataTipoDeCargas.find(
+        (t) =>
+          t.descripcion === data.tipo ||
+          t.id.toString() === data.tipo.toString()
+      );
+      setTipoDeCarga(tipoEncontrado ? tipoEncontrado.id.toString() : "");
+    } else {
+      setTipoDeCarga("");
+    }
+    setRequisitosEspeciales(data.requisitos ?? "");
   };
 
   const handlePesoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,31 +61,16 @@ function CargaForm({
   };
 
   useEffect(() => {
-    if ((mode === "edit" || mode === "view") && data) {
-      setPeso(data.peso || "");
-      setVolumen(data.volumen || "");
-      // Buscar el id del tipo de carga a partir de la descripción si es necesario
-      if (dataTipoDeCargas && data.tipo) {
-        const tipoEncontrado = dataTipoDeCargas.find(
-          (t) =>
-            t.descripcion === data.tipo ||
-            t.id.toString() === data.tipo.toString()
-        );
-        setTipoDeCarga(tipoEncontrado ? tipoEncontrado.id.toString() : "");
-      } else {
-        setTipoDeCarga("");
-      }
-      setRequisitosEspeciales(data.requisitos || "");
+    if (mode === "edit" && data) {
+      fillFormFromData(data, dataTipoDeCargas || []);
     }
   }, [mode, data, dataTipoDeCargas]);
 
   const handleSave = () => {
-    if (mode === "view") {
-      toggleModalVisibility(id);
+    if (!peso || !volumen || !tipoDeCarga) {
+      setShouldValidate(true);
       return;
     }
-
-    if (!peso || !volumen || !tipoDeCarga) return;
     if (onSave) onSave(peso, volumen, tipoDeCarga, requisitosEspeciales);
     toggleModalVisibility(id);
 
@@ -77,19 +80,20 @@ function CargaForm({
   };
 
   const onCancel = () => {
-    if (mode === "edit") {
-      toggleModalVisibility(id);
-      return;
-    }
     toggleModalVisibility(id);
-    resetForm();
+    if (mode === "create") {
+      resetForm();
+    } else if (mode === "edit" && data) {
+      fillFormFromData(data, dataTipoDeCargas || []);
+      setShouldValidate(false);
+    }
   };
 
   return (
     <Modal
       id={id}
       title={title}
-      lineButton={mode !== "view"}
+      lineButton
       fillButton
       lineButtonText="Cancelar"
       fillButtonText={mode === "view" ? "Cerrar" : "Guardar"}
@@ -99,39 +103,38 @@ function CargaForm({
       <form className="flex flex-col gap-4">
         <TextInput
           value={peso}
-          disabled={mode === "view"}
           onChange={handlePesoChange}
           placeholder="Peso"
+          type="number"
+          shouldValidate={peso === "" && shouldValidate}
         />
         <TextInput
           value={volumen}
-          disabled={mode === "view"}
           onChange={handleVolumenChange}
           placeholder="Volumen"
+          type="number"
+          shouldValidate={volumen === "" && shouldValidate}
         />
-        {mode !== "view" ? (
-          <SelectInput
-            id="tipoCarga"
-            label="Tipo de Carga"
-            value={tipoDeCarga}
-            onChange={handleTipoDeCargaChange}
-            options={
-              dataTipoDeCargas
-                ? dataTipoDeCargas?.map((tipoCarga) => {
-                    return {
-                      value: tipoCarga.id.toString(),
-                      label: tipoCarga.descripcion,
-                    };
-                  })
-                : []
-            }
-          />
-        ) : (
-          <TextInput value={tipoDeCarga} disabled />
-        )}
+        <SelectInput
+          id="tipoCarga"
+          label="Tipo de Carga"
+          value={tipoDeCarga}
+          shouldValidate={tipoDeCarga === "" && shouldValidate}
+          onChange={handleTipoDeCargaChange}
+          options={
+            dataTipoDeCargas
+              ? dataTipoDeCargas?.map((tipoCarga) => {
+                  return {
+                    value: tipoCarga.id.toString(),
+                    label: tipoCarga.descripcion,
+                  };
+                })
+              : []
+          }
+        />
         <TextInput
           value={requisitosEspeciales}
-          disabled={mode === "view"}
+          type="text"
           onChange={handleRequisitosEspecialesChange}
           placeholder="Requisitos Especiales"
         />
