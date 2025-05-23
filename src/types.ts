@@ -92,3 +92,11 @@ export type Vehiculo = {
   tipo: string;
   toneladas: number;
 };
+
+export type TipoCargaFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: TipoCarga;
+  onSave?: (descripcion: string) => void;
+};
