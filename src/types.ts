@@ -115,3 +115,93 @@ export type TipoCargaFormProps = {
   data?: TipoCarga;
   onSave?: (descripcion: string) => void;
 };
+
+export type Tarifa = {
+  id: string | number;
+  valor?: string;
+  zona?: string;
+  vehiculo?: string;
+  carga?: string;
+  transportista?: string;
+  fecha?: string;
+  costoAdicionales?: string;
+  valor_base?: string;
+  adicionales?: Adicional[];
+  id_zona?: string | number;
+  id_vehiculo?: string | number;
+  id_carga?: string | number;
+  id_transportista?: string | number;
+};
+
+export type TarifaFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: Tarifa;
+  onSave?: (tarifaData: {
+    valor: string;
+    id_zona: string;
+    id_vehiculo: string;
+    id_carga: string;
+    id_transportista: string;
+    adicionales: Adicional[];
+  }) => void;
+  dataZonas?: Zona[];
+  dataVehiculos?: Vehiculo[];
+  dataCargas?: Carga[];
+  dataTransportistas?: any[];
+  dataAdicionales?: any[];
+};
+
+export interface Adicional {
+  id: number | string;
+  tipo: string;
+  costo?: number | string;
+  costo_personalizado?: number | string;
+}
+
+export interface ModalTipoAdicionalProps {
+  id: string;
+  dataAdicionales: Adicional[];
+  adicionalSeleccionado: Adicional | null;
+  costoAdicionalSeleccionado: string;
+  customCostoAdicional: string;
+  shouldValidate: boolean;
+  errorMessage?: string;
+  handleChangeCustomCostoAdicional: (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+  handleChangeAdicionales: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleSaveTipoAdicional: () => void;
+  handleCancelTipoAdicional: () => void;
+}
+
+export interface TarifaBasicDataSectionProps {
+  mode: "view" | "edit" | "create";
+  valor: string | undefined;
+  vehiculo: string | undefined;
+  zona: string | undefined;
+  carga: string | undefined;
+  transportista: string | undefined;
+  shouldValidate: boolean;
+  dataVehiculos: any[];
+  dataZonas: any[];
+  dataCargas: any[];
+  dataTransportistas: any[];
+  onValorChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onVehiculoChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onZonaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onCargaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onTransportistaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export interface TarifaAdicionalesSectionProps {
+  adicionales: Adicional[];
+  mode: "view" | "edit" | "create";
+  onAgregarAdicional: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export interface TarifaResumenSectionProps {
+  costoAdicionales: number;
+  costoTotal: number;
+}
