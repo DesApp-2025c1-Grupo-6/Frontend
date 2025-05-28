@@ -15,8 +15,6 @@ export async function getTarifa(id: number | string): Promise<Tarifa> {
 }
 
 export async function createTarifa(data: any): Promise<Tarifa> {
-  console.log("Creating tarifa with data:", JSON.stringify(data));
-
   const response = await fetch(`${BASE_URL}/tarifas`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
