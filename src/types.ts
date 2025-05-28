@@ -24,6 +24,11 @@ export type Transportista = {
   id: string | number;
   nombre: string;
 };
+export type Adicional = {
+  id: string | number;
+  tipo: string;
+  costo_default: string;
+};
 export type ZonaFormProps = {
   id: string;
   title: string;
@@ -59,6 +64,13 @@ export type TransportistaFormProps = {
   mode: "view" | "edit" | "create";
   data?: Transportista;
   onSave?: (nombre: string) => void;
+};
+export type AdicionalFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: Adicional;
+  onSave?: (tipo: string, costo_default: string) => void;
 };
 
 export type ToastProps = {
