@@ -137,3 +137,272 @@ export type TipoCargaFormProps = {
   data?: TipoCarga;
   onSave?: (descripcion: string) => void;
 };
+
+export type Tarifa = {
+  id: string | number;
+  valor?: string;
+  zona?: string;
+  vehiculo?: string;
+  carga?: string;
+  transportista?: string;
+  fecha?: string;
+  costoAdicionales?: string;
+  valor_base?: string;
+  adicionales?: Adicional[];
+  id_zona?: string | number;
+  id_vehiculo?: string | number;
+  id_carga?: string | number;
+  id_transportista?: string | number;
+};
+
+export type TarifaFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: Tarifa;
+  onSave?: (tarifaData: {
+    valor: string;
+    id_zona: string;
+    id_vehiculo: string;
+    id_carga: string;
+    id_transportista: string;
+    adicionales: Adicional[];
+  }) => void;
+  dataZonas?: Zona[];
+  dataVehiculos?: Vehiculo[];
+  dataCargas?: Carga[];
+  dataTransportistas?: any[];
+  dataAdicionales?: any[];
+};
+
+export interface Adicional {
+  id: number | string;
+  tipo: string;
+  costo?: number | string;
+  costo_personalizado?: number | string;
+}
+
+export interface ModalTipoAdicionalProps {
+  id: string;
+  dataAdicionales: Adicional[];
+  adicionalSeleccionado: Adicional | null;
+  costoAdicionalSeleccionado: string;
+  customCostoAdicional: string;
+  shouldValidate: boolean;
+  errorMessage?: string;
+  handleChangeCustomCostoAdicional: (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+  handleChangeAdicionales: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleSaveTipoAdicional: () => void;
+  handleCancelTipoAdicional: () => void;
+}
+
+export interface TarifaBasicDataSectionProps {
+  mode: "view" | "edit" | "create";
+  valor: string | undefined;
+  vehiculo: string | undefined;
+  zona: string | undefined;
+  carga: string | undefined;
+  transportista: string | undefined;
+  shouldValidate: boolean;
+  dataVehiculos: any[];
+  dataZonas: any[];
+  dataCargas: any[];
+  dataTransportistas: any[];
+  onValorChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onVehiculoChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onZonaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onCargaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onTransportistaChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export interface TarifaAdicionalesSectionProps {
+  adicionales: Adicional[];
+  mode: "view" | "edit" | "create";
+  onAgregarAdicional: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export interface TarifaResumenSectionProps {
+  costoAdicionales: number;
+  costoTotal: number;
+}
+
+// FilterValues para useTarifaFilters
+export interface FilterValues {
+  carga: string;
+  vehiculo: string;
+  zona: string;
+  adicional: string;
+  transportista: string;
+}
+
+// TarifaData para useTableData
+export interface TarifaData {
+  id: string | number;
+  zona?: string;
+  vehiculo?: string;
+  carga?: string;
+  transportista?: string;
+  id_zona?: string | number;
+  id_vehiculo?: string | number;
+  id_carga?: string | number;
+  id_transportista?: string | number;
+  adicionales?: Array<{ id: string | number; [key: string]: any }>;
+}
+
+// Props para useTableData
+export interface UseTableDataProps {
+  data: TarifaData[];
+  filtrosAplicados: boolean;
+  valoresAplicados: FilterValues;
+}
+
+// Props para useTableActions
+export interface UseTableActionsProps {
+  data: any[];
+  setSelectedRow: (row: any) => void;
+}
+
+// Props para FiltrosSection component
+export interface FiltrosSectionProps {
+  onApply: () => void;
+  onClear: () => void;
+  filtroCarga: string;
+  filtroVehiculo: string;
+  filtroZona: string;
+  filtroAdicional: string;
+  filtroTransportista: string;
+  handleFiltroCarga: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleFiltroVehiculo: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleFiltroZona: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleFiltroAdicional: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleFiltroTransportista: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  cargas?: any[];
+  vehiculos?: any[];
+  zonas?: any[];
+  adicionales: any[];
+  transportistas: any[];
+}
+
+// Props para TarifaModals component
+export interface TarifaModalsProps {
+  selectedRow: TarifaData | undefined;
+  cargas?: any[];
+  vehiculos?: any[];
+  zonas?: any[];
+  adicionales: any[];
+  transportistas: any[];
+  handleCreateTarifa: (
+    valor: string,
+    id_zona: string,
+    id_vehiculo: string,
+    id_carga: string,
+    id_transportista: string,
+    adicionales: any[]
+  ) => Promise<any>;
+  handleEditTarifa: (
+    valor: string,
+    id_zona: string,
+    id_vehiculo: string,
+    id_carga: string,
+    id_transportista: string,
+    adicionales: any[]
+  ) => Promise<any>;
+  handleDelete: (id: string | number) => Promise<any>;
+  showToast: (
+    title: string,
+    message: string,
+    type: "success" | "error"
+  ) => void;
+}
+
+// ============================================
+// Types e interfaces para hooks de TarifaForm
+// ============================================
+
+// TarifaFormData para useTarifaForm
+export interface TarifaFormData {
+  zona: string;
+  vehiculo: string;
+  carga: string;
+  transportista: string;
+  valor: string;
+  idZona: string;
+  idVehiculo: string;
+  idCarga: string;
+  idTransportista: string;
+}
+
+// Props para useTarifaForm
+export interface UseTarifaFormProps {
+  mode: "create" | "edit" | "view";
+  data?: any;
+  dataZonas?: any[];
+  dataVehiculos?: any[];
+  dataCargas?: any[];
+  dataTransportistas?: any[];
+  dataAdicionales?: any[];
+}
+
+// Props para useAdicionales
+export interface UseAdicionalesProps {
+  dataAdicionales?: any[];
+}
+
+// Props para useCostCalculation
+export interface UseCostCalculationProps {
+  adicionales: Adicional[];
+  valor: string;
+}
+
+// Props para useTarifaFormHandlers
+export interface TarifaFormHandlersProps {
+  formData: TarifaFormData;
+  updateField: (field: keyof TarifaFormData, value: string) => void;
+  handleSelectChange: (
+    field: "zona" | "vehiculo" | "carga" | "transportista",
+    selectedId: string,
+    dataArray?: any[],
+    nameField?: string
+  ) => void;
+  dataZonas?: any[];
+  dataVehiculos?: any[];
+  dataCargas?: any[];
+  dataTransportistas?: any[];
+}
+
+// Props para useTarifaFormActions
+export interface UseTarifaFormActionsProps {
+  id: string;
+  mode: "create" | "edit" | "view";
+  formData: TarifaFormData;
+  adicionales: Adicional[];
+  data?: any;
+  isFormValid: () => boolean;
+  setShouldValidate: (value: boolean) => void;
+  resetForm: () => void;
+  fillFormFromData: (data: any) => void;
+  onSave?: (data: any) => void;
+}
+
+// Props para TarifaFormContent component
+export interface TarifaFormContentProps {
+  mode: "create" | "edit" | "view";
+  formData: TarifaFormData;
+  shouldValidate: boolean;
+  adicionales: Adicional[];
+  costoAdicionales: number;
+  costoTotal: number;
+  dataVehiculos: any[];
+  dataZonas: any[];
+  dataCargas: any[];
+  dataTransportistas: any[];
+  onValorChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onVehiculoChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onZonaChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onCargaChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onTransportistaChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onAgregarAdicional: (e: React.MouseEvent) => void;
+  onDeleteAdicional: (id: number) => void;
+}
