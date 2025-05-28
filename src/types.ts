@@ -20,7 +20,10 @@ export type TipoCarga = {
   id: string | number;
   descripcion: string;
 };
-
+export type Transportista = {
+  id: string | number;
+  nombre: string;
+};
 export type ZonaFormProps = {
   id: string;
   title: string;
@@ -49,6 +52,13 @@ export type CargaFormProps = {
     tipoDeCarga: string,
     requisitosEspeciales: string
   ) => void;
+};
+export type TransportistaFormProps = {
+  id: string;
+  title: string;
+  mode: "view" | "edit" | "create";
+  data?: Transportista;
+  onSave?: (nombre: string) => void;
 };
 
 export type ToastProps = {
