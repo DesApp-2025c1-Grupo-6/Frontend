@@ -47,7 +47,7 @@ export function useTarifas(onError?: (msg: string) => void) {
         // Transformar los datos al formato esperado por el backend
         const payload = {
           valor_base: Number(valor_base),
-          fecha: "2024-01-15",
+          fecha: new Date().toISOString().split("T")[0],
           id_zona: Number(zona),
           id_vehiculo: Number(vehiculo),
           id_carga: Number(carga),
@@ -79,34 +79,41 @@ export function useTarifas(onError?: (msg: string) => void) {
    */
   const handleEditTarifa = useCallback(
     async (
-      valor: string,
+      valor_base: string,
       zona: string,
       vehiculo: string,
       carga: string,
       transportista: string,
       adicionales: Adicional[]
     ) => {
-      if (!selectedRow) return { success: false, valor };
+      if (!selectedRow) return { success: false, valor_base };
       try {
-        const updated = await updateTarifa(selectedRow.id, {
-          valor,
-          zona,
-          vehiculo,
-          carga,
-          transportista,
-          fecha: "", // Se envía un string vacío para cumplir con la interfaz
-          adicionales,
-        });
+        const payload = {
+          valor_base: Number(valor_base),
+          fecha: new Date().toISOString().split("T")[0],
+          id_zona: Number(zona),
+          id_vehiculo: Number(vehiculo),
+          id_carga: Number(carga),
+          id_transportista: Number(transportista),
+          adicionales: adicionales.map((a) => {
+            const obj: any = { id_adicional: Number(a.id) };
+            if (a.costo_personalizado && a.costo_personalizado !== "") {
+              obj.costo_personalizado = Number(a.costo_personalizado);
+            }
+            return obj;
+          }),
+        };
+        const updated = await updateTarifa(selectedRow.id, payload);
         setData((prev) =>
           prev.map((row) => (row.id === selectedRow.id ? updated : row))
         );
-        return { success: true, valor };
+        return { success: true, valor_base };
       } catch (error) {
         if (onError)
           onError(
-            "No se pudo editar la tarifa: " + valor + ", Error: " + error
+            "No se pudo editar la tarifa: " + valor_base + ", Error: " + error
           );
-        return { success: false, valor };
+        return { success: false, valor_base };
       }
     },
     [selectedRow, onError]
