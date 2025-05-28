@@ -8,7 +8,7 @@ function Button({
   color = "#566173",
 }: {
   text: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   Icon?: React.ElementType;
   line?: boolean;
   color?: string;
