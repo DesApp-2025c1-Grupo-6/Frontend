@@ -17,3 +17,8 @@ export function mapTarifaDataToTarifa(tarifaData: any): any {
     })),
   };
 }
+
+// Funcion para hacer capitalize la primera letra de una cadena
+export function capitalizeFirstLetter(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
