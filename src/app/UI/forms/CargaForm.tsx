@@ -16,7 +16,7 @@ function CargaForm({
   const [peso, setPeso] = useState("");
   const [volumen, setVolumen] = useState("");
   const [tipoDeCarga, setTipoDeCarga] = useState("");
-  const [requisitosEspeciales, setRequisitosEspeciales] = useState("");
+  const [requisitosEspeciales, setRequisitosEspeciales] = useState("Ninguno");
   const [shouldValidate, setShouldValidate] = useState(false);
 
   const resetForm = () => {
