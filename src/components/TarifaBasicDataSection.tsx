@@ -93,11 +93,36 @@ function TarifaBasicDataSection({
       ) : (
         <>
           {/* En modo view, mostrar los nombres descriptivos */}
-          <TextInput type="text" value={valor || ""} disabled />
-          <TextInput type="text" value={vehiculoNombre || ""} disabled />
-          <TextInput type="text" value={zonaNombre || ""} disabled />
-          <TextInput type="text" value={cargaNombre || ""} disabled />
-          <TextInput type="text" value={transportistaNombre || ""} disabled />
+          <TextInput
+            label="Costo base"
+            type="text"
+            value={valor || ""}
+            disabled
+          />
+          <TextInput
+            label="Vehiculo"
+            type="text"
+            value={vehiculoNombre || ""}
+            disabled
+          />
+          <TextInput
+            label="Zona"
+            type="text"
+            value={zonaNombre || ""}
+            disabled
+          />
+          <TextInput
+            label="Carga"
+            type="text"
+            value={cargaNombre || ""}
+            disabled
+          />
+          <TextInput
+            label="Transportista"
+            type="text"
+            value={transportistaNombre || ""}
+            disabled
+          />
         </>
       )}
     </section>
