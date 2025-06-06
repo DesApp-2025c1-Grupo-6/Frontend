@@ -16,7 +16,8 @@ export const useTarifaFormActions = ({
   resetForm,
   fillFormFromData,
   onSave,
-}: UseTarifaFormActionsProps) => {
+  resetAdicionales, // <-- Agregado
+}: UseTarifaFormActionsProps & { resetAdicionales?: () => void }) => {
   const handleSave = () => {
     if (!isFormValid()) {
       setShouldValidate(true);
@@ -35,13 +36,17 @@ export const useTarifaFormActions = ({
     }
 
     toggleModalVisibility(id);
-    if (mode === "create") resetForm();
+    if (mode === "create") {
+      resetForm();
+      if (resetAdicionales) resetAdicionales();
+    }
   };
 
   const onCancel = () => {
     toggleModalVisibility(id);
     if (mode === "create") {
       resetForm();
+      if (resetAdicionales) resetAdicionales();
     } else if (mode === "edit" && data) {
       fillFormFromData(data);
       setShouldValidate(false);

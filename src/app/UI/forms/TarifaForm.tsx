@@ -95,6 +95,7 @@ function TarifaForm({
     resetForm,
     fillFormFromData,
     onSave,
+    resetAdicionales,
   });
 
   // Cargar datos adicionales cuando el modo o datos cambien
