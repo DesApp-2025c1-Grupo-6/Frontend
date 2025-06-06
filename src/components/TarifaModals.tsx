@@ -69,7 +69,7 @@ const TarifaModals: React.FC<TarifaModalsProps> = ({
           if (res?.success) {
             showToast(
               "Tarifa creada",
-              "Se ha creado la tarifa: " + tarifaData.valor,
+              "Se ha creado la tarifa con exito",
               "success"
             );
           }
