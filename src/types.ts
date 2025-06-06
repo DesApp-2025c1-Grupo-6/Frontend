@@ -25,11 +25,6 @@ export type Transportista = {
   nombre: string;
 };
 
-export type AdicionalBase = {
-  id: string | number;
-  tipo: string;
-  costo_default: string;
-};
 export type ZonaFormProps = {
   id: string;
   title: string;
@@ -180,6 +175,7 @@ export interface Adicional {
   id: number | string;
   tipo: string;
   costo?: number | string;
+  costo_default: string;
   costo_personalizado?: number | string;
 }
 

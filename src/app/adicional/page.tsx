@@ -53,7 +53,7 @@ function Index() {
       <SectionTable
         titulo="Adicionales"
         textButton="Agregar Adicional"
-        onClickButton={() => toggleModalVisibility("createAdicional")}>
+        onClickButton={() => toggleModalVisibility("createAdicional")}
       >
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
@@ -108,12 +108,15 @@ function Index() {
         id="createAdicional"
         mode="create"
         title="Registro de Adicional"
-        onSave={async (tipo: string,costo_default:string) => {
-          const res = await handleCreateAdicional(tipo,costo_default);
+        onSave={async (tipo: string, costo_default: string) => {
+          const res = await handleCreateAdicional(tipo, costo_default);
           if (res?.success) {
             showToast(
               "Adicional creado",
-              "Se ha creado el adicional: " + tipo + " con costo " + costo_default,
+              "Se ha creado el adicional: " +
+                tipo +
+                " con costo " +
+                costo_default,
               "success"
             );
           }
@@ -125,10 +128,14 @@ function Index() {
         mode="edit"
         title={"Editar Adicional " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
-        onSave={async (tipo: string,costo_default:string) => {
-          const res = await handleEditAdicional(tipo,costo_default);
+        onSave={async (tipo: string, costo_default: string) => {
+          const res = await handleEditAdicional(tipo, costo_default);
           if (res?.success) {
-            showToast("Adicional editado", "Adicional editado con éxito", "success");
+            showToast(
+              "Adicional editado",
+              "Adicional editado con éxito",
+              "success"
+            );
           }
         }}
       />
