@@ -24,7 +24,8 @@ export type Transportista = {
   id: string | number;
   nombre: string;
 };
-export type Adicional = {
+
+export type AdicionalBase = {
   id: string | number;
   tipo: string;
   costo_default: string;
@@ -205,6 +206,10 @@ export interface TarifaBasicDataSectionProps {
   zona: string | undefined;
   carga: string | undefined;
   transportista: string | undefined;
+  vehiculoNombre?: string;
+  zonaNombre?: string;
+  cargaNombre?: string;
+  transportistaNombre?: string;
   shouldValidate: boolean;
   dataVehiculos: any[];
   dataZonas: any[];
