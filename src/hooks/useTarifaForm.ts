@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Adicional, TarifaFormData, UseTarifaFormProps } from "@/src/types";
+import { TarifaFormData, UseTarifaFormProps } from "@/src/types";
+import { useEffect, useState } from "react";
 
 export const useTarifaForm = ({
   mode,

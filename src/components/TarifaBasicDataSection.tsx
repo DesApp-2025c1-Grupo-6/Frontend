@@ -10,6 +10,10 @@ function TarifaBasicDataSection({
   zona,
   carga,
   transportista,
+  vehiculoNombre,
+  zonaNombre,
+  cargaNombre,
+  transportistaNombre,
   shouldValidate,
   dataVehiculos,
   dataZonas,
@@ -20,7 +24,12 @@ function TarifaBasicDataSection({
   onZonaChange,
   onCargaChange,
   onTransportistaChange,
-}: TarifaBasicDataSectionProps) {
+}: TarifaBasicDataSectionProps & {
+  vehiculoNombre?: string;
+  zonaNombre?: string;
+  cargaNombre?: string;
+  transportistaNombre?: string;
+}) {
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-lg font-semibold text-wild-sand-600">
@@ -83,11 +92,37 @@ function TarifaBasicDataSection({
         </>
       ) : (
         <>
-          <TextInput type="text" value={valor || ""} disabled />
-          <TextInput type="text" value={vehiculo || ""} disabled />
-          <TextInput type="text" value={zona || ""} disabled />
-          <TextInput type="text" value={carga || ""} disabled />
-          <TextInput type="text" value={transportista || ""} disabled />
+          {/* En modo view, mostrar los nombres descriptivos */}
+          <TextInput
+            label="Costo base"
+            type="text"
+            value={valor || ""}
+            disabled
+          />
+          <TextInput
+            label="Vehiculo"
+            type="text"
+            value={vehiculoNombre || ""}
+            disabled
+          />
+          <TextInput
+            label="Zona"
+            type="text"
+            value={zonaNombre || ""}
+            disabled
+          />
+          <TextInput
+            label="Carga"
+            type="text"
+            value={cargaNombre || ""}
+            disabled
+          />
+          <TextInput
+            label="Transportista"
+            type="text"
+            value={transportistaNombre || ""}
+            disabled
+          />
         </>
       )}
     </section>
