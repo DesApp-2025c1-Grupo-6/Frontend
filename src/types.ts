@@ -407,3 +407,21 @@ export interface TarifaFormContentProps {
   onAgregarAdicional: (e: React.MouseEvent) => void;
   onDeleteAdicional: (id: number) => void;
 }
+
+export interface NavbarMenuItemProps {
+  item: {
+    name: string;
+    href: string;
+    icon: React.ElementType;
+  };
+  open: boolean;
+}
+
+export interface NavbarMenuButtonProps {
+  open: boolean;
+  toggleMenu: () => void;
+}
+
+export interface NavbarMenuItemsProps {
+  open: boolean;
+}

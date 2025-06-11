@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "./UI/Navbar";
 
 export const metadata: Metadata = {
   title: "Gestion de tarifa de costos",
@@ -13,8 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="bg-gray-chateau-100 flex flex-col gap-4">
-        {children}
+      <body className="flex h-screen w-screen bg-gray-chateau-100">
+        <Navbar />
+        <main className="bg-gray-chateau-100 flex flex-col gap-4 size-full">
+          {children}
+        </main>
       </body>
     </html>
   );
