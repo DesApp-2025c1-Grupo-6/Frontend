@@ -10,8 +10,10 @@ import TableSkeleton from "@/src/components/Skeletons";
 import Modal from "../UI/Modal";
 import { useCargas } from "@/src/hooks/useCargas";
 import { useToast } from "@/src/hooks/useToast";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTipoCargas } from "@/src/hooks/useTipoCargas";
+import FiltroInput from "@/src/components/FiltroInput";
+import SectionFiltros from "../UI/SectionFiltros";
 
 function Index() {
   // Hook para mostrar toasts de notificación
@@ -37,6 +39,25 @@ function Index() {
 
   const { data: dataTipoDeCargas } = useTipoCargas(handleError);
 
+  //filtro
+  const [filteredData, setFilteredData] = useState<Carga[]>(data);
+  const [filterSelected, setFilterSelected] = useState<string>("");
+
+  const handleFilterChange = (value: string) => {
+    setFilterSelected(value);
+  };
+
+  useEffect(() => {
+    if (filterSelected) {
+      const filtered = data.filter((carga) =>
+        carga.tipo.toLowerCase().includes(filterSelected.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data);
+    }
+  }, [filterSelected, data]);
+
   // Handler para abrir el modal de edición con la fila seleccionada
   const handleEdit = (row: Carga) => {
     setSelectedRow(row);
@@ -60,13 +81,21 @@ function Index() {
         textButton="Agregar Carga"
         onClickButton={() => toggleModalVisibility("createCarga")}
       >
+        <SectionFiltros onClear={() => setFilterSelected("")}>
+          <FiltroInput
+            label="Cargas"
+            onChange={handleFilterChange}
+            data={[...dataTipoDeCargas.map((carga) => carga.descripcion)]}
+            value={filterSelected}
+          />
+        </SectionFiltros>
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
           <TableSkeleton columns={4} />
         ) : (
           // Tabla con los datos de Cargas
           <Table
-            data={data}
+            data={filteredData}
             rowsPerPage={5}
             editButton
             deleteButton

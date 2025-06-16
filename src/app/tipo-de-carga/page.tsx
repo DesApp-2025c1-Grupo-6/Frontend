@@ -11,6 +11,9 @@ import { useToast } from "@/src/hooks/useToast";
 import { useCallback } from "react";
 import { useTipoCargas } from "@/src/hooks/useTipoCargas";
 import { TipoCarga } from "@/src/types";
+import FiltroInput from "@/src/components/FiltroInput";
+import SectionFiltros from "../UI/SectionFiltros";
+import { useState, useEffect } from "react";
 
 function Index() {
   const { toastVisible, toastMessage, toastTitle, toastType, showToast } =
@@ -42,6 +45,27 @@ function Index() {
     toggleModalVisibility("deleteTipoCarga");
   };
 
+  //filtro
+  const [filteredData, setFilteredData] = useState<TipoCarga[]>(data);
+  const [filterSelected, setFilterSelected] = useState<string>("");
+
+  const handleFilterChange = (value: string) => {
+    setFilterSelected(value);
+  };
+
+  useEffect(() => {
+    if (filterSelected) {
+      const filtered = data.filter((tipoCarga) =>
+        tipoCarga.descripcion
+          .toLowerCase()
+          .includes(filterSelected.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data);
+    }
+  }, [filterSelected, data]);
+
   return (
     <>
       <SectionTable
@@ -49,11 +73,19 @@ function Index() {
         textButton="Agregar Tipo de Carga"
         onClickButton={() => toggleModalVisibility("createTipoCarga")}
       >
+        <SectionFiltros onClear={() => setFilterSelected("")}>
+          <FiltroInput
+            label="Tipos de Carga"
+            onChange={handleFilterChange}
+            data={[...data.map((tipoCarga) => tipoCarga.descripcion)]}
+            value={filterSelected}
+          />
+        </SectionFiltros>
         {loading ? (
           <TableSkeleton columns={2} />
         ) : (
           <Table
-            data={data}
+            data={filteredData}
             rowsPerPage={5}
             editButton
             deleteButton

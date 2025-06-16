@@ -31,20 +31,16 @@ export const useTarifaFilters = () => {
   });
 
   // Handlers para filtros (actualizan el context)
-  const handleFiltroCarga = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setFiltroCarga(e.target.value);
+  const handleFiltroCarga = (value: string) => setFiltroCarga(value);
 
-  const handleFiltroVehiculo = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setFiltroVehiculo(e.target.value);
+  const handleFiltroVehiculo = (value: string) => setFiltroVehiculo(value);
 
-  const handleFiltroZona = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setFiltroZona(e.target.value);
+  const handleFiltroZona = (value: string) => setFiltroZona(value);
 
-  const handleFiltroAdicional = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setFiltroAdicional(e.target.value);
+  const handleFiltroAdicional = (value: string) => setFiltroAdicional(value);
 
-  const handleFiltroTransportista = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setFiltroTransportista(e.target.value);
+  const handleFiltroTransportista = (value: string) =>
+    setFiltroTransportista(value);
 
   // Handler para aplicar filtros
   const onApplyFilters = () => {
