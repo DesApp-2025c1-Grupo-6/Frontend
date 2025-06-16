@@ -13,28 +13,28 @@ export const useTarifaTableData = ({
     if (filtrosAplicados) {
       if (valoresAplicados.carga) {
         filteredData = filteredData.filter(
-          (tarifa) => tarifa.id_carga == valoresAplicados.carga
+          (tarifa) => tarifa.carga == valoresAplicados.carga
         );
       }
       if (valoresAplicados.vehiculo) {
         filteredData = filteredData.filter(
-          (tarifa) => tarifa.id_vehiculo == valoresAplicados.vehiculo
+          (tarifa) => tarifa.vehiculo == valoresAplicados.vehiculo
         );
       }
       if (valoresAplicados.zona) {
         filteredData = filteredData.filter(
-          (tarifa) => tarifa.id_zona == valoresAplicados.zona
+          (tarifa) => tarifa.zona == valoresAplicados.zona
         );
       }
       if (valoresAplicados.transportista) {
         filteredData = filteredData.filter(
-          (tarifa) => tarifa.id_transportista == valoresAplicados.transportista
+          (tarifa) => tarifa.transportista == valoresAplicados.transportista
         );
       }
       if (valoresAplicados.adicional) {
         filteredData = filteredData.filter((tarifa) =>
           tarifa.adicionales?.some(
-            (adicional) => adicional.id == valoresAplicados.adicional
+            (adicional) => adicional.tipo == valoresAplicados.adicional
           )
         );
       }

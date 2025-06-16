@@ -10,7 +10,9 @@ import TableSkeleton from "@/src/components/Skeletons";
 import Modal from "../UI/Modal";
 import { useAdicional } from "@/src/hooks/useAdicional";
 import { useToast } from "@/src/hooks/useToast";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import FiltroInput from "@/src/components/FiltroInput";
+import SectionFiltros from "../UI/SectionFiltros";
 
 function Index() {
   // Hook para mostrar toasts de notificación
@@ -34,6 +36,25 @@ function Index() {
     handleDelete,
   } = useAdicional(handleError);
 
+  //filtro
+  const [filteredData, setFilteredData] = useState<Adicional[]>(data);
+  const [filterSelected, setFilterSelected] = useState<string>("");
+
+  const handleFilterChange = (value: string) => {
+    setFilterSelected(value);
+  };
+
+  useEffect(() => {
+    if (filterSelected) {
+      const filtered = data.filter((adicional) =>
+        adicional.tipo.toLowerCase().includes(filterSelected.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data);
+    }
+  }, [filterSelected, data]);
+
   // Handler para abrir el modal de edición con la fila seleccionada
   const handleEdit = (row: Adicional) => {
     setSelectedRow(row);
@@ -55,13 +76,21 @@ function Index() {
         textButton="Agregar Adicional"
         onClickButton={() => toggleModalVisibility("createAdicional")}
       >
+        <SectionFiltros onClear={() => setFilterSelected("")}>
+          <FiltroInput
+            label="Adicionales"
+            onChange={handleFilterChange}
+            data={[...data.map((adicional) => adicional.tipo)]}
+            value={filterSelected}
+          />
+        </SectionFiltros>
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
           <TableSkeleton columns={3} />
         ) : (
           // Tabla con los datos de adicionales
           <Table
-            data={data}
+            data={filteredData}
             rowsPerPage={5}
             editButton
             deleteButton

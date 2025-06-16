@@ -10,7 +10,9 @@ import TableSkeleton from "@/src/components/Skeletons";
 import Modal from "../UI/Modal";
 import { useZonas } from "@/src/hooks/useZonas";
 import { useToast } from "@/src/hooks/useToast";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import FiltroInput from "@/src/components/FiltroInput";
+import SectionFiltros from "../UI/SectionFiltros";
 
 function Index() {
   // Hook para mostrar toasts de notificación
@@ -47,6 +49,25 @@ function Index() {
     toggleModalVisibility("deleteZona");
   };
 
+  //filtro
+  const [filteredData, setFilteredData] = useState<Zona[]>(data);
+  const [filterSelected, setFilterSelected] = useState<string>("");
+
+  const handleFilterChange = (value: string) => {
+    setFilterSelected(value);
+  };
+
+  useEffect(() => {
+    if (filterSelected) {
+      const filtered = data.filter((zona) =>
+        zona.nombre.toLowerCase().includes(filterSelected.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data);
+    }
+  }, [filterSelected, data]);
+
   return (
     <>
       {/* Sección principal con tabla y botón para agregar zona */}
@@ -55,13 +76,21 @@ function Index() {
         textButton="Agregar Zona"
         onClickButton={() => toggleModalVisibility("createZona")}
       >
+        <SectionFiltros onClear={() => setFilterSelected("")}>
+          <FiltroInput
+            label="Zonas"
+            onChange={handleFilterChange}
+            data={[...data.map((zona) => zona.nombre)]}
+            value={filterSelected}
+          />
+        </SectionFiltros>
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
           <TableSkeleton columns={3} />
         ) : (
           // Tabla con los datos de zonas
           <Table
-            data={data}
+            data={filteredData}
             rowsPerPage={5}
             editButton
             deleteButton

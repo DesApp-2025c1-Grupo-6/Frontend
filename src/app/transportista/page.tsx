@@ -10,7 +10,9 @@ import TableSkeleton from "@/src/components/Skeletons";
 import Modal from "../UI/Modal";
 import { useTransportista } from "@/src/hooks/useTransportista";
 import { useToast } from "@/src/hooks/useToast";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import FiltroInput from "@/src/components/FiltroInput";
+import SectionFiltros from "../UI/SectionFiltros";
 
 function Index() {
   // Hook para mostrar toasts de notificación
@@ -34,6 +36,27 @@ function Index() {
     handleDelete,
   } = useTransportista(handleError);
 
+  //filtro
+  const [filteredData, setFilteredData] = useState<Transportista[]>(data);
+  const [filterSelected, setFilterSelected] = useState<string>("");
+
+  const handleFilterChange = (value: string) => {
+    setFilterSelected(value);
+  };
+
+  useEffect(() => {
+    if (filterSelected) {
+      const filtered = data.filter((transportista) =>
+        transportista.nombre
+          .toLowerCase()
+          .includes(filterSelected.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data);
+    }
+  }, [filterSelected, data]);
+
   // Handler para abrir el modal de edición con la fila seleccionada
   const handleEdit = (row: Transportista) => {
     setSelectedRow(row);
@@ -55,13 +78,21 @@ function Index() {
         textButton="Agregar Transportista"
         onClickButton={() => toggleModalVisibility("createTransportista")}
       >
+        <SectionFiltros onClear={() => setFilterSelected("")}>
+          <FiltroInput
+            label="Transportistas"
+            onChange={handleFilterChange}
+            data={[...data.map((transportista) => transportista.nombre)]}
+            value={filterSelected}
+          />
+        </SectionFiltros>
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
           <TableSkeleton columns={3} />
         ) : (
           // Tabla con los datos de transportistas
           <Table
-            data={data}
+            data={filteredData}
             rowsPerPage={5}
             editButton
             deleteButton

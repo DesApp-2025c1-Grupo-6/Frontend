@@ -1,18 +1,19 @@
 "use client";
 
-import React, { useCallback } from "react";
+import FiltroInput from "@/src/components/FiltroInput";
 import TableSkeleton from "@/src/components/Skeletons";
 import Table from "@/src/components/Table";
-import Toast from "@/src/components/Toast";
-import FiltrosSection from "@/src/components/FiltrosSection";
 import TarifaModals from "@/src/components/TarifaModals";
-import SectionTable from "../UI/SectionTable";
-import { useTarifas } from "@/src/hooks/useTarifas";
-import { useToast } from "@/src/hooks/useToast";
+import Toast from "@/src/components/Toast";
 import { useTarifaFilters } from "@/src/hooks/useTarifaFilters";
-import { useTarifaTableData } from "@/src/hooks/useTarifaTableData";
-import { useTarifaTableActions } from "@/src/hooks/useTarifaTableActions";
 import { useTarifaFormData } from "@/src/hooks/useTarifaFormData";
+import { useTarifas } from "@/src/hooks/useTarifas";
+import { useTarifaTableActions } from "@/src/hooks/useTarifaTableActions";
+import { useTarifaTableData } from "@/src/hooks/useTarifaTableData";
+import { useToast } from "@/src/hooks/useToast";
+import { useCallback, useEffect } from "react";
+import SectionFiltros from "../UI/SectionFiltros";
+import SectionTable from "../UI/SectionTable";
 
 function Index() {
   // Hook para mostrar toasts de notificación
@@ -55,7 +56,7 @@ function Index() {
   } = useTarifaFilters();
 
   // Hook para datos del formulario
-  const { cargas, vehiculos, zonas, adicionales, transportistas } =
+  const { tipoDeCarga, cargas, vehiculos, zonas, adicionales, transportistas } =
     useTarifaFormData();
 
   // Hook para procesamiento de datos de la tabla
@@ -64,6 +65,16 @@ function Index() {
     filtrosAplicados,
     valoresAplicados,
   });
+
+  useEffect(() => {
+    onApplyFilters();
+  }, [
+    filtroCarga,
+    filtroVehiculo,
+    filtroZona,
+    filtroAdicional,
+    filtroTransportista,
+  ]);
 
   // Hook para acciones de la tabla
   const { handleEdit, handleDeleteRequest, handleView, handleCreate } =
@@ -76,25 +87,40 @@ function Index() {
         textButton="Agregar Tarifa"
         onClickButton={handleCreate}
       >
-        <FiltrosSection
-          onApply={onApplyFilters}
-          onClear={onClearFilters}
-          filtroCarga={filtroCarga}
-          filtroVehiculo={filtroVehiculo}
-          filtroZona={filtroZona}
-          filtroAdicional={filtroAdicional}
-          filtroTransportista={filtroTransportista}
-          handleFiltroCarga={handleFiltroCarga}
-          handleFiltroVehiculo={handleFiltroVehiculo}
-          handleFiltroZona={handleFiltroZona}
-          handleFiltroAdicional={handleFiltroAdicional}
-          handleFiltroTransportista={handleFiltroTransportista}
-          cargas={cargas}
-          vehiculos={vehiculos}
-          zonas={zonas}
-          adicionales={adicionales}
-          transportistas={transportistas}
-        />
+        <SectionFiltros onClear={() => onClearFilters()}>
+          <FiltroInput
+            label="Carga"
+            onChange={handleFiltroCarga}
+            data={[...tipoDeCarga.map((carga) => carga.descripcion)]}
+            value={filtroCarga}
+          />
+          <FiltroInput
+            label="Vehiculo"
+            onChange={handleFiltroVehiculo}
+            data={[...vehiculos.map((vehiculo) => vehiculo.tipo)]}
+            value={filtroVehiculo}
+          />
+          <FiltroInput
+            label="Transportista"
+            onChange={handleFiltroTransportista}
+            data={[
+              ...transportistas.map((transportista) => transportista.nombre),
+            ]}
+            value={filtroTransportista}
+          />
+          <FiltroInput
+            label="Zona"
+            onChange={handleFiltroZona}
+            data={[...zonas.map((zona) => zona.nombre)]}
+            value={filtroZona}
+          />
+          <FiltroInput
+            label="Adicional"
+            onChange={handleFiltroAdicional}
+            data={[...adicionales.map((adicional) => adicional.tipo)]}
+            value={filtroAdicional}
+          />
+        </SectionFiltros>
         {loading ? (
           // Muestra skeletons mientras se cargan los datos
           <TableSkeleton columns={3} />
