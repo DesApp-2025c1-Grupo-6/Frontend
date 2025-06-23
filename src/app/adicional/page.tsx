@@ -1,18 +1,18 @@
 "use client";
 
-import Table from "@/src/components/Table";
-import AdicionalForm from "../UI/forms/AdicionalForm";
-import SectionTable from "../UI/SectionTable";
-import { toggleModalVisibility } from "../utils/utils";
-import { Adicional } from "@/src/types";
-import Toast from "@/src/components/Toast";
+import FiltroInput from "@/src/components/FiltroInput";
 import TableSkeleton from "@/src/components/Skeletons";
-import Modal from "../UI/Modal";
+import Table from "@/src/components/Table";
+import Toast from "@/src/components/Toast";
 import { useAdicional } from "@/src/hooks/useAdicional";
 import { useToast } from "@/src/hooks/useToast";
+import { Adicional } from "@/src/types";
 import { useCallback, useEffect, useState } from "react";
-import FiltroInput from "@/src/components/FiltroInput";
+import AdicionalForm from "../UI/forms/AdicionalForm";
+import Modal from "../UI/Modal";
 import SectionFiltros from "../UI/SectionFiltros";
+import SectionTable from "../UI/SectionTable";
+import { generateReporte, toggleModalVisibility } from "../utils/utils";
 
 function Index() {
   // Hook para mostrar toasts de notificación
@@ -74,6 +74,9 @@ function Index() {
       <SectionTable
         titulo="Adicionales"
         textButton="Agregar Adicional"
+        onClickReporte={() =>
+          generateReporte("/adicionales/reporte", "reporte_adicionales.pdf")
+        }
         onClickButton={() => toggleModalVisibility("createAdicional")}
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
