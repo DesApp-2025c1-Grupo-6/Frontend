@@ -6,6 +6,8 @@ import TransportistaIcon from "@/src/icons/TransportistaIcon";
 import VehiculoIcon from "@/src/icons/VehiculoIcon";
 import ZonaIcon from "@/src/icons/ZonaIcon";
 
+const BASE_URL = "http://localhost:3000";
+
 export function toggleModalVisibility(id: string) {
   const modal = document.getElementById(id);
   modal?.classList.toggle("hidden");
@@ -68,3 +70,21 @@ export const menuItems = [
     href: "/adicional",
   },
 ];
+
+export async function generateReporte(endpoint: string, filename: string) {
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!response.ok) throw new Error("Error generating report");
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", filename);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
+  return { success: true, message: "Reporte generado exitosamente" };
+}
