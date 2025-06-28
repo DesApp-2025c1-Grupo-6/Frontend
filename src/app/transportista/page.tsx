@@ -72,7 +72,7 @@ function Index() {
 
   return (
     <>
-      {/* Sección principal con tabla y botón para agregar zona */}
+      {/* Sección principal con tabla y botón para agregar transportista */}
       <SectionTable
         titulo="Transportistas"
         textButton="Agregar Transportista"
@@ -139,8 +139,8 @@ function Index() {
         id="createTransportista"
         mode="create"
         title="Registro de Transportista"
-        onSave={async (nombre: string) => {
-          const res = await handleCreateTransportista(nombre);
+        onSave={async (nombre: string, telefono: string, email: string) => {
+          const res = await handleCreateTransportista(nombre, telefono, email);
           if (res?.success) {
             showToast(
               "Transportista creada",
@@ -156,8 +156,8 @@ function Index() {
         mode="edit"
         title={"Editar Transportista " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
-        onSave={async (nombre: string) => {
-          const res = await handleEditTransportista(nombre);
+        onSave={async (nombre: string, telefono: string, email: string) => {
+          const res = await handleEditTransportista(nombre, telefono, email);
           if (res?.success) {
             showToast(
               "Transportista editado",
