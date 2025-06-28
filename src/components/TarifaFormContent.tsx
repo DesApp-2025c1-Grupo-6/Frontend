@@ -24,7 +24,7 @@ const TarifaFormContent: React.FC<TarifaFormContentProps> = ({
   onDeleteAdicional,
 }) => {
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4 w-full max-w-full">
       <TarifaBasicDataSection
         mode={mode}
         valor={formData.valor}

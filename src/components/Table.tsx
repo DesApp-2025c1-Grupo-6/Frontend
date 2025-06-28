@@ -31,8 +31,8 @@ function Table({
   );
 
   return (
-    <div>
-      <table className="overflow-hidden w-full bg-wild-sand-100 shadow-md rounded-2xl border-gray-300">
+    <div className="w-full">
+      <table className="table-fixed w-full bg-wild-sand-100 shadow-md rounded-2xl border border-gray-300">
         <thead className="bg-gray-300 rounded-2xl">
           {isEmpty ? (
             <tr>
@@ -42,7 +42,7 @@ function Table({
             <TableColumn columns={columns} hasActions={hasActions} />
           )}
         </thead>
-        <tbody className="p-3">
+        <tbody>
           {isEmpty ? (
             <tr>
               <td
