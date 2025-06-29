@@ -20,7 +20,14 @@ function TransportistaForm({
     setNombre(event.target.value);
   };
   const handleTelefonoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTelefono(event.target.value);
+    const valor = event.target.value;
+
+    // Permitir solo números, guiones y paréntesis
+    const soloPermitidos = /^[0-9\-\(\)\s]*$/;
+
+    if (soloPermitidos.test(valor)) {
+      setTelefono(valor);
+    }
   };
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -41,14 +48,32 @@ function TransportistaForm({
     }
   }, [mode, data]);
 
+  const isValidEmail = (email: string) => {
+    // Expresión regular simple para validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  const isValidTelefono = (telefono: string) => {
+    const telefonoRegex = /^[0-9\-\(\)\s]+$/;
+    return telefonoRegex.test(telefono);
+  };
+
   const handleSave = () => {
-    if (!nombre || !telefono || !email) {
+    if (!nombre || !telefono || !isValidTelefono(telefono)) {
       setShouldValidate(true);
       return;
     }
-    if (onSave) {
-      onSave(nombre, telefono, email);
+
+    if (email && !isValidEmail(email)) {
+      setShouldValidate(true);
+      return;
     }
+
+    if (onSave) {
+      const trimmedEmail = email.trim();
+      onSave(nombre, telefono, trimmedEmail === "" ? null : trimmedEmail);
+    }
+
     toggleModalVisibility(id);
     resetForm();
   };
@@ -89,7 +114,9 @@ function TransportistaForm({
       <form>
         <TextInput
           value={telefono}
-          shouldValidate={shouldValidate && telefono === ""}
+          shouldValidate={
+            shouldValidate && (telefono === "" || !isValidTelefono(telefono))
+          }
           type="text"
           onChange={handleTelefonoChange}
           placeholder="Teléfono"
@@ -98,7 +125,9 @@ function TransportistaForm({
       <form>
         <TextInput
           value={email}
-          shouldValidate={shouldValidate && email === ""}
+          shouldValidate={
+            shouldValidate && email !== "" && !isValidEmail(email)
+          }
           type="email"
           onChange={handleEmailChange}
           placeholder="Email"

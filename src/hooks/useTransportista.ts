@@ -38,12 +38,12 @@ export function useTransportista(onError?: (msg: string) => void) {
    * @param email Email del transportista
    */
   const handleCreateTransportista = useCallback(
-    async (nombre: string, telefono: string, email: string) => {
+    async (nombre: string, telefono: string, email?: string | null) => {
       try {
         const newTransportista = await createTransportista({
           nombre,
           telefono,
-          email,
+          email: email ?? null,
         });
         setData((current) => [...current, newTransportista]);
         return { success: true, nombre, telefono, email };
@@ -65,13 +65,13 @@ export function useTransportista(onError?: (msg: string) => void) {
    * @param email Nuevo email del transportista
    */
   const handleEditTransportista = useCallback(
-    async (nombre: string, telefono: string, email: string) => {
+    async (nombre: string, telefono: string, email?: string | null) => {
       if (!selectedRow) return { success: false, nombre, telefono, email };
       try {
         const updated = await updateTransportista(selectedRow.id, {
           nombre,
           telefono,
-          email,
+          email: email ?? null,
         });
         setData((prev) =>
           prev.map((row) => (row.id === selectedRow.id ? updated : row))
