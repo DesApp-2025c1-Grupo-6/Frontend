@@ -34,13 +34,19 @@ export function useTransportista(onError?: (msg: string) => void) {
   /**
    * Crea un nuevo transportista
    * @param nombre Nombre del transportista
+   * @param telefono Teléfono del transportista
+   * @param email Email del transportista
    */
   const handleCreateTransportista = useCallback(
-    async (nombre: string) => {
+    async (nombre: string, telefono: string, email: string) => {
       try {
-        const newTransportista = await createTransportista({ nombre });
+        const newTransportista = await createTransportista({
+          nombre,
+          telefono,
+          email,
+        });
         setData((current) => [...current, newTransportista]);
-        return { success: true, nombre };
+        return { success: true, nombre, telefono, email };
       } catch (error) {
         if (onError)
           onError(
@@ -55,16 +61,22 @@ export function useTransportista(onError?: (msg: string) => void) {
   /**
    * Edita un transportista existente (usa la seleccionada)
    * @param nombre Nuevo nombre del transportista
+   * @param telefono Nuevo teléfono del transportista
+   * @param email Nuevo email del transportista
    */
   const handleEditTransportista = useCallback(
-    async (nombre: string) => {
-      if (!selectedRow) return { success: false, nombre };
+    async (nombre: string, telefono: string, email: string) => {
+      if (!selectedRow) return { success: false, nombre, telefono, email };
       try {
-        const updated = await updateTransportista(selectedRow.id, { nombre });
+        const updated = await updateTransportista(selectedRow.id, {
+          nombre,
+          telefono,
+          email,
+        });
         setData((prev) =>
           prev.map((row) => (row.id === selectedRow.id ? updated : row))
         );
-        return { success: true, nombre };
+        return { success: true, nombre, telefono, email };
       } catch (error) {
         if (onError)
           onError(
@@ -73,7 +85,7 @@ export function useTransportista(onError?: (msg: string) => void) {
               ", Error: " +
               error
           );
-        return { success: false, nombre };
+        return { success: false, nombre, telefono, email };
       }
     },
     [selectedRow, onError]

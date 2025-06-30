@@ -17,10 +17,11 @@ function SectionTable({
   onClickButton?: () => void;
 }) {
   return (
-    <section className="flex flex-col p-10 h-screen bg-gray-chateau-100 gap-5">
-      <div className="flex justify-between py-5">
-        <h1 className="text-3xl font-semibold">{titulo}</h1>
-        <div className="flex gap-4">
+    <section className="flex flex-col px-4 sm:px-6 md:px-10 py-6 min-h-screen bg-gray-chateau-100 gap-5">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 py-3">
+        <h1 className="text-2xl sm:text-3xl font-semibold">{titulo}</h1>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
           {onClickReporte && (
             <Button
               onClick={onClickReporte}
@@ -31,9 +32,10 @@ function SectionTable({
           <Button onClick={onClickButton} Icon={Plus} text={textButton} />
         </div>
       </div>
-      {children}
+
+      {/* Tabla sin scroll */}
+      <div className="w-full">{children}</div>
     </section>
   );
 }
-
 export default SectionTable;
