@@ -59,19 +59,20 @@ function TransportistaForm({
   };
 
   const handleSave = () => {
-    if (!nombre || !telefono || !isValidTelefono(telefono)) {
+    if (!nombre || !telefono) {
       setShouldValidate(true);
       return;
     }
 
-    if (email && !isValidEmail(email)) {
+    const trimmedEmail = email.trim();
+
+    if (trimmedEmail !== "" && !isValidEmail(trimmedEmail)) {
       setShouldValidate(true);
       return;
     }
 
     if (onSave) {
-      const trimmedEmail = email.trim();
-      onSave(nombre, telefono, trimmedEmail === "" ? null : trimmedEmail);
+      onSave(nombre, telefono, trimmedEmail === "" ? undefined : trimmedEmail); //Enviamos undefined
     }
 
     toggleModalVisibility(id);
@@ -126,7 +127,7 @@ function TransportistaForm({
         <TextInput
           value={email}
           shouldValidate={
-            shouldValidate && email !== "" && !isValidEmail(email)
+            shouldValidate && email !== "" && !isValidEmail(email.trim())
           }
           type="email"
           onChange={handleEmailChange}

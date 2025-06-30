@@ -25,6 +25,7 @@ export async function createTransportista(data: any): Promise<Transportista> {
 }
 
 export async function updateTransportista(id: number | string, data: any) {
+  console.log("Payload enviado:", data); // <-- Verificá esto en consola
   const response = await fetch(`${BASE_URL}/transportistas/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
