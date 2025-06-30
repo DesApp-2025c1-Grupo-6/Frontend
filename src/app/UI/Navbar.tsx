@@ -15,12 +15,11 @@ function Navbar() {
     <nav
       role="navigation"
       aria-label="Barra lateral de navegación"
-      style={{}}
-      className={`bg-gray-200 relative flex flex-col gap-32 h-full items-center justify-center rounded-r-2xl shadow-md px-3 transition-all duration-300 ${
+      className={`fixed top-0 left-0 h-screen bg-gray-200 flex flex-col gap-16 items-center justify-start rounded-r-2xl shadow-md px-3 transition-all duration-300 z-50 ${
         open ? "w-52" : "w-16"
       }`}
     >
-      <div className="flex absolute top-0 items-center justify-center mt-5 p-2 w-full mr-6">
+      <div className="flex items-center justify-center mt-5 w-full">
         <NavbarMenuButton open={open} toggleMenu={toggleMenu} />
       </div>
       <NavbarMenuItems open={open} />

@@ -32,7 +32,7 @@ const TableRow = ({
 }: TableRowProps) => {
   if (isMobile) {
     return (
-      <div className="border-2 border-black rounded-xl p-4 mb-4 shadow-sm bg-white">
+      <div className=" bg-gray-chateau-50  border border-gray-300 rounded-lg p-4 mb-4 shadow-lg text-gray-500 mr-2">
         {columns
           .filter((col) => col !== "id")
           .map((col) => (
@@ -83,7 +83,7 @@ const TableRow = ({
   const values = Object.values(row);
 
   return (
-    <tr className="hover:bg-gray-100 transition-all border-b border-gray-300">
+    <tr className="hover:bg-gray-100 transition-all border-b border-gray-300 rounded-2xl">
       {values.map((value, idx) => (
         <td
           key={idx}

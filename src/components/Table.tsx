@@ -31,13 +31,13 @@ function Table({
   );
 
   return (
-    <div>
+    <div className=" pt-4">
       {/* 🖥️ Tabla - visible solo en pantallas md en adelante */}
-      <table className="hidden md:table w-full bg-white shadow-md rounded-2xl border border-gray-300">
-        <thead className="bg-gray-300 rounded-2xl">
+      <table className="hidden md:table w-full bg-gray-chateau-50 shadow-md rounded-2xl shadow-md border-gray-300">
+        <thead className="bg-gray-chateau-50 rounded-2xl">
           {isEmpty ? (
             <tr>
-              <th className="px-3 py-4"></th>
+              <th className="px-3 py-4 "></th>
             </tr>
           ) : (
             <TableColumn columns={columns} hasActions={hasActions} />
@@ -47,7 +47,7 @@ function Table({
           {isEmpty ? (
             <tr>
               <td
-                className="text-center p-2 text-sm font-semibold text-gray-500"
+                className="text-center p-2 text-sm font-semibold text-gray-500 rounded-t-2xl"
                 colSpan={columns.length}
               >
                 No hay datos disponibles
