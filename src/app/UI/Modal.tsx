@@ -35,7 +35,7 @@ function Modal({
     >
       <section className="flex flex-col gap-4 justify-center items-start w-full max-w-xl bg-gray-chateau-50 rounded-2xl shadow-lg p-5 overflow-y-auto max-h-[90vh]">
         {/* Título del modal, con corte de palabras y ajuste a pantalla */}
-        <h1 className="w-full max-w-full text-left text-2xl font-semibold break-words leading-tight text-black pt-8">
+        <h1 className="w-full max-w-full text-left text-2xl font-semibold break-words leading-tight text-black">
           {title}
         </h1>
 
