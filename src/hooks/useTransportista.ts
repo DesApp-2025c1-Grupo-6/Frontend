@@ -43,7 +43,7 @@ export function useTransportista(onError?: (msg: string) => void) {
         const newTransportista = await createTransportista({
           nombre,
           telefono,
-          email: email?.trim() === "" ? null : email?.trim(),
+          email: email?.trim() === "" ? "" : email?.trim(),
         });
         setData((current) => [...current, newTransportista]);
         return { success: true, nombre, telefono, email };
@@ -71,13 +71,13 @@ export function useTransportista(onError?: (msg: string) => void) {
       const payload: any = {
         nombre,
         telefono,
-        email: email && email.trim() !== "" ? email.trim() : null,
+        email: email && email.trim() !== "" ? email.trim() : "",
       };
 
       if (email !== undefined) {
         const trimmedEmail = email.trim();
         if (trimmedEmail === "") {
-          payload.email = null;
+          payload.email = "";
         } else {
           payload.email = trimmedEmail;
         }

@@ -61,7 +61,7 @@ export type TransportistaFormProps = {
   title: string;
   mode: "view" | "edit" | "create";
   data?: Transportista;
-  onSave?: (nombre: string, telefono: string, email?: string | null) => void;
+  onSave?: (nombre: string, telefono: string, email?: string) => void;
 };
 export type AdicionalFormProps = {
   id: string;
