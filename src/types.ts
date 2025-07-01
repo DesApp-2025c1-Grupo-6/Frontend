@@ -24,7 +24,7 @@ export type Transportista = {
   id: string | number;
   nombre: string;
   telefono?: string;
-  email?: string;
+  email?: string | null;
 };
 
 export type ZonaFormProps = {
@@ -61,7 +61,7 @@ export type TransportistaFormProps = {
   title: string;
   mode: "view" | "edit" | "create";
   data?: Transportista;
-  onSave?: (nombre: string, telefono: string, email: string) => void;
+  onSave?: (nombre: string, telefono: string, email?: string) => void;
 };
 export type AdicionalFormProps = {
   id: string;
