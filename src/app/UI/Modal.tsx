@@ -31,20 +31,28 @@ function Modal({
   return (
     <section
       id={id}
-      className="fixed hidden justify-center items-center h-screen w-screen"
+      className="fixed hidden justify-center items-center inset-0 z-50 bg-black/45 px-4 py-6"
     >
-      <span className="absolute size-full bg-black/45 z-40"></span>
-      <section className="flex flex-col gap-3 justify-center items-center p-3 w-1/3 bg-gray-chateau-50 rounded-2xl shadow-lg z-50">
-        <h1 className="w-full text-left text-2xl font-semibold">{title}</h1>
-        <p className="w-full text-left text-wild-sand-600">
-          {description && description}
-        </p>
-        {children && (
-          <section className="flex flex-col gap-3 w-full p-3">
-            {children}
-          </section>
+      <section className="flex flex-col gap-4 justify-center items-start w-full max-w-xl bg-gray-chateau-50 rounded-2xl shadow-lg p-5 overflow-y-auto max-h-[90vh]">
+        {/* Título del modal, con corte de palabras y ajuste a pantalla */}
+        <h1 className="w-full max-w-full text-left text-2xl font-semibold break-words leading-tight text-black">
+          {title}
+        </h1>
+
+        {/* Descripción opcional */}
+        {description && (
+          <p className="w-full text-left text-wild-sand-600 break-words">
+            {description}
+          </p>
         )}
-        <div className="flex justify-end w-full gap-2">
+
+        {/* Contenido del modal */}
+        {children && (
+          <section className="flex flex-col gap-4 w-full">{children}</section>
+        )}
+
+        {/* Botones */}
+        <div className="flex justify-end w-full gap-2 flex-wrap">
           {lineButton && (
             <Button
               onClick={lineButtonAction}

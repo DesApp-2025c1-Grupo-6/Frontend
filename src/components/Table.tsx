@@ -31,12 +31,13 @@ function Table({
   );
 
   return (
-    <div>
-      <table className="overflow-hidden w-full bg-wild-sand-100 shadow-md rounded-2xl border-gray-300">
-        <thead className="bg-gray-300 rounded-2xl">
+    <div className=" pt-4">
+      {/* 🖥️ Tabla - visible solo en pantallas md en adelante */}
+      <table className="hidden md:table w-full bg-gray-chateau-50 shadow-md rounded-2xl shadow-md border-gray-300">
+        <thead className="bg-gray-chateau-50 rounded-2xl">
           {isEmpty ? (
             <tr>
-              <th className="px-3 py-4"></th>
+              <th className="px-3 py-4 "></th>
             </tr>
           ) : (
             <TableColumn columns={columns} hasActions={hasActions} />
@@ -46,7 +47,7 @@ function Table({
           {isEmpty ? (
             <tr>
               <td
-                className="text-center p-2 text-sm font-semibold text-gray-500"
+                className="text-center p-2 text-sm font-semibold text-gray-500 rounded-t-2xl"
                 colSpan={columns.length}
               >
                 No hay datos disponibles
@@ -63,13 +64,38 @@ function Table({
                 onView={onView}
                 onEdit={onEdit}
                 onDelete={onDelete}
+                isMobile={false}
               />
             ))
           )}
         </tbody>
       </table>
 
-      {/* Controles de paginación */}
+      {/* 📱 Tarjetas - visibles solo en pantallas chicas */}
+      <div className="flex flex-col gap-4 md:hidden mt-4">
+        {isEmpty ? (
+          <p className="text-center text-gray-500 p-4">
+            No hay datos disponibles
+          </p>
+        ) : (
+          paginatedData.map((row, index) => (
+            <TableRow
+              key={row.id ?? index}
+              row={row}
+              columns={columns}
+              viewButton={viewButton}
+              editButton={editButton}
+              deleteButton={deleteButton}
+              onView={onView}
+              onEdit={onEdit}
+              onDelete={onDelete}
+              isMobile={true}
+            />
+          ))
+        )}
+      </div>
+
+      {/* 📄 Controles de paginación */}
       {!isEmpty && (
         <div className="flex flex-col items-center mt-4 gap-2">
           <span className="text-gray-600 text-base">
@@ -78,14 +104,14 @@ function Table({
           </span>
           <div className="flex shadow-md rounded-full">
             <button
-              className="rounded-l-full px-6 py-2 bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="rounded-l-full px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
             >
               Anterior
             </button>
             <button
-              className="rounded-r-full px-6 py-2 bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="rounded-r-full px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
             >
