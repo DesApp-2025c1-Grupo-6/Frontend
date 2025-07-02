@@ -128,7 +128,7 @@ function TarifaForm({
       <Modal
         id={id}
         title={title}
-        lineButton
+        lineButton={mode === "view" ? false : true}
         fillButton
         lineButtonText="Cancelar"
         fillButtonText={mode === "view" ? "Cerrar" : "Guardar"}
