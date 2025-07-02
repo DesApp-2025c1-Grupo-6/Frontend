@@ -50,7 +50,6 @@ function TarifaForm({
     customCostoAdicional,
     shouldValidateTipoAdicional,
     errorMessageTipoAdicional,
-    setAdicionales,
     resetAdicionales,
     resetFormTipoAdicional,
     handleChangeAdicionales,

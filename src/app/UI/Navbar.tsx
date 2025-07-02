@@ -19,7 +19,7 @@ function Navbar() {
         open ? "w-52" : "w-16"
       }`}
     >
-      <div className="flex items-center justify-center mt-5 w-full">
+      <div className="flex items-center justify-end mt-5 w-full">
         <NavbarMenuButton open={open} toggleMenu={toggleMenu} />
       </div>
       <NavbarMenuItems open={open} />

@@ -128,7 +128,7 @@ function Index() {
           // Tabla con los datos de tarifas
           <Table
             data={tableData}
-            rowsPerPage={5}
+            rowsPerPage={4}
             viewButton
             editButton
             deleteButton

@@ -93,7 +93,7 @@ function Index() {
           // Tabla con los datos de transportistas
           <Table
             data={filteredData}
-            rowsPerPage={5}
+            rowsPerPage={4}
             editButton
             deleteButton
             onEdit={handleEdit}
@@ -139,7 +139,7 @@ function Index() {
         id="createTransportista"
         mode="create"
         title="Registro de Transportista"
-        onSave={async (nombre: string, telefono: string, email: string) => {
+        onSave={async (nombre: string, telefono: string, email?: string) => {
           const res = await handleCreateTransportista(nombre, telefono, email);
           if (res?.success) {
             showToast(
@@ -156,7 +156,7 @@ function Index() {
         mode="edit"
         title={"Editar Transportista " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
-        onSave={async (nombre: string, telefono: string, email: string) => {
+        onSave={async (nombre: string, telefono: string, email?: string) => {
           const res = await handleEditTransportista(nombre, telefono, email);
           if (res?.success) {
             showToast(
