@@ -38,6 +38,10 @@ function Index() {
 
   //filtro
   const [filteredData, setFilteredData] = useState<Transportista[]>(data);
+  const displayData = filteredData.map((t) => ({
+    ...t,
+    email: t.email?.trim() || "Ninguno",
+  }));
   const [filterSelected, setFilterSelected] = useState<string>("");
 
   const handleFilterChange = (value: string) => {
@@ -92,7 +96,7 @@ function Index() {
         ) : (
           // Tabla con los datos de transportistas
           <Table
-            data={filteredData}
+            data={displayData}
             rowsPerPage={4}
             editButton
             deleteButton
