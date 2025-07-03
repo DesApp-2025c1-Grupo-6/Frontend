@@ -11,29 +11,32 @@ function TarifaAdicionalesSection({
   onDeleteAdicional,
 }: TarifaAdicionalesSectionProps & { onDeleteAdicional: (id: any) => void }) {
   return (
-    <section className="flex flex-col gap-4">
-      <h3 className="text-lg font-semibold text-wild-sand-600">Adicionales</h3>
-      <section className="flex flex-col gap-2">
+    <section className="flex flex-col gap-2 w-full">
+      <div className="w-full flex 2xl:flex-col gap-2 justify-between items-center">
+        <h3 className="text-lg text-left 2xl:w-full font-semibold text-wild-sand-600">
+          Adicionales
+        </h3>
         {mode !== "view" && (
           <Button
+            className="2xl:w-full"
             line
             Icon={Plus}
             text="Agregar adicional"
             onClick={onAgregarAdicional}
           />
         )}
-        {adicionales && adicionales.length > 0 ? (
-          <TableAdicional
-            mode={mode}
-            data={adicionales}
-            onDelete={onDeleteAdicional}
-          />
-        ) : (
-          <p className="text-sm text-wild-sand-600 text-center text-wild-sand-500">
-            No hay adicionales registrados.
-          </p>
-        )}
-      </section>
+      </div>
+      {adicionales && adicionales.length > 0 ? (
+        <TableAdicional
+          mode={mode}
+          data={adicionales}
+          onDelete={onDeleteAdicional}
+        />
+      ) : (
+        <p className="text-sm text-wild-sand-600 text-center text-wild-sand-500">
+          No hay adicionales registrados.
+        </p>
+      )}
     </section>
   );
 }

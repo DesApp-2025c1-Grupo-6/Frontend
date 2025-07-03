@@ -50,7 +50,6 @@ function TarifaForm({
     customCostoAdicional,
     shouldValidateTipoAdicional,
     errorMessageTipoAdicional,
-    setAdicionales,
     resetAdicionales,
     resetFormTipoAdicional,
     handleChangeAdicionales,
@@ -129,7 +128,7 @@ function TarifaForm({
       <Modal
         id={id}
         title={title}
-        lineButton
+        lineButton={mode === "view" ? false : true}
         fillButton
         lineButtonText="Cancelar"
         fillButtonText={mode === "view" ? "Cerrar" : "Guardar"}

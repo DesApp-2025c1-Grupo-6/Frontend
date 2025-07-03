@@ -43,7 +43,7 @@ function TarifaBasicDataSection({
             shouldValidate={shouldValidate && (valor || "") === ""}
             value={valor || ""}
             onChange={onValorChange}
-            placeholder="Costo base"
+            label="Costo base"
           />
           <SelectInput
             id="vehiculo"

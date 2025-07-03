@@ -94,7 +94,7 @@ function Index() {
           // Tabla con los datos de adicionales
           <Table
             data={filteredData}
-            rowsPerPage={5}
+            rowsPerPage={4}
             editButton
             deleteButton
             onEdit={handleEdit}

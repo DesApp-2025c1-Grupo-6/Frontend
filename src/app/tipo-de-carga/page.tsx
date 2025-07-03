@@ -86,7 +86,7 @@ function Index() {
         ) : (
           <Table
             data={filteredData}
-            rowsPerPage={5}
+            rowsPerPage={4}
             editButton
             deleteButton
             onEdit={handleEdit}

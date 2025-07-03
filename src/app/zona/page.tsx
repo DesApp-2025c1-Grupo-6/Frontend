@@ -91,7 +91,7 @@ function Index() {
           // Tabla con los datos de zonas
           <Table
             data={filteredData}
-            rowsPerPage={5}
+            rowsPerPage={4}
             editButton
             deleteButton
             onEdit={handleEdit}

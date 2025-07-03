@@ -8,7 +8,7 @@ const NavbarMenuButton = ({ open, toggleMenu }: NavbarMenuButtonProps) => (
     onClick={toggleMenu}
     aria-label={open ? "Cerrar menú lateral" : "Abrir menú lateral"}
     aria-expanded={open}
-    className={`flex items-center justify-center size-10 absolute p-1 right-0 top-0 rounded-xl cursor-pointer hover:bg-gray-300 focus:outline-none focus-visible:ring-2 focus:ring-0 focus-visible:ring-blue-500 transition-all duration-300`}
+    className={`flex items-center justify-center size-10 p-1 right-0 top-0 rounded-xl cursor-pointer hover:bg-gray-300 focus:outline-none focus-visible:ring-2 focus:ring-0 focus-visible:ring-blue-500 transition-all duration-300`}
   >
     <span className="transition-all duration-300 size-10 flex items-center justify-center">
       <svg
