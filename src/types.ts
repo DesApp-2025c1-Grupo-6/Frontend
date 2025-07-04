@@ -427,3 +427,15 @@ export interface NavbarMenuButtonProps {
 export interface NavbarMenuItemsProps {
   open: boolean;
 }
+export interface HistorialCambios {
+  [key: string]: any;
+}
+
+export interface HistorialTarifa {
+  id: number;
+  idtarifa: number;
+  fecha: string;
+  data: Tarifa;
+  accion: "CREACION" | "MODIFICACION" | "ELIMINACION";
+  cambios: HistorialCambios | null;
+}
