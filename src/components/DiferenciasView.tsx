@@ -25,7 +25,7 @@ const DiferenciasView: React.FC<DiferenciasViewProps> = ({
           </h2>
         </header>
         <p className="text-esmerald-500">
-          Este registro fue creado - no hay cambios previos para mostrar.
+          Este registro fue creado: no hay cambios previos para mostrar.
         </p>
       </section>
     );

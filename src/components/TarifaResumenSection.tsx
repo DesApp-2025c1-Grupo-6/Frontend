@@ -8,7 +8,7 @@ function TarifaResumenSection({
   return (
     <section className="text-wild-sand-600">
       <div className="p-1 w-full bg-wild-sand-100 border-b border-wild-sand-600 flex justify-between">
-        <span className="font-semibold text-sm">Costo adicionales:</span>
+        <span className="font-semibold text-sm">Costos adicionales:</span>
         <span>${costoAdicionales}</span>
       </div>
       <div className="p-1 w-full bg-wild-sand-100 flex justify-between">
