@@ -98,9 +98,6 @@ const DiferenciasView: React.FC<DiferenciasViewProps> = ({
                     <span className="font-medium text-gray-700">
                       {field.label}
                     </span>
-                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                      Modificado
-                    </span>
                   </header>
                   <div className="grid md:grid-cols-2 gap-4">
                     {/* Valor Anterior */}
@@ -118,7 +115,15 @@ const DiferenciasView: React.FC<DiferenciasViewProps> = ({
                         className="bg-red-200/30 border border-red-200 rounded-md p-3 text-roman-700 text-sm"
                         aria-label="Valor anterior"
                       >
-                        {field.anterior || "Sin valor"}
+                        {field.anterior && field.anterior.includes(",") ? (
+                          <ul className="list-disc list-inside text-roman-700 text-sm">
+                            {field.anterior.split(",").map((item, idx) => (
+                              <li key={idx}>{item.trim()}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          field.anterior || "Sin valor"
+                        )}
                       </div>
                     </div>
                     {/* Valor Actual */}

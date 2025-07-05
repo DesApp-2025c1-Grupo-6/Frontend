@@ -101,7 +101,10 @@ const Page = () => {
                     registro.data.adicionales.length > 0
                       ? (() => {
                           const adicionalesStr = registro.data.adicionales
-                            .map((a) => `${a.tipo} ($${a.costo_default})`)
+                            .map(
+                              (a) =>
+                                `${a.tipo} ($${a.costo || a.costo_default})`
+                            )
                             .join(", ");
                           return adicionalesStr.includes(",") ? (
                             <ul className="list-disc list-inside text-gray-600 text-sm">

@@ -1,4 +1,4 @@
-import { HistorialTarifa, HistorialCambios } from "@/src/types";
+import { HistorialTarifa } from "@/src/types";
 
 // Tipos para las diferencias
 export interface DiferenciaField {
@@ -28,20 +28,10 @@ const FIELD_CONFIG = {
   adicionales: {
     label: "Adicionales",
     tipo: "array" as const,
-    formatItem: (item: any) => `${item.tipo} ($${item.costo})`,
+    formatItem: (item: any) =>
+      `${item.tipo} ($${item.costo ? item.costo : item.costo_personalizado})`,
     compareBy: "id",
   },
-};
-
-/**
- * Obtiene el registro anterior en el historial para comparar
- */
-export const getRegistroAnterior = async (
-  registro: HistorialTarifa
-): Promise<HistorialTarifa | null> => {
-  // Aquí deberías implementar la lógica para obtener el registro anterior
-  // Esto podría ser una llamada a la API o buscar en el historial local
-  return null; // Placeholder
 };
 
 /**
