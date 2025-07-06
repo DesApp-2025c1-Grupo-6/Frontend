@@ -12,7 +12,7 @@ function SectionTable({
 }: {
   titulo: string;
   children: React.ReactNode;
-  textButton: string;
+  textButton?: string;
   onClickReporte?: () => void;
   onClickButton?: () => void;
 }) {
@@ -29,7 +29,9 @@ function SectionTable({
               text={"Generar Reporte"}
             />
           )}
-          <Button onClick={onClickButton} Icon={Plus} text={textButton} />
+          {textButton && (
+            <Button onClick={onClickButton} Icon={Plus} text={textButton} />
+          )}
         </div>
       </div>
 

@@ -1,5 +1,6 @@
 import AdicionalesIcon from "@/src/icons/AdicionalesIcon";
 import CargaIcon from "@/src/icons/CargaIcon";
+import HistoryIcon from "@/src/icons/HistoryIcon";
 import HomeIcon from "@/src/icons/HomeIcon";
 import TipoCargaIcon from "@/src/icons/TipoCargaIcon";
 import TransportistaIcon from "@/src/icons/TransportistaIcon";
@@ -68,6 +69,11 @@ export const menuItems = [
     name: "Adicional",
     icon: AdicionalesIcon,
     href: "/adicional",
+  },
+  {
+    name: "Historial",
+    icon: HistoryIcon,
+    href: "/historial",
   },
 ];
 
