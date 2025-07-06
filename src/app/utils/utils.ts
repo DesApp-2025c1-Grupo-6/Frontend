@@ -1,5 +1,6 @@
 import AdicionalesIcon from "@/src/icons/AdicionalesIcon";
 import CargaIcon from "@/src/icons/CargaIcon";
+import DashboardIcon from "@/src/icons/DashboardIcon";
 import HistoryIcon from "@/src/icons/HistoryIcon";
 import HomeIcon from "@/src/icons/HomeIcon";
 import TipoCargaIcon from "@/src/icons/TipoCargaIcon";
@@ -40,6 +41,7 @@ export const menuItems = [
     icon: HomeIcon,
     href: "/tarifa",
   },
+  { name: "Dashboard", icon: DashboardIcon, href: "/dashboard" },
   {
     name: "Vehículo",
     icon: VehiculoIcon,

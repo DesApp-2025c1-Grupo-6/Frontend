@@ -1,4 +1,4 @@
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ArrowSelect from "../icons/ArrowSelect";
 import SearchIcon from "../icons/SearchIcon";
 
@@ -26,7 +26,7 @@ function FiltroInput({
     if (data) {
       setFilteredData(
         data.filter((item) =>
-          item.toLowerCase().includes(searchValue.toLowerCase())
+          String(item).toLowerCase().includes(searchValue.toLowerCase())
         )
       );
     }
