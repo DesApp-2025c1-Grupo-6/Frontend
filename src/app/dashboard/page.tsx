@@ -195,7 +195,8 @@ function App() {
               </span>
 
               <FiltroInput
-                label={tarifaSelected || "Ninguna"}
+                defaultOption="Ninguna"
+                label={"Tarifa"}
                 onChange={(value: string) => {
                   value = value.replace("Tarifa ", "");
                   if (value === "Ninguna") {
@@ -212,10 +213,8 @@ function App() {
                 Seleccione un rango
               </span>
               <div className="flex flex-col">
-                <label className="mb-1 text-sm text-gray-600 font-semibold">
-                  Desde
-                </label>
                 <DateInput
+                  label="Desde"
                   value={fromDate}
                   onChange={(e) => setFromDate(e.target.value)}
                   shouldValidate={shouldValidate}
@@ -223,10 +222,8 @@ function App() {
                 />
               </div>
               <div className="flex flex-col">
-                <label className="mb-1 text-sm text-gray-600 font-semibold">
-                  Hasta
-                </label>
                 <DateInput
+                  label="Hasta"
                   value={toDate}
                   onChange={(e) => setToDate(e.target.value)}
                   shouldValidate={shouldValidate}

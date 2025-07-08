@@ -116,6 +116,7 @@ export type SelectInputProps = {
 };
 
 export type DateInputProps = {
+  label?: string;
   required?: boolean;
   shouldValidate?: boolean;
   errorMessage?: string;

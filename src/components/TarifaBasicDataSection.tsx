@@ -1,6 +1,5 @@
-import TextInput from "@/src/components/TextInput";
 import SelectInput from "@/src/components/SelectInput";
-import React from "react";
+import TextInput from "@/src/components/TextInput";
 import { TarifaBasicDataSectionProps } from "@/src/types";
 
 function TarifaBasicDataSection({

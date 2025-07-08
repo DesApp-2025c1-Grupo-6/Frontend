@@ -8,14 +8,22 @@
   --color-wild-sand-100: #edeef1;
   --color-wild-sand-600: #566173;
   --color-esmerald-500: #2bbc68;
-  --color-esmerald-700: #1B7A43;
+  --color-esmerald-700: #1b7a43;
   --color-roman-500: #eb5757;
-  --color-roman-700: #B42121;
+  --color-roman-700: #b42121;
 }
 
-body{
-  font-family: 'Roboto', sans-serif;
+body {
+  font-family: "Roboto", sans-serif;
   font-size: medium;
 }
 
+ul::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+}
 
+ul::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
