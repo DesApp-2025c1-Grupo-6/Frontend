@@ -74,8 +74,8 @@ function SelectInput({
           </span>
         </button>
         {isOpen && (
-          <div className="p-2 absolute z-50 left-0 top-full mt-1 w-full bg-gray-chateau-50 border border-gray-300 rounded-lg shadow-lg">
-            <div className="p-2 flex items-center">
+          <div className=" absolute z-50 left-0 top-full mt-1 w-full bg-gray-chateau-50 border border-gray-300 rounded-lg shadow-lg">
+            <div className="p-2 m-2 flex items-center border border-gray-300 rounded-lg">
               <SearchIcon className="text-gray-500 mr-2" />
               <input
                 autoComplete="off"
