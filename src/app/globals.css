@@ -27,3 +27,26 @@ ul::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 4px;
 }
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 16px;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.badge-MODIFICACION {
+  background-color: var(--color-blue-400);
+  opacity: 90%;
+}
+.badge-CREACION {
+  background-color: var(--color-esmerald-500);
+  opacity: 90%;
+}
+.badge-ELIMINACION {
+  background-color: var(--color-roman-500);
+  opacity: 90%;
+}
