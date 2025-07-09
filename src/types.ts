@@ -84,6 +84,7 @@ export type TableProps = {
   viewButton?: boolean;
   editButton?: boolean;
   deleteButton?: boolean;
+  defaultColumnName?: string;
   onView?: (row: any) => void;
   onEdit?: (row: any) => void;
   onDelete?: (id: string | number) => void;

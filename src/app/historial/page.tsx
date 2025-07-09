@@ -16,6 +16,7 @@ const Index = () => {
         <Skeletons columns={5} rows={4} />
       ) : (
         <Table
+          defaultColumnName="Detalle"
           data={tableData}
           viewButton
           onView={(row) => {

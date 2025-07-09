@@ -30,6 +30,7 @@ const Page = () => {
         <TableSkeleton columns={5} />
       ) : (
         <Table
+          defaultColumnName="Detalle"
           data={filteredTableData}
           viewButton
           onView={(row) => {

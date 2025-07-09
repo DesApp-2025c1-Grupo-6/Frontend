@@ -4,9 +4,14 @@ import { capitalizeFirstLetter } from "../app/utils/utils";
 interface TableColumsProps {
   columns: string[];
   hasActions?: boolean;
+  defaultColumnName?: string;
 }
 
-function TableColumn({ columns, hasActions }: TableColumsProps) {
+function TableColumn({
+  columns,
+  hasActions,
+  defaultColumnName,
+}: TableColumsProps) {
   const updatedColumns =
     columns.map((column: string) => {
       if (column === "id") {
@@ -34,7 +39,7 @@ function TableColumn({ columns, hasActions }: TableColumsProps) {
       ))}
       {hasActions && (
         <th className="text-right px-5 py-3 max-w-3 break-words truncate w-24 sm:w-32 md:w-40 rounded-tr-2xl">
-          Acciones
+          {defaultColumnName}
         </th>
       )}
     </tr>
