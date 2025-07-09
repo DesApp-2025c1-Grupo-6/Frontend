@@ -43,6 +43,7 @@ function TarifaBasicDataSection({
             value={valor || ""}
             onChange={onValorChange}
             label="Costo base"
+            placeholder="Ej: $10.000"
           />
           <SelectInput
             id="vehiculo"

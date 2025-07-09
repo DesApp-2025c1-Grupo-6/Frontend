@@ -13,7 +13,7 @@ const Page = () => {
   );
 
   return (
-    <SectionTable titulo={`Detalle de modificaciones - ID: ${id}`}>
+    <SectionTable backButton titulo={`Detalle de modificaciones - ID: ${id}`}>
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <div className="text-lg">Cargando...</div>

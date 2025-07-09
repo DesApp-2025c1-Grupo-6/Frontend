@@ -21,6 +21,7 @@ const Page = () => {
 
   return (
     <SectionTable
+      backButton
       titulo={`Historial de modificaciones de la tarifa: ${
         id ?? "Desconocido"
       }`}

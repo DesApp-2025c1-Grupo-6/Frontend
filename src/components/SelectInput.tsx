@@ -82,6 +82,7 @@ function SelectInput({
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
+                placeholder={"Buscar " + label}
                 className="w-full rounded-lg focus:outline-none"
                 ref={inputRef}
               />
