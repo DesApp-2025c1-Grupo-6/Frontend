@@ -46,8 +46,6 @@ export async function updateCarga(id: number | string, data: Carga) {
     id_tipo_carga: data.tipo,
   };
 
-  console.log("Payload to update carga:", JSON.stringify(payload));
-
   const response = await fetch(`${BASE_URL}/cargas/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

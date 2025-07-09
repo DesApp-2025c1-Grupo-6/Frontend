@@ -45,14 +45,12 @@ function SelectInput({
     };
   }, [isOpen]);
 
-  const handleSelect = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    value: string
-  ) => {
+  const handleSelect = (value: string) => {
     setIsOpen(false);
     const event = {
       target: { value },
-    } as React.ChangeEvent<HTMLSelectElement>;
+    };
+
     if (onChange) onChange(event);
   };
 
@@ -68,15 +66,15 @@ function SelectInput({
           onClick={() => setIsOpen((open) => !open)}
         >
           <span className="truncate block">
-            {options.find((o) => o.value === props.value)?.label ||
+            {options.find((o) => o.value == props.value)?.label ||
               defaultOption}
           </span>
           <span className={isOpen ? "rotate-180" : ""}>
-            <ArrowSelect></ArrowSelect>
+            <ArrowSelect />
           </span>
         </button>
         {isOpen && (
-          <div className="p-2 absolute left-0 top-full mt-1 w-full bg-gray-chateau-50 border border-gray-300 rounded-lg shadow-lg">
+          <div className="p-2 absolute z-50 left-0 top-full mt-1 w-full bg-gray-chateau-50 border border-gray-300 rounded-lg shadow-lg">
             <div className="p-2 flex items-center">
               <SearchIcon className="text-gray-500 mr-2" />
               <input
@@ -84,7 +82,6 @@ function SelectInput({
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                placeholder={`Buscar ${label}`}
                 className="w-full rounded-lg focus:outline-none"
                 ref={inputRef}
               />
@@ -93,7 +90,7 @@ function SelectInput({
               <li>
                 <button
                   className="w-full p-2 text-left hover:bg-gray-300/50 cursor-pointer"
-                  onClick={(e) => handleSelect(e, "")}
+                  onClick={() => handleSelect("")}
                 >
                   {defaultOption}
                 </button>
@@ -102,7 +99,7 @@ function SelectInput({
                 <li key={String(option.value) + "-" + idx}>
                   <button
                     className="w-full p-2 text-left hover:bg-gray-300/50 cursor-pointer"
-                    onClick={(e) => handleSelect(e, option.value)}
+                    onClick={() => handleSelect(String(option.value))}
                   >
                     {option.label}
                   </button>
