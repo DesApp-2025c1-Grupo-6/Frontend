@@ -16,7 +16,7 @@ function Button({
   className?: string;
 }) {
   const baseStyles =
-    " justify-center items-center cursor-pointer flex gap-1.5 py-2 px-2 lg:px-4 rounded-xl transition duration-200 ease-in-out ";
+    " hover:shadow-lg active:backdrop-brightness-80 active:scale-98 justify-center items-center cursor-pointer flex gap-1.5 py-2 px-2 lg:px-4 rounded-xl transition-transform  ";
   const filledStyles = ` text-white `;
   const lineStyles = ` text-wild-sand-600 border border-2 `;
 
@@ -25,7 +25,7 @@ function Button({
   return (
     <button
       onClick={onClick}
-      className={styles + " " + className}
+      className={styles + " " + className + ""}
       style={{
         backgroundColor: line ? "transparent" : color,
         color: line ? color : "white",
