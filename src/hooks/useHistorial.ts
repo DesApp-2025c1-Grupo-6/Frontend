@@ -51,6 +51,8 @@ export const useHistorial = (id?: string) => {
         const historialArray = Array.isArray(data) ? data : [data];
 
         return historialArray.map(({ id, data, fecha, accion }) => {
+          accion =
+            '<span class="badge badge-' + accion + '">' + accion + "</span>";
           return {
             id: id,
             tarifa: data.id,

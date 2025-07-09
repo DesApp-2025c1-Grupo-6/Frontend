@@ -8,14 +8,45 @@
   --color-wild-sand-100: #edeef1;
   --color-wild-sand-600: #566173;
   --color-esmerald-500: #2bbc68;
-  --color-esmerald-700: #1B7A43;
+  --color-esmerald-700: #1b7a43;
   --color-roman-500: #eb5757;
-  --color-roman-700: #B42121;
+  --color-roman-700: #b42121;
 }
 
-body{
-  font-family: 'Roboto', sans-serif;
+body {
+  font-family: "Roboto", sans-serif;
   font-size: medium;
 }
 
+ul::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+}
 
+ul::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 16px;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.badge-MODIFICACION {
+  background-color: var(--color-blue-400);
+  opacity: 90%;
+}
+.badge-CREACION {
+  background-color: var(--color-esmerald-500);
+  opacity: 90%;
+}
+.badge-ELIMINACION {
+  background-color: var(--color-roman-500);
+  opacity: 90%;
+}

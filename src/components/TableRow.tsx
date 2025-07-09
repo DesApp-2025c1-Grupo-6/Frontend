@@ -88,8 +88,9 @@ const TableRow = ({
         <td
           key={idx}
           className="text-left px-5 py-2 text-sm break-words truncate max-w-[180px] sm:max-w-[240px]"
+          dangerouslySetInnerHTML={{ __html: String(value) }}
         >
-          {String(value)}
+          {/* {String(value)} */}
         </td>
       ))}
 

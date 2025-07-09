@@ -77,7 +77,7 @@ function AdicionalForm({ id, title, mode, data, onSave }: AdicionalFormProps) {
         <TextInput
           value={costo_default}
           shouldValidate={shouldValidate && costo_default === ""}
-          type="text"
+          type="number"
           onChange={handleCostoChange}
           placeholder="Costo"
         />

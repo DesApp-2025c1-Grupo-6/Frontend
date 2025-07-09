@@ -1,16 +1,17 @@
 import type { TipoCarga } from "../types";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function getTipoCargas() {
   const response = await fetch(`${BASE_URL}/tipocargas`);
-  if (!response.ok) throw new Error("Error fetching tipo cargas");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
 export async function getTipoCarga(id: number | string) {
   const response = await fetch(`${BASE_URL}/tipocargas/${id}`);
-  if (!response.ok) throw new Error("Error fetching tipo carga");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -22,7 +23,7 @@ export async function createTipoCarga(data: {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error creating tipo carga");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json() as Promise<TipoCarga>;
 }
 
@@ -35,7 +36,7 @@ export async function updateTipoCarga(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error updating tipo carga");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 

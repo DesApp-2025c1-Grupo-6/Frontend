@@ -8,6 +8,7 @@ function DateInput({
   shouldValidate,
   errorMessage = "Este campo es obligatorio",
   value,
+  label,
 }: DateInputProps & { value?: string }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,6 +28,9 @@ function DateInput({
         className="w-full flex gap-4 relative border-2 border-wild-sand-600 rounded-lg p-2 justify-between cursor-pointer"
         onClick={handleContainerClick}
       >
+        <label className="text-gray-400 text-xs  px-1 left-3 -top-2 absolute bg-gradient-to-t from-gray-chateau-100 from-70% to-transparent ">
+          {label}
+        </label>
         <input
           ref={inputRef}
           className="form-date__input text-wild-sand-600 w-full bg-transparent focus:outline-none appearance-none"

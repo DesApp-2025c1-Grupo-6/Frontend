@@ -1,6 +1,5 @@
-import TextInput from "@/src/components/TextInput";
 import SelectInput from "@/src/components/SelectInput";
-import React from "react";
+import TextInput from "@/src/components/TextInput";
 import { TarifaBasicDataSectionProps } from "@/src/types";
 
 function TarifaBasicDataSection({
@@ -44,6 +43,7 @@ function TarifaBasicDataSection({
             value={valor || ""}
             onChange={onValorChange}
             label="Costo base"
+            placeholder="Ej: $10.000"
           />
           <SelectInput
             id="vehiculo"

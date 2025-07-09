@@ -13,7 +13,7 @@ const Page = () => {
   );
 
   return (
-    <SectionTable titulo={`Detalle de modificaciones - ID: ${id}`}>
+    <SectionTable backButton titulo={`Detalle de modificaciones - ID: ${id}`}>
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <div className="text-lg">Cargando...</div>
@@ -44,19 +44,11 @@ const Page = () => {
                 <span className="text-sm font-medium text-gray-500">Fecha</span>
                 <div className="text-lg font-semibold">{registro.fecha}</div>
               </div>
-              <div>
+              <div className="flex flex-col justify-center items-start">
                 <span className="text-sm font-medium text-gray-500">
                   Acción
                 </span>
-                <div
-                  className={`text-lg font-semibold ${
-                    registro.accion === "CREACION"
-                      ? "text-esmerald-500"
-                      : registro.accion === "MODIFICACION"
-                      ? "text-blue-600"
-                      : "text-roman-500"
-                  }`}
-                >
+                <div className={`badge badge-${registro.accion}`}>
                   {registro.accion}
                 </div>
               </div>

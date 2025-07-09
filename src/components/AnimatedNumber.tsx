@@ -7,6 +7,7 @@ interface AnimatedNumberProps {
   duration?: number; // ms
   decimals?: number;
   title?: string;
+  style?: string;
 }
 
 function AnimatedNumber({
@@ -63,7 +64,10 @@ function AnimatedNumber({
           {title}
         </span>
       )}
-      <span className="text-7xl font-extrabold" style={{ color: "#566173" }}>
+      <span
+        className="text-5xl md:text-7xl font-extrabold"
+        style={{ color: "#566173" }}
+      >
         {symbolPosition === "left" && symbol}
         {formatted}
         {symbolPosition === "right" && symbol}

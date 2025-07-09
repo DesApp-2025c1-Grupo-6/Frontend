@@ -21,6 +21,7 @@ const Page = () => {
 
   return (
     <SectionTable
+      backButton
       titulo={`Historial de modificaciones de la tarifa: ${
         id ?? "Desconocido"
       }`}
@@ -29,6 +30,7 @@ const Page = () => {
         <TableSkeleton columns={5} />
       ) : (
         <Table
+          defaultColumnName="Detalle"
           data={filteredTableData}
           viewButton
           onView={(row) => {

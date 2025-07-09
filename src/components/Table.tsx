@@ -8,6 +8,7 @@ function Table({
   viewButton,
   editButton,
   deleteButton,
+  defaultColumnName = "Acciones",
   onView,
   onEdit,
   onDelete,
@@ -40,7 +41,11 @@ function Table({
               <th className="px-3 py-4 "></th>
             </tr>
           ) : (
-            <TableColumn columns={columns} hasActions={hasActions} />
+            <TableColumn
+              columns={columns}
+              defaultColumnName={defaultColumnName}
+              hasActions={hasActions}
+            />
           )}
         </thead>
         <tbody className="p-3">

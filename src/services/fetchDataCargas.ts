@@ -1,22 +1,17 @@
 import type { Carga } from "../types";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function getCargas() {
   const response = await fetch(`${BASE_URL}/cargas`);
-  if (!response.ok) {
-    console.error("Error fetching cargas", await response.text());
-    throw new Error("Error fetching cargas");
-  }
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
 export async function getCarga(id: number | string) {
   const response = await fetch(`${BASE_URL}/cargas/${id}`);
-  if (!response.ok) {
-    console.error("Error fetching carga", await response.text());
-    throw new Error("Error fetching carga");
-  }
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -32,10 +27,7 @@ export async function createCarga(data: Carga): Promise<Carga> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
-  if (!response.ok) {
-    console.error("Error creating carga", await response.text());
-    throw new Error("Error creating carga");
-  }
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json() as Promise<Carga>;
 }
 
@@ -45,8 +37,6 @@ export async function updateCarga(id: number | string, data: Carga) {
     requisitos_especiales: data.requisitos,
     id_tipo_carga: data.tipo,
   };
-
-  console.log("Payload to update carga:", JSON.stringify(payload));
 
   const response = await fetch(`${BASE_URL}/cargas/${id}`, {
     method: "PUT",

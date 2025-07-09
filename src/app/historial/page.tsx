@@ -11,11 +11,12 @@ const Index = () => {
   const { tableData, loading } = useHistorial();
 
   return (
-    <SectionTable titulo="Historial de Tarifas">
+    <SectionTable backButton titulo="Historial de Tarifas">
       {loading ? (
         <Skeletons columns={5} rows={4} />
       ) : (
         <Table
+          defaultColumnName="Detalle"
           data={tableData}
           viewButton
           onView={(row) => {

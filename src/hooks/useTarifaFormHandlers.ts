@@ -1,8 +1,7 @@
+import { TarifaFormHandlersProps } from "@/src/types";
 import React from "react";
-import { TarifaFormData, TarifaFormHandlersProps } from "@/src/types";
 
 export const useTarifaFormHandlers = ({
-  formData,
   updateField,
   handleSelectChange,
   dataZonas,

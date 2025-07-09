@@ -84,6 +84,7 @@ export type TableProps = {
   viewButton?: boolean;
   editButton?: boolean;
   deleteButton?: boolean;
+  defaultColumnName?: string;
   onView?: (row: any) => void;
   onEdit?: (row: any) => void;
   onDelete?: (id: string | number) => void;
@@ -116,6 +117,7 @@ export type SelectInputProps = {
 };
 
 export type DateInputProps = {
+  label?: string;
   required?: boolean;
   shouldValidate?: boolean;
   errorMessage?: string;

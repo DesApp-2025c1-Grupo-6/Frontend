@@ -2,42 +2,30 @@ import { HistorialTarifa } from "@/src/types";
 
 const BASE_URL = "http://localhost:3000";
 
-// // Mock data para desarrollo
-// const mockHistorialData: HistorialTarifa[] = [
-//   // Tarifa 4 - CREACION
-//   {
-//     id: 1,
-//     idtarifa: 4,
-//     fecha: "01/07/2025",
-//     data: {
-//       id: 4,
-//       zona: "Zona Oeste",
-//       carga: "Carga refrigerada",
-//       fecha: "01/01/2025",
-//       id_zona: 1,
-//       id_carga: 1,
-//       vehiculo: "camión",
-//       valor_base: "1000.00",
-//       adicionales: [
-//         {
-//           id: 1,
-//           tipo: "Ayudante",
-//           costo_default: "200.00",
-//         },
-//       ],
-//       id_vehiculo: 1,
-//       transportista: "Transportes Express",
-//       id_transportista: 1,
-//     },
-//     accion: "CREACION",
-//     cambios: null,
-//   },
-//   // Tarifa 4 - MODIFICACION
-//   {
-//     id: 2,
-//     idtarifa: 4,
-//     fecha: "02/07/2025",
-//     data: {
+async function getErrorMessage(response: Response) {
+  try {
+    const data = await response.json();
+    if (data && data.error) return data.error;
+    if (typeof data === "string") return data;
+    return response.statusText || "Error desconocido";
+  } catch {
+    return response.statusText || "Error desconocido";
+  }
+}
+
+export async function getHistorialTarifas(): Promise<HistorialTarifa[]> {
+  const response = await fetch(`${BASE_URL}/historial`);
+  if (!response.ok) throw new Error(await getErrorMessage(response));
+  return response.json();
+}
+
+export async function getHistorialTarifa(
+  id: number | string
+): Promise<HistorialTarifa> {
+  const response = await fetch(`${BASE_URL}/historial/${id}`);
+  if (!response.ok) throw new Error(await getErrorMessage(response));
+  return response.json();
+}
 //       id: 4,
 //       zona: "Zona Oeste",
 //       carga: "Carga refrigerada",
