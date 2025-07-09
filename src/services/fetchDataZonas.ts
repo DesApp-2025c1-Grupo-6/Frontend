@@ -1,16 +1,17 @@
 import type { Zona } from "../types";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function getZonas() {
   const response = await fetch(`${BASE_URL}/zonas`);
-  if (!response.ok) throw new Error("Error fetching zonas");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
 export async function getZona(id: number | string) {
   const response = await fetch(`${BASE_URL}/zonas/${id}`);
-  if (!response.ok) throw new Error("Error fetching zona");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -20,7 +21,7 @@ export async function createZona(data: any): Promise<Zona> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error creating zona");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json() as Promise<Zona>;
 }
 
@@ -30,7 +31,7 @@ export async function updateZona(id: number | string, data: any) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error updating zona");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -38,6 +39,6 @@ export async function deleteZona(id: number | string) {
   const response = await fetch(`${BASE_URL}/zonas/${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) throw new Error("Error deleting zona");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }

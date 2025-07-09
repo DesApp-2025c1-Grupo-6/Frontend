@@ -1,16 +1,17 @@
 import type { Vehiculo } from "../types";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function getVehiculos() {
   const response = await fetch(`${BASE_URL}/vehiculos`);
-  if (!response.ok) throw new Error("Error fetching vehiculos");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
 export async function getVehiculo(id: number | string) {
   const response = await fetch(`${BASE_URL}/vehiculos/${id}`);
-  if (!response.ok) throw new Error("Error fetching vehiculo");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -20,7 +21,7 @@ export async function createVehiculo(data: any): Promise<Vehiculo> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error creating vehiculo");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json() as Promise<Vehiculo>;
 }
 
@@ -30,7 +31,7 @@ export async function updateVehiculo(id: number | string, data: any) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error updating vehiculo");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -38,6 +39,6 @@ export async function deleteVehiculo(id: number | string) {
   const response = await fetch(`${BASE_URL}/vehiculos/${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) throw new Error("Error deleting vehiculo");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }

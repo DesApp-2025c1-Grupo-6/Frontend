@@ -1,6 +1,7 @@
 import { AreaData } from "lightweight-charts";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const getdataDashboard = async (
   id: string
@@ -9,8 +10,7 @@ export const getdataDashboard = async (
 
   if (!response.ok) {
     if (response.status === 404) return null; // No se encontró historial
-    const errorText = await response.text();
-    throw new Error(errorText || "Error fetching data dashboard");
+    throw new Error(await getErrorMessage(response));
   }
   return response.json() as Promise<AreaData[]>;
 };

@@ -1,16 +1,17 @@
 import type { Tarifa } from "../types";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function getTarifas(): Promise<Tarifa[]> {
   const response = await fetch(`${BASE_URL}/tarifas`);
-  if (!response.ok) throw new Error("Error fetching tarifas");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
 export async function getTarifa(id: number | string): Promise<Tarifa> {
   const response = await fetch(`${BASE_URL}/tarifas/${id}`);
-  if (!response.ok) throw new Error("Error fetching tarifa");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -20,7 +21,7 @@ export async function createTarifa(data: any): Promise<Tarifa> {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error creating tarifa");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json() as Promise<Tarifa>;
 }
 
@@ -33,7 +34,7 @@ export async function updateTarifa(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Error updating tarifa");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
 
@@ -41,6 +42,6 @@ export async function deleteTarifa(id: number | string): Promise<any> {
   const response = await fetch(`${BASE_URL}/tarifas/${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) throw new Error("Error deleting tarifa");
+  if (!response.ok) throw new Error(await getErrorMessage(response));
   return response.json();
 }
