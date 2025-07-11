@@ -34,8 +34,8 @@ function Table({
   return (
     <div className="pt-4">
       {/* 🖥️ Tabla - visible solo en pantallas md en adelante */}
-      <table className="hidden md:table w-full bg-gray-100 rounded-2xl shadow-md border-gray-300 overflow-hidden">
-        <thead className="bg-gray-300 rounded-2xl">
+      <table className="hidden md:table w-full bg-gray-100 rounded-2xl shadow-md border-gray-300 overflow-hidden table-fixed">
+        <thead className="bg-gray-300 rounded-2xl w-full">
           {isEmpty ? (
             <tr>
               <th className="px-3 py-4 "></th>

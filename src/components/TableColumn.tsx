@@ -22,11 +22,11 @@ function TableColumn({
     }) || columns;
 
   return (
-    <tr className="rounded-t-2xl overflow-hidden">
+    <tr className="rounded-t-2xl overflow-hidden w-full">
       {updatedColumns.map((header: string, index: number) => (
         <th
           key={index}
-          className={`text-left px-5 py-3 ${
+          className={`text-left px-5 py-3 w-full ${
             index === 0 ? "rounded-tl-2xl" : ""
           } ${
             index === updatedColumns.length - 1 && !hasActions
@@ -38,7 +38,7 @@ function TableColumn({
         </th>
       ))}
       {hasActions && (
-        <th className="text-right px-5 py-3 max-w-3 break-words truncate w-24 sm:w-32 md:w-40 rounded-tr-2xl">
+        <th className="text-right px-5 py-3 max-w-3 break-words truncate w-full rounded-tr-2xl">
           {defaultColumnName}
         </th>
       )}
