@@ -104,20 +104,22 @@ function CargaForm({
         <TextInput
           value={peso}
           onChange={handlePesoChange}
-          placeholder="Peso"
+          label="Peso"
+          placeholder="kilogramos"
           type="number"
           shouldValidate={peso === "" && shouldValidate}
         />
         <TextInput
           value={volumen}
           onChange={handleVolumenChange}
-          placeholder="Volumen"
+          label="Volumen"
+          placeholder="Metros cúbicos"
           type="number"
           shouldValidate={volumen === "" && shouldValidate}
         />
         <SelectInput
           id="tipoCarga"
-          label="Tipo de Carga"
+          label="Tipo"
           value={tipoDeCarga}
           errorMessage="Debe seleccionar un tipo de carga"
           shouldValidate={tipoDeCarga === "" && shouldValidate}
@@ -136,8 +138,8 @@ function CargaForm({
         <TextInput
           value={requisitosEspeciales}
           type="text"
+          label="Requisitos Especiales"
           onChange={handleRequisitosEspecialesChange}
-          placeholder="Requisitos Especiales"
         />
       </form>
     </Modal>

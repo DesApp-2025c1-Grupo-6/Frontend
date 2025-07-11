@@ -236,7 +236,7 @@ function App() {
             <Chart data={filteredData} />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-10 mt-8 w-full justify-center items-center">
+        <div className="flex flex-col md:flex-row gap-7 md:gap-16 mt-8 w-full justify-center items-center">
           <AnimatedNumber
             value={absChange}
             symbol="$"

@@ -64,10 +64,7 @@ export function useTarifas(onError?: (msg: string) => void) {
         setData((current) => [...current, newTarifa]);
         return { success: true, valor_base };
       } catch (error) {
-        if (onError)
-          onError(
-            "No se pudo crear la tarifa: " + valor_base + ", Error: " + error
-          );
+        if (onError) onError("No se pudo crear la tarifa. " + error);
         return { success: false, valor_base };
       }
     },
@@ -109,10 +106,7 @@ export function useTarifas(onError?: (msg: string) => void) {
         );
         return { success: true, valor_base };
       } catch (error) {
-        if (onError)
-          onError(
-            "No se pudo editar la tarifa: " + valor_base + ", Error: " + error
-          );
+        if (onError) onError("No se pudo editar la tarifa. " + error);
         return { success: false, valor_base };
       }
     },

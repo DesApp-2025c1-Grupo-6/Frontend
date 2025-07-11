@@ -40,7 +40,10 @@ const TableRow = ({
               <span className="text-xs font-semibold text-gray-500 block">
                 {capitalizeFirstLetter(col === "id" ? "Código" : col)}
               </span>
-              <span className="text-sm text-gray-800">{row[col]}</span>
+              <span
+                className="text-sm text-gray-800"
+                dangerouslySetInnerHTML={{ __html: String(row[col]) }}
+              />
             </div>
           ))}
 
@@ -89,9 +92,7 @@ const TableRow = ({
           key={idx}
           className="text-left px-5 py-2 text-sm break-words truncate max-w-[180px] sm:max-w-[240px]"
           dangerouslySetInnerHTML={{ __html: String(value) }}
-        >
-          {/* {String(value)} */}
-        </td>
+        />
       ))}
 
       {(viewButton || editButton || deleteButton) && (

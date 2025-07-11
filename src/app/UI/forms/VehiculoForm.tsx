@@ -68,10 +68,11 @@ function VehiculoForm({ id, title, mode, data, onSave }: VehiculoFormProps) {
         <TextInput
           value={tipo}
           type="text"
+          label="Tipo"
           shouldValidate={tipo === "" && shouldValidate}
           disabled={mode === "view"}
           onChange={handleTipoChange}
-          placeholder="Tipo"
+          placeholder="Ej: Camión, Furgoneta, etc."
         />
         <TextInput
           value={toneladas}
@@ -79,7 +80,8 @@ function VehiculoForm({ id, title, mode, data, onSave }: VehiculoFormProps) {
           shouldValidate={toneladas === "" && shouldValidate}
           disabled={mode === "view"}
           onChange={handleToneladasChange}
-          placeholder="Toneladas"
+          placeholder="Ej: 12"
+          label="Capacidad en Toneladas"
         />
       </form>
     </Modal>

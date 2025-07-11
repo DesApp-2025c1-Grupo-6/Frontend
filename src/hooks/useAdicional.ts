@@ -24,7 +24,15 @@ export function useAdicional(onError?: (msg: string) => void) {
   useEffect(() => {
     setLoading(true);
     getAdicionales()
-      .then(setData)
+      .then((adicionales) => {
+        const adicionalesSinCosto = adicionales.map(
+          ({ costo_default, ...rest }) => ({
+            ...rest,
+            costo: costo_default,
+          })
+        );
+        setData(adicionalesSinCosto);
+      })
       .catch((error) => {
         if (onError) onError("No se pudieron cargar los datos: " + error);
       })

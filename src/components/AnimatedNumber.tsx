@@ -55,7 +55,7 @@ function AnimatedNumber({
   });
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center max-w-full">
       {title && (
         <span
           className="text-lg font-semibold mb-2"
@@ -65,7 +65,7 @@ function AnimatedNumber({
         </span>
       )}
       <span
-        className="text-5xl md:text-7xl font-extrabold"
+        className="text-4xl md:text-7xl font-extrabold"
         style={{ color: "#566173" }}
       >
         {symbolPosition === "left" && symbol}

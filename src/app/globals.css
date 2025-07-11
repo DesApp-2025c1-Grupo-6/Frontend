@@ -36,6 +36,7 @@ ul::-webkit-scrollbar-thumb {
   border-radius: 16px;
   letter-spacing: 0.5px;
   color: #fff;
+  margin-top: 5px;
 }
 
 .badge-MODIFICACION {

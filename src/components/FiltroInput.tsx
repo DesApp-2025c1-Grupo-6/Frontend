@@ -100,7 +100,7 @@ function FiltroInput({
           </div>
         </div>
         {isOpen && (
-          <div className="absolute text-wild-sand-600 z-10 bg-gray-chateau-100 border border-gray-300 rounded-lg shadow-lg mt-1 w-full">
+          <div className="absolute text-wild-sand-600 z-20 bg-gray-chateau-100 border border-gray-300 rounded-lg shadow-lg mt-1 w-full">
             <div className="p-2">
               <span className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none flex items-center">
                 <SearchIcon className="text-gray-500 mr-2" />
