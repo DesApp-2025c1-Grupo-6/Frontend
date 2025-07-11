@@ -64,24 +64,22 @@ function AdicionalForm({ id, title, mode, data, onSave }: AdicionalFormProps) {
       fillButtonAction={handleSave}
       lineButtonAction={onCancel}
     >
-      <form>
-        <TextInput
-          value={tipo}
-          shouldValidate={shouldValidate && tipo === ""}
-          type="text"
-          onChange={handleTipoChange}
-          placeholder="Tipo"
-        />
-      </form>
-      <form>
-        <TextInput
-          value={costo_default}
-          shouldValidate={shouldValidate && costo_default === ""}
-          type="number"
-          onChange={handleCostoChange}
-          placeholder="Costo"
-        />
-      </form>
+      <TextInput
+        value={tipo}
+        shouldValidate={shouldValidate && tipo === ""}
+        type="text"
+        onChange={handleTipoChange}
+        placeholder="Ej: Carga Especial, Seguro, etc."
+        label="Tipo"
+      />
+      <TextInput
+        value={costo_default}
+        shouldValidate={shouldValidate && costo_default === ""}
+        type="number"
+        onChange={handleCostoChange}
+        placeholder="Ej: 1000"
+        label="Costo"
+      />
     </Modal>
   );
 }

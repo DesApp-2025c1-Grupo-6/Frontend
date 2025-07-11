@@ -103,37 +103,34 @@ function TransportistaForm({
       fillButtonAction={handleSave}
       lineButtonAction={onCancel}
     >
-      <form>
-        <TextInput
-          value={nombre}
-          shouldValidate={shouldValidate && nombre === ""}
-          type="text"
-          onChange={handleNombreChange}
-          placeholder="Nombre"
-        />
-      </form>
-      <form>
-        <TextInput
-          value={telefono}
-          shouldValidate={
-            shouldValidate && (telefono === "" || !isValidTelefono(telefono))
-          }
-          type="text"
-          onChange={handleTelefonoChange}
-          placeholder="Teléfono"
-        />
-      </form>
-      <form>
-        <TextInput
-          value={email}
-          shouldValidate={
-            shouldValidate && email !== "" && !isValidEmail(email.trim())
-          }
-          type="email"
-          onChange={handleEmailChange}
-          placeholder="Email"
-        />
-      </form>
+      <TextInput
+        value={nombre}
+        shouldValidate={shouldValidate && nombre === ""}
+        type="text"
+        label="Nombre"
+        onChange={handleNombreChange}
+        placeholder="Nombre del Transportista"
+      />
+      <TextInput
+        value={telefono}
+        shouldValidate={
+          shouldValidate && (telefono === "" || !isValidTelefono(telefono))
+        }
+        type="text"
+        onChange={handleTelefonoChange}
+        placeholder="Ej: 123-456-7890"
+        label="Teléfono"
+      />
+      <TextInput
+        value={email}
+        shouldValidate={
+          shouldValidate && email !== "" && !isValidEmail(email.trim())
+        }
+        type="email"
+        label="Email"
+        onChange={handleEmailChange}
+        placeholder="example@email.com"
+      />
     </Modal>
   );
 }

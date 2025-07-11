@@ -7,7 +7,7 @@ function SelectInput({
   id,
   label = "Seleccione una opción",
   options,
-  defaultOption = "Ninguno",
+  defaultOption = "Seleccione una opción",
   shouldValidate,
   errorMessage = "Este campo es obligatorio",
   onChange,
@@ -90,7 +90,7 @@ function SelectInput({
             <ul className="max-h-60 overflow-y-auto text-wild-sand-600">
               <li>
                 <button
-                  className="w-full p-2 text-left hover:bg-gray-300/50 cursor-pointer"
+                  className="w-full text-wild-sand-600/50 p-2 text-left hover:bg-gray-300/50 cursor-pointer pointer-events-none"
                   onClick={() => handleSelect("")}
                 >
                   {defaultOption}

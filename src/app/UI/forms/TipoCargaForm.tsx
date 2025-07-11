@@ -64,7 +64,8 @@ function TipoCargaForm({ id, title, mode, data, onSave }: TipoCargaFormProps) {
           shouldValidate={shouldValidate && descripcion === ""}
           value={descripcion}
           onChange={handleDescripcionChange}
-          placeholder="Descripción"
+          placeholder="Ej: Carga Refrigerada, Carga Peligrosa, etc."
+          label="Descripción"
         />
       </form>
     </Modal>

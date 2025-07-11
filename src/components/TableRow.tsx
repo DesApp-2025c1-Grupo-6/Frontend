@@ -40,7 +40,10 @@ const TableRow = ({
               <span className="text-xs font-semibold text-gray-500 block">
                 {capitalizeFirstLetter(col === "id" ? "Código" : col)}
               </span>
-              <span className="text-sm text-gray-800">{row[col]}</span>
+              <span
+                className="text-sm text-gray-800"
+                dangerouslySetInnerHTML={{ __html: String(row[col]) }}
+              />
             </div>
           ))}
 
@@ -87,15 +90,13 @@ const TableRow = ({
       {values.map((value, idx) => (
         <td
           key={idx}
-          className="text-left px-5 py-2 text-sm break-words truncate max-w-[180px] sm:max-w-[240px]"
+          className="text-left px-5 py-2 text-sm break-words truncate"
           dangerouslySetInnerHTML={{ __html: String(value) }}
-        >
-          {/* {String(value)} */}
-        </td>
+        />
       ))}
 
       {(viewButton || editButton || deleteButton) && (
-        <td className="px-2 py-2 flex justify-end items-center gap-3 w-24 sm:w-32 md:w-40">
+        <td className="px-2 py-2 flex justify-end gap-3 ">
           {viewButton && (
             <button
               className="cursor-pointer"

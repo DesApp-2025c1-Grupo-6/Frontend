@@ -18,7 +18,7 @@ export function useToast() {
       }
       toastTimeoutRef.current = setTimeout(() => {
         setToastVisible(false);
-      }, 2000);
+      }, 4000);
     },
     []
   );

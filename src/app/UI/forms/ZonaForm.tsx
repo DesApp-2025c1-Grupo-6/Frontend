@@ -57,11 +57,12 @@ function ZonaForm({ id, title, mode, data, onSave }: ZonaFormProps) {
     >
       <form>
         <TextInput
+          label="Nombre"
           value={nombre}
           shouldValidate={shouldValidate && nombre === ""}
           type="text"
           onChange={handleNombreChange}
-          placeholder="Nombre"
+          placeholder="Ej: Zona Norte, Zona Sur, etc."
         />
       </form>
     </Modal>
