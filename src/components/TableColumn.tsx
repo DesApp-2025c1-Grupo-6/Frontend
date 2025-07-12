@@ -16,6 +16,8 @@ function TableColumn({
     columns.map((column: string) => {
       if (column === "id") {
         return "Codigo";
+      } else if (column === "costo_default") {
+        return "Costo";
       } else {
         return column;
       }

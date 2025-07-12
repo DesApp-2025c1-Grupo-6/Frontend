@@ -100,7 +100,7 @@ export type TextInputProps = {
   shouldValidate?: boolean;
   className?: string;
   errorMessage?: string;
-  type: "text" | "number";
+  type: "text" | "number" | "email";
   value?: string | number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   [key: string]: any;

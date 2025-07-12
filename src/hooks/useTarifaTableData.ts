@@ -9,6 +9,7 @@ export const useTarifaTableData = ({
   // Transformar los datos para la tabla para mostrar solo los textos
   const tableData = useMemo(() => {
     let filteredData = data;
+    console.log("Data before filtering:", data);
 
     if (filtrosAplicados) {
       if (valoresAplicados.carga) {
@@ -40,13 +41,33 @@ export const useTarifaTableData = ({
       }
     }
 
-    return filteredData.map((tarifa) => ({
-      id: tarifa.id,
-      zona: tarifa.zona || "",
-      vehiculo: tarifa.vehiculo || "",
-      carga: tarifa.carga || "",
-      transportista: tarifa.transportista || "",
-    }));
+    return filteredData.map((tarifa) => {
+      const costoTotal =
+        Number(tarifa.valor_base || 0) +
+        Number(
+          tarifa.adicionales?.reduce((acc, adicional) => {
+            let costo = 0;
+            if (
+              adicional.costo_personalizado !== undefined &&
+              adicional.costo_personalizado !== null &&
+              adicional.costo_personalizado !== ""
+            ) {
+              costo = Number(adicional.costo_personalizado);
+            } else {
+              costo = Number(adicional.costo ?? 0);
+            }
+            return acc + (isNaN(costo) ? 0 : costo);
+          }, 0) || 0
+        );
+      return {
+        id: tarifa.id,
+        zona: tarifa.zona || "",
+        vehiculo: tarifa.vehiculo || "",
+        carga: tarifa.carga || "",
+        transportista: tarifa.transportista || "",
+        costo: `$${costoTotal}`,
+      };
+    });
   }, [data, filtrosAplicados, valoresAplicados]);
 
   return {
