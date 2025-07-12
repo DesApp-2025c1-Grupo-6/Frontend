@@ -13,7 +13,7 @@ const Page = () => {
   );
 
   return (
-    <SectionTable backButton titulo={`Detalle de modificaciones - ID: ${id}`}>
+    <SectionTable backButton titulo={`Detalle de modificaciones`}>
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <div className="text-lg">Cargando...</div>
@@ -27,13 +27,7 @@ const Page = () => {
         <div className="space-y-6">
           {/* Información del Registro */}
           <div className="bg-gray-chateau-100 border border-gray-200 rounded-lg p-6 shadow-md">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-              <div>
-                <span className="text-sm font-medium text-gray-500">
-                  ID Historial
-                </span>
-                <div className="text-lg font-semibold">{registro.id}</div>
-              </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 justify-between w-full">
               <div>
                 <span className="text-sm font-medium text-gray-500">
                   ID Tarifa

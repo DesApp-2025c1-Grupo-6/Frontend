@@ -21,7 +21,7 @@ function App() {
 
   const [show, setShow] = useState(false);
   // Fechas por defecto (controladas, nunca undefined)
-  const [fromDate, setFromDate] = useState<string>("2022-01-17");
+  const [fromDate, setFromDate] = useState<string>("2025-07-01");
   const [toDate, setToDate] = useState<string>(
     new Date().toISOString().slice(0, 10)
   );

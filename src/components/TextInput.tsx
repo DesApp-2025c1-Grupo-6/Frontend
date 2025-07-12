@@ -34,7 +34,7 @@ function TextInput({
           {...props}
         />
       </div>
-      {shouldValidate && !value && (
+      {shouldValidate && (
         <p className="font-semibold text-roman-500 text-xs ml-1 mt-1">
           {errorMessage}
         </p>

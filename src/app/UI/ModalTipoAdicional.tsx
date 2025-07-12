@@ -53,13 +53,15 @@ function ModalTipoAdicional({
               ? `$${costoAdicionalSeleccionado}`
               : ""
           }
-          placeholder="Costo"
+          placeholder=""
+          label="Costo del adicional"
           disabled
         />
         <TextInput
           type="number"
-          placeholder="Costo personalizado"
+          placeholder="Ej: 10.000"
           value={customCostoAdicional}
+          label="Costo personalizado"
           onChange={handleChangeCustomCostoAdicional}
         />
       </form>
