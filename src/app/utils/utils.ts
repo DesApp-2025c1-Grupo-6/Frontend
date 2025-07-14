@@ -43,7 +43,7 @@ export const menuItems = [
   },
   { name: "Dashboard", icon: DashboardIcon, href: "/dashboard" },
   {
-    name: "Vehículo",
+    name: "Tipo de vehículo",
     icon: VehiculoIcon,
     href: "/vehiculo",
   },

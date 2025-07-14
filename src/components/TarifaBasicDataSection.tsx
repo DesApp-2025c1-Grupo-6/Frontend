@@ -32,7 +32,7 @@ function TarifaBasicDataSection({
   return (
     <section className="flex flex-col gap-3">
       <h3 className="text-lg font-semibold text-wild-sand-600">
-        Datos basicos
+        Datos básicos
       </h3>
       {mode !== "view" ? (
         <>
@@ -47,7 +47,7 @@ function TarifaBasicDataSection({
           />
           <SelectInput
             id="vehiculo"
-            label="Vehículo"
+            label="Tipo de vehículo"
             shouldValidate={shouldValidate && (vehiculo || "") === ""}
             value={vehiculo || ""}
             onChange={onVehiculoChange}

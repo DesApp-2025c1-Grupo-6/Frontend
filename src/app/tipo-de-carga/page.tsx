@@ -69,13 +69,13 @@ function Index() {
   return (
     <>
       <SectionTable
-        titulo="Tipos de Carga"
-        textButton="Agregar Tipo de Carga"
+        titulo="Tipos de carga"
+        textButton="Agregar tipo de carga"
         onClickButton={() => toggleModalVisibility("createTipoCarga")}
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
           <FiltroInput
-            label="Tipos de Carga"
+            label="Tipo de carga"
             onChange={handleFilterChange}
             data={[...data.map((tipoCarga) => tipoCarga.descripcion)]}
             value={filterSelected}
@@ -102,8 +102,8 @@ function Index() {
       />
       <Modal
         id="deleteTipoCarga"
-        title={"Eliminar Tipo de Carga " + (selectedRow ? selectedRow.id : "")}
-        description="¿Está seguro de que desea eliminar este Tipo de Carga?"
+        title={"Eliminar tipo de carga " + (selectedRow ? selectedRow.id : "")}
+        description="¿Está seguro de que desea eliminar este tipo de carga?"
         fillButton
         lineButton
         fillButtonText="Eliminar"
@@ -116,7 +116,7 @@ function Index() {
             if (res?.success) {
               showToast(
                 "Tipo de carga eliminado",
-                "Se ha eliminado el Tipo de Carga: " + selectedRow.id,
+                "Se ha eliminado el tipo de carga",
                 "success"
               );
             }

@@ -110,7 +110,7 @@ function FiltroInput({
                   type="text"
                   value={searchValue}
                   onChange={handleSearchChange}
-                  placeholder={`Buscar ${label}`}
+                  placeholder={`Buscar ${label.toLowerCase()}`}
                   className="w-full rounded-lg focus:outline-none"
                   ref={inputRef}
                 />

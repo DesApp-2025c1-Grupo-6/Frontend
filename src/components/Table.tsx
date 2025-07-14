@@ -109,14 +109,14 @@ function Table({
           </span>
           <div className="flex shadow-md rounded-full">
             <button
-              className="rounded-l-full px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="cursor-pointer rounded-l-full px-6 py-2 bg-gray-200 hover:bg-gray-300 active:bg-gray-400 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
             >
               Anterior
             </button>
             <button
-              className="rounded-r-full px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="cursor-pointer rounded-r-full px-6 py-2 bg-gray-200 hover:bg-gray-300 active:bg-gray-400 text-gray-600 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
             >

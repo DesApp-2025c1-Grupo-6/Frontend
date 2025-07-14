@@ -72,13 +72,13 @@ function Index() {
     <>
       {/* Sección principal con tabla y botón para agregar Vehiculo */}
       <SectionTable
-        titulo="Vehiculos"
-        textButton="Agregar Vehiculo"
+        titulo="Tipos de Vehículo"
+        textButton="Agregar Vehículo"
         onClickButton={() => toggleModalVisibility("createVehiculo")}
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
           <FiltroInput
-            label="Vehiculos"
+            label="Tipo de vehículo"
             onChange={handleFilterChange}
             data={[...data.map((vehiculo) => vehiculo.tipo)]}
             value={filterSelected}
@@ -109,8 +109,10 @@ function Index() {
       {/* Modal de confirmación de eliminación de Vehiculo */}
       <Modal
         id="deleteVehiculo"
-        title={"Eliminar Vehiculo " + (selectedRow ? selectedRow.id : "")}
-        description="¿Está seguro de que desea eliminar esta Vehiculo?"
+        title={
+          "Eliminar tipo de vehículo " + (selectedRow ? selectedRow.id : "")
+        }
+        description="¿Está seguro de que desea eliminar este tipo de vehículo?"
         fillButton
         lineButton
         fillButtonText="Eliminar"
@@ -122,8 +124,8 @@ function Index() {
             const res = await handleDelete(selectedRow.id);
             if (res?.success) {
               showToast(
-                "Vehiculo eliminada",
-                "Se ha eliminado la Vehiculo: " + selectedRow.id,
+                "Tipo de vehículo eliminado",
+                "Se ha eliminado el tipo de vehículo",
                 "success"
               );
             }
@@ -136,13 +138,13 @@ function Index() {
       <VehiculoForm
         id="createVehiculo"
         mode="create"
-        title="Registro de Vehiculo"
+        title="Registro de tipo de vehículo"
         onSave={async (vehiculo) => {
           const res = await handleCreateVehiculo(vehiculo);
           if (res?.success) {
             showToast(
-              "Vehiculo creada",
-              `Se ha creado el Vehiculo: ${vehiculo.tipo} (${vehiculo.toneladas} toneladas)`,
+              "Tipo de vehículo creado",
+              `Se ha creado el tipo de vehículo`,
               "success"
             );
           }
@@ -152,14 +154,14 @@ function Index() {
       <VehiculoForm
         id="editVehiculo"
         mode="edit"
-        title={"Editar Vehiculo " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar tipo de vehículo " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
         onSave={async (vehiculo) => {
           const res = await handleEditVehiculo(vehiculo);
           if (res?.success) {
             showToast(
-              "Vehiculo editada",
-              `Vehiculo editada: ${vehiculo.tipo} (${vehiculo.toneladas} toneladas)`,
+              "Tipo de vehículo editado",
+              `Tipo de vehículo editado con éxito`,
               "success"
             );
           }

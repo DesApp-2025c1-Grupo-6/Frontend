@@ -181,7 +181,7 @@ function App() {
   ]);
 
   return (
-    <SectionTable titulo="Tendencia de Aumentos de Tarifas">
+    <SectionTable titulo="Tendencia de aumentos de tarifas">
       <section
         className={`transition-all duration-700 ease-out transform ${
           show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"

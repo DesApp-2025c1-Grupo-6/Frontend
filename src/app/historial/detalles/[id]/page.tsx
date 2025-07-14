@@ -63,7 +63,9 @@ const Page = () => {
                   <div>{registro.data.carga}</div>
                 </div>
                 <div>
-                  <span className="font-semibold text-gray-600">Vehículo:</span>
+                  <span className="font-semibold text-gray-600">
+                    Tipo de vehículo:
+                  </span>
                   <div>{registro.data.vehiculo}</div>
                 </div>
                 <div>
@@ -74,7 +76,7 @@ const Page = () => {
                 </div>
                 <div>
                   <span className="font-semibold text-gray-600">
-                    Valor Base:
+                    Valor base:
                   </span>
                   <div>${registro.data.valor_base}</div>
                 </div>

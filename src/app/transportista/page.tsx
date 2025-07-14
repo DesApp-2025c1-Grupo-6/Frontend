@@ -79,12 +79,12 @@ function Index() {
       {/* Sección principal con tabla y botón para agregar transportista */}
       <SectionTable
         titulo="Transportistas"
-        textButton="Agregar Transportista"
+        textButton="Agregar transportista"
         onClickButton={() => toggleModalVisibility("createTransportista")}
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
           <FiltroInput
-            label="Transportistas"
+            label="Transportista"
             onChange={handleFilterChange}
             data={[...data.map((transportista) => transportista.nombre)]}
             value={filterSelected}
@@ -115,7 +115,7 @@ function Index() {
       {/* Modal de confirmación de eliminación de transportista */}
       <Modal
         id="deleteTransportista"
-        title={"Eliminar Transportista " + (selectedRow ? selectedRow.id : "")}
+        title={"Eliminar transportista " + (selectedRow ? selectedRow.id : "")}
         description="¿Está seguro de que desea eliminar este transportista?"
         fillButton
         lineButton
@@ -129,7 +129,7 @@ function Index() {
             if (res?.success) {
               showToast(
                 "Transportista eliminado",
-                "Se ha eliminado el transportista: " + selectedRow.id,
+                "Se ha eliminado el transportista",
                 "success"
               );
             }
@@ -142,13 +142,13 @@ function Index() {
       <TransportistaForm
         id="createTransportista"
         mode="create"
-        title="Registro de Transportista"
+        title="Registro de transportista"
         onSave={async (nombre: string, telefono: string, email?: string) => {
           const res = await handleCreateTransportista(nombre, telefono, email);
           if (res?.success) {
             showToast(
               "Transportista creada",
-              "Se ha creado el transportista: " + nombre,
+              "Se ha creado el transportista",
               "success"
             );
           }

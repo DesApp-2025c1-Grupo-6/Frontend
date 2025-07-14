@@ -84,7 +84,7 @@ function Index() {
       {/* Sección principal con tabla y botón para agregar tarifa */}
       <SectionTable
         titulo="Tarifas"
-        textButton="Agregar Tarifa"
+        textButton="Agregar tarifa"
         onClickButton={handleCreate}
       >
         <SectionFiltros onClear={() => onClearFilters()}>
@@ -95,7 +95,7 @@ function Index() {
             value={filtroCarga}
           />
           <FiltroInput
-            label="Vehiculo"
+            label="Tipo de vehículo"
             onChange={handleFiltroVehiculo}
             data={[...vehiculos.map((vehiculo) => vehiculo.tipo)]}
             value={filtroVehiculo}

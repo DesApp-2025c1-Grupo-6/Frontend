@@ -78,12 +78,12 @@ function Index() {
       {/* Sección principal con tabla y botón para agregar Carga */}
       <SectionTable
         titulo="Cargas"
-        textButton="Agregar Carga"
+        textButton="Agregar carga"
         onClickButton={() => toggleModalVisibility("createCarga")}
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
           <FiltroInput
-            label="Cargas"
+            label="Carga"
             onChange={handleFilterChange}
             data={[...dataTipoDeCargas.map((carga) => carga.descripcion)]}
             value={filterSelected}
@@ -114,8 +114,8 @@ function Index() {
       {/* Modal de confirmación de eliminación de Carga */}
       <Modal
         id="deleteCarga"
-        title={"Eliminar Carga " + (selectedRow ? selectedRow.id : "")}
-        description="¿Está seguro de que desea eliminar esta Carga?"
+        title={"Eliminar carga " + (selectedRow ? selectedRow.id : "")}
+        description="¿Está seguro de que desea eliminar esta carga?"
         fillButton
         lineButton
         fillButtonText="Eliminar"
@@ -128,7 +128,7 @@ function Index() {
             if (res?.success) {
               showToast(
                 "Carga eliminada",
-                "Se ha eliminado la Carga: " + selectedRow.id,
+                "Se ha eliminado la carga",
                 "success"
               );
             }
@@ -151,7 +151,7 @@ function Index() {
             requisitos,
           });
           if (res?.success) {
-            showToast("Carga creada", "Se ha creado la Carga", "success");
+            showToast("Carga creada", "Se ha creado la carga", "success");
           }
         }}
       />

@@ -15,9 +15,15 @@ function TableColumn({
   const updatedColumns =
     columns.map((column: string) => {
       if (column === "id") {
-        return "Codigo";
+        return "Código";
       } else if (column === "costo_default") {
         return "Costo";
+      } else if (column === "ultima accion") {
+        return "Última acción";
+      } else if (column === "accion") {
+        return "Acción";
+      } else if (column === "vehiculo") {
+        return "Tipo de vehículo";
       } else {
         return column;
       }

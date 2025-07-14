@@ -24,7 +24,7 @@ const TarifaModals: React.FC<TarifaModalsProps> = ({
       {/* Modal de confirmación de eliminación de tarifa */}
       <Modal
         id="deleteTarifa"
-        title={"Eliminar Tarifa " + (selectedRow ? selectedRow.id : "")}
+        title={"Eliminar tarifa " + (selectedRow ? selectedRow.id : "")}
         description="¿Está seguro de que desea eliminar esta tarifa?"
         fillButton
         lineButton
@@ -38,7 +38,7 @@ const TarifaModals: React.FC<TarifaModalsProps> = ({
             if (res?.success) {
               showToast(
                 "Tarifa eliminada",
-                "Se ha eliminado la tarifa: " + selectedRow.id,
+                "Se ha eliminado la tarifa",
                 "success"
               );
             }
@@ -51,7 +51,7 @@ const TarifaModals: React.FC<TarifaModalsProps> = ({
       <TarifaForm
         id="createTarifa"
         mode="create"
-        title="Registro de Tarifa"
+        title="Registro de tarifa"
         dataCargas={cargas}
         dataVehiculos={vehiculos}
         dataZonas={zonas}
@@ -79,7 +79,7 @@ const TarifaModals: React.FC<TarifaModalsProps> = ({
       <TarifaForm
         id="editTarifa"
         mode="edit"
-        title={"Editar Tarifa " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar tarifa " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow ? mapTarifaDataToTarifa(selectedRow) : undefined}
         dataCargas={cargas}
         dataVehiculos={vehiculos}
@@ -104,7 +104,7 @@ const TarifaModals: React.FC<TarifaModalsProps> = ({
       <TarifaForm
         id="viewTarifa"
         mode="view"
-        title={"Ver Tarifa " + (selectedRow ? selectedRow.id : "")}
+        title={"Ver tarifa " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow ? mapTarifaDataToTarifa(selectedRow) : undefined}
         dataCargas={cargas}
         dataVehiculos={vehiculos}
