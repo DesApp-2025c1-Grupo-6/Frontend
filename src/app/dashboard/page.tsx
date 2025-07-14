@@ -218,7 +218,7 @@ function App() {
                   value={fromDate}
                   onChange={(e) => setFromDate(e.target.value)}
                   shouldValidate={shouldValidate}
-                  errorMessage={"Debe ser mayor que 'Hasta'."}
+                  errorMessage={"Debe ser menor que 'Hasta'."}
                 />
               </div>
               <div className="flex flex-col">

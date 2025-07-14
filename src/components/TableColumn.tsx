@@ -20,10 +20,12 @@ function TableColumn({
         return "Costo";
       } else if (column === "ultima accion") {
         return "Última acción";
-      } else if (column === "accion") {
+      } else if (column.includes("accion")) {
         return "Acción";
       } else if (column === "vehiculo") {
         return "Tipo de vehículo";
+      } else if (column === "descripcion") {
+        return "Descripción";
       } else {
         return column;
       }

@@ -33,19 +33,36 @@ const TableRow = ({
   if (isMobile) {
     return (
       <div className=" bg-gray-chateau-100  border border-gray-300 rounded-lg p-4 mb-4 shadow-lg text-gray-500 mr-2">
-        {columns
-          .filter((col) => col !== "id")
-          .map((col) => (
-            <div key={col} className="mb-2">
-              <span className="text-xs font-semibold text-gray-500 block">
-                {capitalizeFirstLetter(col === "id" ? "Código" : col)}
-              </span>
-              <span
-                className="text-sm text-gray-800"
-                dangerouslySetInnerHTML={{ __html: String(row[col]) }}
-              />
-            </div>
-          ))}
+        {columns.map((col) => (
+          <div key={col} className="mb-2">
+            <span className="text-xs font-semibold text-gray-500 block">
+              {(() => {
+                if (col === "ultima accion") {
+                  return "Última acción";
+                } else if (col === "accion") {
+                  return "Acción";
+                } else if (col === "descripcion") {
+                  return "Descripción";
+                } else if (col === "vehiculo") {
+                  return "Tipo de vehículo";
+                } else {
+                  return capitalizeFirstLetter(
+                    col === "costo_default"
+                      ? "costo"
+                      : col === "id"
+                      ? "código"
+                      : col
+                  );
+                }
+              })()}
+              :
+            </span>
+            <span
+              className="text-sm text-gray-800"
+              dangerouslySetInnerHTML={{ __html: String(row[col]) }}
+            />
+          </div>
+        ))}
 
         {(viewButton || editButton || deleteButton) && (
           <div className="flex justify-end gap-3 mt-3">
