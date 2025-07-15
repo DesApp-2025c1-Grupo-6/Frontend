@@ -125,7 +125,7 @@ export function useTarifas(onError?: (msg: string) => void) {
         return { success: true, id };
       } catch (error) {
         if (onError)
-          onError("No se pudo eliminar la tarifa: " + id + ", Error: " + error);
+          onError("No se pudo eliminar la tarifa: " + id + ", " + error);
         return { success: false, id };
       }
     },

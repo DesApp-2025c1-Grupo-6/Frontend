@@ -21,7 +21,8 @@ function FiltroInput({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState(value || "");
-  const [filteredData, setFilteredData] = useState(data || []);
+  const uniqueData = data ? Array.from(new Set(data.map(String))) : [];
+  const [filteredData, setFilteredData] = useState(uniqueData);
   const [selectedValue, setSelectedValue] = useState<string>(value || "");
   const ref = useRef<HTMLDivElement>(null);
 
@@ -30,9 +31,10 @@ function FiltroInput({
 
   useEffect(() => {
     if (data) {
+      const unique = Array.from(new Set(data.map(String)));
       setFilteredData(
-        data.filter((item) =>
-          String(item).toLowerCase().includes(searchValue.toLowerCase())
+        unique.filter((item) =>
+          item.toLowerCase().includes(searchValue.toLowerCase())
         )
       );
     }
