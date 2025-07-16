@@ -52,9 +52,7 @@ export function useVehiculos(onError?: (msg: string) => void) {
         return { success: true, vehiculo: newVehiculo };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo crear el vehiculo: " + tipo + ", Error: " + error
-          );
+          onError("No se pudo crear el vehiculo: " + tipo + ", " + error);
         return { success: false, vehiculo: { tipo, toneladas } };
       }
     },
@@ -88,9 +86,7 @@ export function useVehiculos(onError?: (msg: string) => void) {
         return { success: true, vehiculo: updated };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo editar el vehiculo: " + tipo + ", Error: " + error
-          );
+          onError("No se pudo editar el vehiculo: " + tipo + ", " + error);
         return { success: false, vehiculo: { tipo, toneladas } };
       }
     },
@@ -109,9 +105,7 @@ export function useVehiculos(onError?: (msg: string) => void) {
         return { success: true, id };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo eliminar el vehiculo: " + id + ", Error: " + error
-          );
+          onError("No se pudo eliminar el vehiculo: " + id + ", " + error);
         return { success: false, id };
       }
     },

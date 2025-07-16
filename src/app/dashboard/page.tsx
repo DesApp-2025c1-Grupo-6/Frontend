@@ -21,7 +21,7 @@ function App() {
 
   const [show, setShow] = useState(false);
   // Fechas por defecto (controladas, nunca undefined)
-  const [fromDate, setFromDate] = useState<string>("2022-01-17");
+  const [fromDate, setFromDate] = useState<string>("2025-07-01");
   const [toDate, setToDate] = useState<string>(
     new Date().toISOString().slice(0, 10)
   );
@@ -181,7 +181,7 @@ function App() {
   ]);
 
   return (
-    <SectionTable titulo="Tendencia de Aumentos de Tarifas">
+    <SectionTable titulo="Tendencia de aumentos de tarifas">
       <section
         className={`transition-all duration-700 ease-out transform ${
           show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -218,7 +218,7 @@ function App() {
                   value={fromDate}
                   onChange={(e) => setFromDate(e.target.value)}
                   shouldValidate={shouldValidate}
-                  errorMessage={"Debe ser mayor que 'Hasta'."}
+                  errorMessage={"Debe ser menor que 'Hasta'."}
                 />
               </div>
               <div className="flex flex-col">

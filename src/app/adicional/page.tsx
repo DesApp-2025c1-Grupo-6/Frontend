@@ -73,7 +73,7 @@ function Index() {
       {/* Sección principal con tabla y botón para agregar adicional */}
       <SectionTable
         titulo="Adicionales"
-        textButton="Agregar Adicional"
+        textButton="Agregar adicional"
         onClickReporte={() =>
           generateReporte("/adicionales/reporte", "reporte_adicionales.pdf")
         }
@@ -81,7 +81,7 @@ function Index() {
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
           <FiltroInput
-            label="Adicionales"
+            label="Adicional"
             onChange={handleFilterChange}
             data={[...data.map((adicional) => adicional.tipo)]}
             value={filterSelected}
@@ -112,7 +112,7 @@ function Index() {
       {/* Modal de confirmación de eliminación de adicional */}
       <Modal
         id="deleteAdicional"
-        title={"Eliminar Adicional " + (selectedRow ? selectedRow.id : "")}
+        title={"Eliminar adicional " + (selectedRow ? selectedRow.id : "")}
         description="¿Está seguro de que desea eliminar este adicional?"
         fillButton
         lineButton
@@ -125,8 +125,8 @@ function Index() {
             const res = await handleDelete(selectedRow.id);
             if (res?.success) {
               showToast(
-                "adicional eliminado",
-                "Se ha eliminado el adicional: " + selectedRow.id,
+                "Adicional eliminado",
+                "Se ha eliminado el adicional",
                 "success"
               );
             }
@@ -139,16 +139,13 @@ function Index() {
       <AdicionalForm
         id="createAdicional"
         mode="create"
-        title="Registro de Adicional"
+        title="Registro de adicional"
         onSave={async (tipo: string, costo_default: string) => {
           const res = await handleCreateAdicional(tipo, costo_default);
           if (res?.success) {
             showToast(
               "Adicional creado",
-              "Se ha creado el adicional: " +
-                tipo +
-                " con costo " +
-                costo_default,
+              "Se ha creado el adicional",
               "success"
             );
           }
@@ -158,7 +155,7 @@ function Index() {
       <AdicionalForm
         id="editAdicional"
         mode="edit"
-        title={"Editar Adicional " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar adicional " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
         onSave={async (tipo: string, costo_default: string) => {
           const res = await handleEditAdicional(tipo, costo_default);

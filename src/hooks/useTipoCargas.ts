@@ -35,10 +35,7 @@ export function useTipoCargas(onError?: (msg: string) => void) {
       } catch (error) {
         if (onError)
           onError(
-            "No se pudo crear el Tipo de Carga: " +
-              descripcion +
-              ", Error: " +
-              error
+            "No se pudo crear el Tipo de Carga: " + descripcion + ", " + error
           );
         return { success: false, descripcion };
       }
@@ -58,10 +55,7 @@ export function useTipoCargas(onError?: (msg: string) => void) {
       } catch (error) {
         if (onError)
           onError(
-            "No se pudo editar el Tipo de Carga: " +
-              descripcion +
-              ", Error: " +
-              error
+            "No se pudo editar el Tipo de Carga: " + descripcion + ", " + error
           );
         return { success: false, descripcion };
       }
@@ -77,9 +71,7 @@ export function useTipoCargas(onError?: (msg: string) => void) {
         return { success: true, id };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo eliminar el Tipo de Carga: " + id + ", Error: " + error
-          );
+          onError("No se pudo eliminar el Tipo de Carga: " + id + ", " + error);
         return { success: false, id };
       }
     },

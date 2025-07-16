@@ -50,7 +50,7 @@ export function useTransportista(onError?: (msg: string) => void) {
       } catch (error) {
         if (onError)
           onError(
-            "No se pudo crear el transportista: " + nombre + ", Error: " + error
+            "No se pudo crear el transportista: " + nombre + ", " + error
           );
         return { success: false, nombre };
       }
@@ -92,10 +92,7 @@ export function useTransportista(onError?: (msg: string) => void) {
       } catch (error) {
         if (onError)
           onError(
-            "No se pudo editar el transportista: " +
-              nombre +
-              ", Error: " +
-              error
+            "No se pudo editar el transportista: " + nombre + ", " + error
           );
         return { success: false, nombre, telefono, email };
       }
@@ -115,9 +112,7 @@ export function useTransportista(onError?: (msg: string) => void) {
         return { success: true, id };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo eliminar el transportista: " + id + ", Error: " + error
-          );
+          onError("No se pudo eliminar el transportista: " + id + ", " + error);
         return { success: false, id };
       }
     },

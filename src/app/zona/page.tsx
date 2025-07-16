@@ -73,12 +73,12 @@ function Index() {
       {/* Sección principal con tabla y botón para agregar zona */}
       <SectionTable
         titulo="Zonas"
-        textButton="Agregar Zona"
+        textButton="Agregar zona"
         onClickButton={() => toggleModalVisibility("createZona")}
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
           <FiltroInput
-            label="Zonas"
+            label="Zona"
             onChange={handleFilterChange}
             data={[...data.map((zona) => zona.nombre)]}
             value={filterSelected}
@@ -109,7 +109,7 @@ function Index() {
       {/* Modal de confirmación de eliminación de zona */}
       <Modal
         id="deleteZona"
-        title={"Eliminar Zona " + (selectedRow ? selectedRow.id : "")}
+        title={"Eliminar zona " + (selectedRow ? selectedRow.id : "")}
         description="¿Está seguro de que desea eliminar esta zona?"
         fillButton
         lineButton
@@ -121,11 +121,7 @@ function Index() {
           if (selectedRow?.id !== undefined) {
             const res = await handleDelete(selectedRow.id);
             if (res?.success) {
-              showToast(
-                "Zona eliminada",
-                "Se ha eliminado la zona: " + selectedRow.id,
-                "success"
-              );
+              showToast("Zona eliminada", "Se ha eliminado la zona", "success");
             }
           }
           toggleModalVisibility("deleteZona");
@@ -136,15 +132,11 @@ function Index() {
       <ZonaForm
         id="createZona"
         mode="create"
-        title="Registro de Zona"
+        title="Registro de zona"
         onSave={async (nombre: string) => {
           const res = await handleCreateZone(nombre);
           if (res?.success) {
-            showToast(
-              "Zona creada",
-              "Se ha creado la zona: " + nombre,
-              "success"
-            );
+            showToast("Zona creada", "Se ha creado la zona", "success");
           }
         }}
       />
@@ -152,7 +144,7 @@ function Index() {
       <ZonaForm
         id="editZona"
         mode="edit"
-        title={"Editar Zona " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar zona " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
         onSave={async (nombre: string) => {
           const res = await handleEditZone(nombre);

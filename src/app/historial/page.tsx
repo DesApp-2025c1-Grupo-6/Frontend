@@ -11,7 +11,7 @@ const Index = () => {
   const { tableData, loading } = useHistorial();
 
   return (
-    <SectionTable backButton titulo="Historial de Tarifas">
+    <SectionTable titulo="Historial de tarifas">
       {loading ? (
         <Skeletons columns={5} rows={4} />
       ) : (

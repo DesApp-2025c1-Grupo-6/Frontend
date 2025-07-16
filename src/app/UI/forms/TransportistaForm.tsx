@@ -48,10 +48,10 @@ function TransportistaForm({
     }
   }, [mode, data]);
 
-  const isValidEmail = (email: string) => {
+  const isValidEmail = (emailToValidate: string) => {
     // Expresión regular simple para validar email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return emailRegex.test(emailToValidate);
   };
   const isValidTelefono = (telefono: string) => {
     const telefonoRegex = /^[0-9\-\(\)\s]+$/;
@@ -64,15 +64,14 @@ function TransportistaForm({
       return;
     }
 
-    const trimmedEmail = email.trim();
-
-    if (trimmedEmail !== "" && !isValidEmail(trimmedEmail)) {
+    if (email.trim() !== "" && !isValidEmail(email.trim())) {
       setShouldValidate(true);
       return;
     }
 
     if (onSave) {
-      onSave(nombre, telefono, trimmedEmail === "" ? undefined : trimmedEmail); //Enviamos undefined
+      const emailToSend = email.trim() === "" ? undefined : email.trim();
+      onSave(nombre, telefono, emailToSend);
     }
 
     toggleModalVisibility(id);
@@ -118,18 +117,19 @@ function TransportistaForm({
         }
         type="text"
         onChange={handleTelefonoChange}
-        placeholder="Ej: 123-456-7890"
+        placeholder="Ej: 11-3456-7890"
         label="Teléfono"
       />
       <TextInput
         value={email}
         shouldValidate={
-          shouldValidate && email !== "" && !isValidEmail(email.trim())
+          shouldValidate && email.trim() !== "" && !isValidEmail(email.trim())
         }
         type="email"
         label="Email"
         onChange={handleEmailChange}
         placeholder="example@email.com"
+        errorMessage={"Debe ingresar un email válido"}
       />
     </Modal>
   );

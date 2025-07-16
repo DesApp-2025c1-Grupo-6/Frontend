@@ -24,15 +24,7 @@ export function useAdicional(onError?: (msg: string) => void) {
   useEffect(() => {
     setLoading(true);
     getAdicionales()
-      .then((adicionales) => {
-        const adicionalesSinCosto = adicionales.map(
-          ({ costo_default, ...rest }) => ({
-            ...rest,
-            costo: costo_default,
-          })
-        );
-        setData(adicionalesSinCosto);
-      })
+      .then(setData)
       .catch((error) => {
         if (onError) onError("No se pudieron cargar los datos: " + error);
       })
@@ -52,14 +44,7 @@ export function useAdicional(onError?: (msg: string) => void) {
         return { success: true, tipo, costo_default };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo crear el adicional: " +
-              tipo +
-              "con el costo  " +
-              costo_default +
-              ", Error: " +
-              error
-          );
+          onError("No se pudo crear el adicional: " + tipo + ", " + error);
         return { success: false, tipo, costo_default };
       }
     },
@@ -85,14 +70,7 @@ export function useAdicional(onError?: (msg: string) => void) {
         return { success: true, tipo, costo_default };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo editar el adicional: " +
-              tipo +
-              "con el costo  " +
-              costo_default +
-              ", Error: " +
-              error
-          );
+          onError("No se pudo editar el adicional: " + tipo + ", " + error);
         return { success: false, tipo, costo_default };
       }
     },
@@ -111,9 +89,7 @@ export function useAdicional(onError?: (msg: string) => void) {
         return { success: true, id };
       } catch (error) {
         if (onError)
-          onError(
-            "No se pudo eliminar el adicional : " + id + ", Error: " + error
-          );
+          onError("No se pudo eliminar el adicional: " + id + ", " + error);
         return { success: false, id };
       }
     },

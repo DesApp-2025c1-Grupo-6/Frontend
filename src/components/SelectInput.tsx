@@ -65,7 +65,7 @@ function SelectInput({
           className="w-full py-0.5 cursor-pointer text-wild-sand-600 focus:outline-none focus:border-wild-sand-600 rounded-lg flex justify-between items-center"
           onClick={() => setIsOpen((open) => !open)}
         >
-          <span className="truncate block">
+          <span className={"truncate block"}>
             {options.find((o) => o.value == props.value)?.label ||
               defaultOption}
           </span>
@@ -82,7 +82,7 @@ function SelectInput({
                 type="text"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                placeholder={"Buscar " + label}
+                placeholder={"Buscar " + label.toLowerCase()}
                 className="w-full rounded-lg focus:outline-none"
                 ref={inputRef}
               />

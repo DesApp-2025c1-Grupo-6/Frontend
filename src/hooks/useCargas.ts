@@ -66,13 +66,7 @@ export function useCargas(onError?: (msg: string) => void) {
         return { success: true };
       } catch (error) {
         // Manejo de error con mensaje claro
-        if (onError)
-          onError(
-            "No se pudo crear la Carga: " +
-              JSON.stringify(cargaNueva) +
-              ", Error: " +
-              error
-          );
+        if (onError) onError("No se pudo crear la Carga, " + error);
         return { success: false };
       }
     },
@@ -87,13 +81,7 @@ export function useCargas(onError?: (msg: string) => void) {
         await fetchAndSetCargas();
         return { success: true };
       } catch (error) {
-        if (onError)
-          onError(
-            "No se pudo editar la Carga: " +
-              JSON.stringify(data) +
-              ", Error: " +
-              error
-          );
+        if (onError) onError("No se pudo editar la Carga, " + error);
         return { success: false };
       }
     },
@@ -108,8 +96,7 @@ export function useCargas(onError?: (msg: string) => void) {
         setData((prev) => prev.filter((row) => row.id !== id));
         return { success: true };
       } catch (error) {
-        if (onError)
-          onError("No se pudo eliminar la Carga: " + id + ", Error: " + error);
+        if (onError) onError("No se pudo eliminar la Carga, " + error);
         return { success: false };
       }
     },
