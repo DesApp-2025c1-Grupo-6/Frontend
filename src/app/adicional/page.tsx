@@ -155,7 +155,7 @@ function Index() {
       <AdicionalForm
         id="editAdicional"
         mode="edit"
-        title={"Editar Adicional " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar adicional " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
         onSave={async (tipo: string, costo_default: string) => {
           const res = await handleEditAdicional(tipo, costo_default);

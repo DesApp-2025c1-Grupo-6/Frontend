@@ -132,7 +132,7 @@ function Index() {
       <ZonaForm
         id="createZona"
         mode="create"
-        title="Registro de Zona"
+        title="Registro de zona"
         onSave={async (nombre: string) => {
           const res = await handleCreateZone(nombre);
           if (res?.success) {

@@ -45,6 +45,8 @@ const TableRow = ({
                   return "Descripción";
                 } else if (col === "vehiculo") {
                   return "Tipo de vehículo";
+                } else if (col === "telefono") {
+                  return "Teléfono";
                 } else {
                   return capitalizeFirstLetter(
                     col === "costo_default"

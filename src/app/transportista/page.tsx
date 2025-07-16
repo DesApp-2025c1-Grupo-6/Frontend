@@ -158,7 +158,7 @@ function Index() {
       <TransportistaForm
         id="editTransportista"
         mode="edit"
-        title={"Editar Transportista " + (selectedRow ? selectedRow.id : "")}
+        title={"Editar transportista " + (selectedRow ? selectedRow.id : "")}
         data={selectedRow}
         onSave={async (nombre: string, telefono: string, email?: string) => {
           const res = await handleEditTransportista(nombre, telefono, email);

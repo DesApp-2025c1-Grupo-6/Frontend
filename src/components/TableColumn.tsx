@@ -26,6 +26,8 @@ function TableColumn({
         return "Tipo de vehículo";
       } else if (column === "descripcion") {
         return "Descripción";
+      } else if (column === "telefono") {
+        return "Teléfono";
       } else {
         return column;
       }
