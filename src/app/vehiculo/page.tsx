@@ -73,7 +73,7 @@ function Index() {
       {/* Sección principal con tabla y botón para agregar Vehiculo */}
       <SectionTable
         titulo="Tipos de vehículo"
-        textButton="Agregar vehículo"
+        textButton="Agregar tipo de vehículo"
         onClickButton={() => toggleModalVisibility("createVehiculo")}
       >
         <SectionFiltros onClear={() => setFilterSelected("")}>
