@@ -147,7 +147,7 @@ function Index() {
           const res = await handleCreateTransportista(nombre, telefono, email);
           if (res?.success) {
             showToast(
-              "Transportista creada",
+              "Transportista creado",
               "Se ha creado el transportista",
               "success"
             );
